@@ -15,6 +15,9 @@ public abstract class AbstractConfiguration {
 	public abstract String getWikiName();
 	public abstract String getQS();
 	public abstract File getCaptchaFile();
+	public abstract String getBrowserVersion();
+	public abstract String getDeviceID();
+	public abstract String getPort();
 	public abstract boolean loginCookieAvailable();
 	protected abstract String getCredentialsFilePath();
 	public Credentials getCredentials() {

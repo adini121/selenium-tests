@@ -65,4 +65,19 @@ public class ManualConfiguration extends AbstractConfiguration {
 	public String getQS() {
 		return config.get("qs");
 	}
+
+	@Override
+	public String getBrowserVersion() {
+		return config.get("browserVersion");
+	}
+
+	@Override
+	public String getDeviceID() {
+		return config.get("deviceID");
+	}
+
+	@Override
+	public String getPort() {
+		return config.get("port");
+	}
 }

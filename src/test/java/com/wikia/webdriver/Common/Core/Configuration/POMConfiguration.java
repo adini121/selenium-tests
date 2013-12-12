@@ -69,4 +69,19 @@ public class POMConfiguration extends AbstractConfiguration {
 	public String getQS() {
 		return System.getProperty("qs");
 	}
+
+	@Override
+	public String getBrowserVersion() {
+		return System.getProperty("version");
+	}
+
+	@Override
+	public String getDeviceID() {
+		return System.getProperty("deviceID");
+	}
+
+	@Override
+	public String getPort() {
+		return System.getProperty("port");
+	}
 }

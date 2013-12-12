@@ -121,6 +121,9 @@
 					<systemPropertyVariables>
 						<run_mvn>true</run_mvn>
 						<base-address>${base-address}</base-address>
+						<version>${version}</version>
+						<deviceID>${deviceID}</deviceID>
+						<port>${port}</port>
 						<live-domain>${live-domain}</live-domain>
 						<browser>${browser}</browser>
 						<env>${env}</env>

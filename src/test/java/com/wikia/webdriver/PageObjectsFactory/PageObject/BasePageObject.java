@@ -64,7 +64,7 @@ public class BasePageObject{
 		this.driver = driver;
 		builder = new Actions(driver);
 		PageFactory.initElements(driver, this);
-		driver.manage().window().maximize();
+//		driver.manage().window().maximize();
 		urlBuilder = new UrlBuilder();
 	}
 

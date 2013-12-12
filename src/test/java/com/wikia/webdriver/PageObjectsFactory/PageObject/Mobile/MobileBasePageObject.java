@@ -21,7 +21,7 @@ public class MobileBasePageObject extends WikiBasePageObject {
 	public MobileBasePageObject(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		driver.manage().window().setSize(new Dimension(768, 1280));
+//		driver.manage().window().setSize(new Dimension(768, 1280));
 	}
 
 	// UI Mapping
