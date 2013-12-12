@@ -41,6 +41,8 @@ public class MobileDriverProvider {
 				throw new RuntimeException(ex);
 			}
 			remoteWebDriver = new RemoteWebDriver(url, desiredCapabilities);
+		} else if (browserName.equals("safari")) {
+			desiredCapabilities.setCapability("app", "safari");
 		}
 		WebDriver augmentedDriver = new Augmenter().augment(remoteWebDriver);
 		return augmentedDriver;
