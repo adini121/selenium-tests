@@ -1,22 +1,23 @@
 package com.wikia.webdriver.TestCases.Mobile;
 
+import com.wikia.webdriver.Common.Templates.MobileTestTemplate;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile.MobileArticlePageObject;
 import org.testng.annotations.Test;
 
 
-public class TopbarTests extends NewTestTemplate{
+public class TopbarTests extends MobileTestTemplate {
 
 	@Test(groups={"topbarTest_001", "topbarTests", "mobile"})
 	public void TopbarTests_001_topbarButtons() {
-		MobileArticlePageObject topbar = new MobileArticlePageObject(driver);
+		MobileArticlePageObject topbar = new MobileArticlePageObject(mobileDriver);
 		topbar.openTopbarPage(wikiURL);
 		topbar.verifyAllTopbarButtons();
 	}
 
 	@Test(groups={"topbarTest_002", "topbarTests", "mobile"})
 	public void TopbarTests_002_wordmark() {
-		MobileArticlePageObject topbar = new MobileArticlePageObject(driver);
+		MobileArticlePageObject topbar = new MobileArticlePageObject(mobileDriver);
 		topbar.openTopbarPage(wikiURL);
 		topbar.clickWordmark();
 		topbar.verifyMainPageOpened(wikiURL);
@@ -24,7 +25,7 @@ public class TopbarTests extends NewTestTemplate{
 
 	@Test(groups={"topbarTest_003", "topbarTests", "mobile"})
 	public void TopbarTests_003_topbarPosition() {
-		MobileArticlePageObject topbar = new MobileArticlePageObject(driver);
+		MobileArticlePageObject topbar = new MobileArticlePageObject(mobileDriver);
 		topbar.openTopbarPage(wikiURL);
 		Long startPosition = topbar.getPosition();
 		topbar.triggerSearch();
@@ -36,7 +37,7 @@ public class TopbarTests extends NewTestTemplate{
 
 	@Test(groups={"topbarTest_004", "topbarTests", "mobile"})
 	public void TopbarTests_004_menuPagination() {
-		MobileArticlePageObject topbar = new MobileArticlePageObject(driver);
+		MobileArticlePageObject topbar = new MobileArticlePageObject(mobileDriver);
 		topbar.openTopbarPage(wikiURL);
 		topbar.verifyMenuPagination();
 	}

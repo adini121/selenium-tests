@@ -1,22 +1,21 @@
 package com.wikia.webdriver.TestCases.Mobile;
 
+import com.wikia.webdriver.Common.Templates.MobileTestTemplate;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile.MobileCategoryPageObject;
 import org.testng.annotations.Test;
 
-import com.wikia.webdriver.Common.Templates.NewTestTemplate;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile.MobileCategoryPageObject;
+public class CategoriesTests extends MobileTestTemplate {
 
-public class CategoriesTests extends NewTestTemplate {
-
-	@Test(groups={"categoryTest_001", "categoriesTests", "mobile"})
+//	@Test(groups={"categoryTest_001", "categoriesTests", "mobile"})
 	public void categoryTest_001_checkCategoryExhibitionButtons() {
-		MobileCategoryPageObject mobile = new MobileCategoryPageObject(driver);
+		MobileCategoryPageObject mobile = new MobileCategoryPageObject(mobileDriver);
 		mobile.openCategory(wikiURL);
 		mobile.verifyCategoryExhibition();
 	}
 
-	@Test(groups={"categoryTest_002", "categoriesTests", "mobile"})
+//	@Test(groups={"categoryTest_002", "categoriesTests", "mobile"})
 	public void categoryTest_002_checkPagination() {
-		MobileCategoryPageObject mobile = new MobileCategoryPageObject(driver);
+		MobileCategoryPageObject mobile = new MobileCategoryPageObject(mobileDriver);
 		mobile.openCategory(wikiURL);
 		mobile.verifyArticlesCount("P", 25);
 		String firstArticle = mobile.getFirstArticleName("P");

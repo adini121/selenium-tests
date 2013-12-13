@@ -8,25 +8,25 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile.MobileBasePageOb
 
 public class LoginTests extends NewTestTemplate{
 
-	Credentials credentials = config.getCredentials();
-
-	@Test(groups={"loginTest_001", "mobile"})
-	public void Login() {
-		MobileBasePageObject mobile = new MobileBasePageObject(driver);
-		mobile.openHome(wikiURL);
-		mobile.openRandomPage();
-		String url = driver.getCurrentUrl();
-		mobile.login(credentials.userName, credentials.password);
-		mobile.verifyURLcontains(url);
-	}
-
-	@Test(groups={"loginTest_002", "mobile"})
-	public void LoginFacebook() {
-		MobileBasePageObject mobile = new MobileBasePageObject(driver);
-		mobile.openHome(wikiURL);
-		mobile.openRandomPage();
-		mobile.clickLoginFBButton();
-		mobile.verifyFBLogin();
-	}
+//	Credentials credentials = config.getCredentials();
+//
+//	@Test(groups={"loginTest_001", "mobile"})
+//	public void Login() {
+//		MobileBasePageObject mobile = new MobileBasePageObject(driver);
+//		mobile.openHome(wikiURL);
+//		mobile.openRandomPage();
+//		String url = driver.getCurrentUrl();
+//		mobile.login(credentials.userName, credentials.password);
+//		mobile.verifyURLcontains(url);
+//	}
+//
+//	@Test(groups={"loginTest_002", "mobile"})
+//	public void LoginFacebook() {
+//		MobileBasePageObject mobile = new MobileBasePageObject(driver);
+//		mobile.openHome(wikiURL);
+//		mobile.openRandomPage();
+//		mobile.clickLoginFBButton();
+//		mobile.verifyFBLogin();
+//	}
 
 }

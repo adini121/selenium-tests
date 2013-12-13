@@ -30,7 +30,9 @@ public class MobileTestTemplate extends NewTestTemplateCore {
 
 	@AfterMethod(alwaysRun = true)
 	public void stop() {
-		mobileDriver.quit();
+		if (mobileDriver != null) {
+			mobileDriver.quit();
+		}
 	}
 
 	@Override

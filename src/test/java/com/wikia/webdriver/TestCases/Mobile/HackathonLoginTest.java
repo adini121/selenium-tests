@@ -14,7 +14,7 @@ public class HackathonLoginTest extends MobileTestTemplate {
 	Credentials credentials = config.getCredentials();
 
 	@Test(
-		groups={"HackathonTest"}
+		groups={"HackathonTest", "mobile"}
 	)
 	public void hackathonLoginTest() {
 		MobileBasePageObject mobile = new MobileBasePageObject(mobileDriver);

@@ -1,16 +1,17 @@
 package com.wikia.webdriver.TestCases.Mobile;
 
+import com.wikia.webdriver.Common.Templates.MobileTestTemplate;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile.MobileArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile.MobileEditModePageObject;
 
-public class SectionsTests extends NewTestTemplate{
+public class SectionsTests extends MobileTestTemplate {
 
-	@Test(groups={"sectionTest_001", "sectionsTests", "mobile"})
+//	@Test(groups={"sectionTest_001", "sectionsTests", "mobile"})
 	public void Sections_001_chevronTest() {
-		MobileArticlePageObject article = new MobileArticlePageObject(driver);
+		MobileArticlePageObject article = new MobileArticlePageObject(mobileDriver);
 		article.openSections(wikiURL);
 		article.clickSection(1);
 		article.verifySectionVisibility();
@@ -18,9 +19,9 @@ public class SectionsTests extends NewTestTemplate{
 		article.verifySectionInvisibility();
 	}
 
-	@Test(groups={"sectionTest_002", "sectionsTests", "mobile"})
+//	@Test(groups={"sectionTest_002", "sectionsTests", "mobile"})
 	public void Sections_002_hideTest() {
-		MobileArticlePageObject article = new MobileArticlePageObject(driver);
+		MobileArticlePageObject article = new MobileArticlePageObject(mobileDriver);
 		article.openSections(wikiURL);
 		article.clickSection(1);
 		article.verifySectionVisibility();
@@ -28,9 +29,9 @@ public class SectionsTests extends NewTestTemplate{
 		article.verifySectionInvisibility();
 	}
 
-	@Test(groups={"sectionTest_002", "sectionsTests", "mobile"}, enabled = false)
+//	@Test(groups={"sectionTest_002", "sectionsTests", "mobile"}, enabled = false)
 	public void Sections_003_editSection() {
-		MobileArticlePageObject article = new MobileArticlePageObject(driver);
+		MobileArticlePageObject article = new MobileArticlePageObject(mobileDriver);
 		article.openSections(wikiURL);
 		article.clickSection(1);
 		String sectionText = article.getSectionText(0);
