@@ -12,6 +12,7 @@ import org.openqa.selenium.support.PageFactory;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Mobile.TableOfContentsComponentObject;
 
 public class MobileArticlePageObject extends MobileBasePageObject{
 
@@ -25,8 +26,8 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 	private String mainPageTitle = "Mobileregressiontesting Wiki";
 	private String curtainNotOpened = ".ads";
 
-	@FindBy(css="#wkArtCom .collSec.addChev")
-	private WebElement commentsSectionShowButton;
+	@FindBy(css="#wkArtComHeader")
+	private WebElement commentsSectionHeader;
 	@FindBy(css=".commSbt.wkBtn.main")
 	private WebElement postCommentButton;
 	@FindBy(css=".commText[name='wpArticleComment']")
@@ -39,26 +40,16 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 	private WebElement loadMoreCommentsButton;
 	@FindBy(css="#commPrev")
 	private WebElement loadPreviousCommentsButton;
-	@FindBy(css="#toctitle")
-	private WebElement tocWrapper;
 	@FindBy(css=".lazy.media.load.loaded")
 	private WebElement modalWrapper;
 	@FindBy(css=".swiperPage.current")
 	private WebElement currentImageModal;
-	@FindBy(css=".toc:not(.open)")
-	private WebElement tocClosed;
-	@FindBy(css=".toc.open")
-	private WebElement tocOpened;
+	@FindBy(css="#wkTOC.active")
+	private WebElement tocSideMenu;
+	@FindBy(css="#wkTOCHandle")
+	private WebElement openTOCbutton;
 	@FindBy(css="#wkMainCntHdr>h1")
 	private WebElement wikiHeader;
-	@FindBys(@FindBy(css=".toclevel-1 > a"))
-	private List<WebElement> tocLevel1Sections;
-	@FindBys(@FindBy(css=".toclevel-2 > a"))
-	private List<WebElement> tocLevel2Sections;
-	@FindBys(@FindBy(css=".toclevel-3 > a"))
-	private List<WebElement> tocLevel3Sections;
-	@FindBys(@FindBy(css=".toclevel-4 > a"))
-	private List<WebElement> tocLevel4Sections;
 	@FindBys(@FindBy(css=".txt > p"))
 	private List<WebElement> listOfComments;
 	@FindBy(css="section.artSec.open")
@@ -95,9 +86,8 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 	String backCssSelector = ".goBck";
 
 	public void showCommentsSection() {
-		waitForElementNotVisibleByElement(commentInputArea);
-		waitForElementByElement(commentsSectionShowButton);
-		scrollAndClick(commentsSectionShowButton);
+		waitForElementByElement(commentsSectionHeader);
+		scrollToElement(commentsSectionHeader);
 		waitForElementByElement(postCommentButton);
 		waitForElementByElement(commentInputArea);
 		PageObjectLogging.log("showCommentsSection", "comments sections is visible", true, driver);
@@ -108,8 +98,8 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 	}
 
 	private void verifyNumberOfComments(int number) {
-		waitForElementByElement(numberOfComments);
-		Assertion.assertEquals(Integer.parseInt(numberOfComments.getAttribute("innerText")), number + 1,
+		waitForElementByElement(commentsSectionHeader);
+		Assertion.assertEquals(Integer.parseInt(commentsSectionHeader.getAttribute("data-count")), number + 1,
 			"number of comments was not increased"
 		);
 	}
@@ -138,7 +128,7 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 
 	public void verifyNumberOfComments(String comment) {
 		showCommentsSection();
-		int number = Integer.parseInt(numberOfComments.getAttribute("innerText"));
+		int number = Integer.parseInt(commentsSectionHeader.getAttribute("data-count"));
 		commentInputArea.sendKeys(comment);
 		postCommentButton.click();
 		waitForElementByXPath(
@@ -196,14 +186,12 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 
 	public MobileArticlePageObject openSections(String wikiURL) {
 		getUrl(wikiURL + URLsContent.articleSections);
-		waitForElementByElement(tocWrapper);
 		PageObjectLogging.log("openSections", "sections page was opened", true, driver);
 		return new MobileArticlePageObject(driver);
 	}
 
 	public MobileArticlePageObject openTOCPage(String wikiURL) {
 		getUrl(wikiURL + wikiTOC);
-		waitForElementByElement(tocWrapper);
 		PageObjectLogging.log("openTOCPage", "TOC page was opened", true, driver);
 		return new MobileArticlePageObject(driver);
 	}
@@ -270,58 +258,53 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 		return new MobileModalComponentObject(driver);
 	}
 
-	public void verifyTocOpened() {
-		waitForElementByElement(tocOpened);
-		PageObjectLogging.log("verifyTocOpened", "verified toc opened", true);
-	}
-
 	public void verifyTocClosed() {
-		waitForElementByElement(tocClosed);
-		PageObjectLogging.log("verifyTocClosed", "verified toc closed", true);
+		waitForElementNotVisibleByElement(tocSideMenu);
+		PageObjectLogging.log("verifyTocClosed", "toc is closed", true);
 	}
 
-	public void clickChevronToOpenToc() {
-		waitForElementByElement(tocClosed);
-		tocClosed.click();
-		PageObjectLogging.log("clickChevronToChangeTocState", "toc state changed", true);
-	}
-
-	public void clickChevronToCloseToc() {
-		waitForElementByElement(tocOpened);
-		tocOpened.click();
-		PageObjectLogging.log("clickChevronToChangeTocState", "toc state changed", true);
+	public TableOfContentsComponentObject openToc() {
+		waitForElementByElement(openTOCbutton);
+		openTOCbutton.click();
+		PageObjectLogging.log("openToc", "toc opened", true);
+		return new TableOfContentsComponentObject(driver);
 	}
 
 	public String clickOnLevel1SectionInToc(int number, String wikiURL) {
-		WebElement tocElement = tocLevel1Sections.get(number);
-		String href = tocElement.getAttribute("href");
-		tocElement.click();
-		PageObjectLogging.log("clickOnLevel1SectionInToc", "toc level 1 clicked", true);
-		return href.replace(wikiURL + wikiTOC, "");
+//		WebElement tocElement = tocLevel1Sections.get(number);
+//		String href = tocElement.getAttribute("href");
+//		tocElement.click();
+//		PageObjectLogging.log("clickOnLevel1SectionInToc", "toc level 1 clicked", true);
+//		return href.replace(wikiURL + wikiTOC, "");
+		return null;
 	}
 
+
 	public String clickOnLevel2SectionInToc(int number, String wikiURL) {
-		WebElement tocElement = tocLevel2Sections.get(number);
-		String href = tocElement.getAttribute("href");
-		tocElement.click();
-		PageObjectLogging.log("clickOnLevel2SectionInToc", "toc level 2 clicked: " + href, true);
-		return href.replace(wikiURL + wikiTOC, "");
+//		WebElement tocElement = tocLevel2Sections.get(number);
+//		String href = tocElement.getAttribute("href");
+//		tocElement.click();
+//		PageObjectLogging.log("clickOnLevel2SectionInToc", "toc level 2 clicked: " + href, true);
+//		return href.replace(wikiURL + wikiTOC, "");
+		return null;
 	}
 
 	public String clickOnLevel3SectionInToc(int number, String wikiURL) {
-		WebElement tocElement = tocLevel3Sections.get(number);
-		String href = tocElement.getAttribute("href");
-		tocElement.click();
-		PageObjectLogging.log("clickOnLevel3SectionInToc", "toc level 3 clicked: " + href, true);
-		return href.replace(wikiURL + wikiTOC, "");
+//		WebElement tocElement = tocLevel3Sections.get(number);
+//		String href = tocElement.getAttribute("href");
+//		tocElement.click();
+//		PageObjectLogging.log("clickOnLevel3SectionInToc", "toc level 3 clicked: " + href, true);
+//		return href.replace(wikiURL + wikiTOC, "");
+		return null;
 	}
 
 	public String clickOnLevel4SectionInToc(int number, String wikiURL) {
-		WebElement tocElement = tocLevel4Sections.get(number);
-		String href = tocElement.getAttribute("href");
-		tocElement.click();
-		PageObjectLogging.log("clickOnLevel4SectionInToc", "toc level 4 clicked: " + href, true);
-		return href.replace(wikiURL + wikiTOC, "");
+//		WebElement tocElement = tocLevel4Sections.get(number);
+//		String href = tocElement.getAttribute("href");
+//		tocElement.click();
+//		PageObjectLogging.log("clickOnLevel4SectionInToc", "toc level 4 clicked: " + href, true);
+//		return href.replace(wikiURL + wikiTOC, "");
+		return null;
 	}
 
 	public void verifyPositionsNotEquals(Long positionBeforeClick) {
