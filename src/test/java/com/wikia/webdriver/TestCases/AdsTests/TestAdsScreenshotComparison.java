@@ -88,8 +88,7 @@ public class TestAdsScreenshotComparison extends NewTestTemplate {
 	)
 	public void Ads_Screenshot_GeoEdgeFree() throws Exception {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-		wikiPage.checkTopLeaderboard();
-		wikiPage.checkMedrec();
+		wikiPage.testVideo();
 	}
 }
 

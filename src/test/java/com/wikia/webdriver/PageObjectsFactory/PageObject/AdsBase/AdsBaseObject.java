@@ -53,6 +53,8 @@ public class AdsBaseObject extends WikiBasePageObject {
 	protected WebElement presentMedrec;
 	@FindBy(css="div[id*='TOP_LEADERBOARD_gpt']")
 	protected WebElement presentLeaderboardGpt;
+	@FindBy(css="#LightboxModal")
+	private WebElement lightBoxModal;
 
 	protected NetworkTrafficInterceptor networkTrafficInterceptor;
 	protected String presentLeaderboardName;
@@ -609,5 +611,17 @@ public class AdsBaseObject extends WikiBasePageObject {
 				driver
 			);
 		}
+	}
+
+	public void testVideo() throws InterruptedException {
+		driver.get("http://adtest.wikia.com/wiki/Ads_in_videos/Synthetic_test?file=7500_Theatrical_Trailer");
+		waitForElementByElement(lightBoxModal);
+		Thread.sleep(10 * 1000);
+		PageObjectLogging.log(
+				"VideoScreenshot",
+				"screenshot",
+				true,
+				driver
+		);
 	}
 }
