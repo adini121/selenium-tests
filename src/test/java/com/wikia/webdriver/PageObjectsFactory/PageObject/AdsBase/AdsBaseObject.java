@@ -614,12 +614,26 @@ public class AdsBaseObject extends WikiBasePageObject {
 	}
 
 	public void testVideo() throws InterruptedException {
-		driver.get("http://adtest.wikia.com/wiki/Ads_in_videos/Synthetic_test?file=7500_Theatrical_Trailer");
+		driver.get("http://adtest.wikia.com/wiki/SyntheticTests/OoyalaVideo/Simple?file=Synthetic_video_ad_test_%28all_green_video%29_320x240_%28ooyala-stored_video%29");
 		waitForElementByElement(lightBoxModal);
-		Thread.sleep(10 * 1000);
+		Thread.sleep(20 * 1000);
 		PageObjectLogging.log(
 				"VideoScreenshot",
-				"screenshot",
+				"after 20s",
+				true,
+				driver
+		);
+		Thread.sleep(35 * 1000);
+		PageObjectLogging.log(
+				"VideoScreenshot",
+				"after 35s",
+				true,
+				driver
+		);
+		Thread.sleep(50 * 1000);
+		PageObjectLogging.log(
+				"VideoScreenshot",
+				"after 50s",
 				true,
 				driver
 		);
