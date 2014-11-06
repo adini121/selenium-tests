@@ -37,6 +37,7 @@ public class URLsContent {
 	public static final String specialCreateBlogPage = "wiki/Special:CreateBlogPage";
 	public static final String specialAdminDashboard = "wiki/Special:AdminDashboard";
 	public static final String specialCSS = "wiki/Special:CSS";
+	public static final String specialCC = "wiki/Special:CuratedContent";
 	public static final String specialRandom = "wiki/Special:Random";
 	public static final String specialFollow = "wiki/Special:Following";
 	public static final String specialForum = "wiki/Special:Forum";
@@ -147,6 +148,7 @@ public class URLsContent {
 
 	//avatars
 	public static String avatarGeneric = "150px-Avatar.jpg";
+
 
 	//Urls for VE editor
 	public static final String veEnabledTestMainPage = "vetest";

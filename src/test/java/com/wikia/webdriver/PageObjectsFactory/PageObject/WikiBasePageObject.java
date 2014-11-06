@@ -64,6 +64,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialAdminDas
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialContributionsPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreatePagePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCssPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCuratedContentPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialEditHubPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialFBConnectPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialFactoryPageObject;
@@ -96,6 +97,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.VideoHomePage.VideoHome
 import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEditorPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiHistoryPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Blog.BlogPageObject;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.Cookie;
@@ -376,6 +378,12 @@ public class WikiBasePageObject extends BasePageObject {
 		getUrl(wikiURL + URLsContent.specialCSS);
 		return new SpecialCssPageObject(driver);
 	}
+	
+	public SpecialCuratedContentPageObject openSpecialCuratedContent(String wikiURL) {
+		getUrl(wikiURL + URLsContent.specialCC);
+		return new SpecialCuratedContentPageObject(driver);
+	}
+
 
 	public SpecialUploadPageObject openSpecialUpload(String wikiURL) {
 		getUrl(wikiURL + URLsContent.specialUpload);
@@ -1214,5 +1222,6 @@ public class WikiBasePageObject extends BasePageObject {
 			PageObjectLogging.log("ResizeWindow", "Cannot resize window (width=" + width + ", height=" + height + ")", true);
 		}
 	}
+
 
 }
