@@ -188,7 +188,7 @@ public class CommonExpectedConditions {
 	 * An expectation for checking if the given text is present in the specified
 	 * element.
 	 */
-	public static ExpectedCondition<Boolean> textToBePresentInElement(
+	public static ExpectedCondition<Boolean> textPresenceInElement(
 			final By selectorBy, final String text) {
 
 		return new ExpectedCondition<Boolean>() {
@@ -206,7 +206,7 @@ public class CommonExpectedConditions {
 	}
 
 	/**
-	 * An expectation for checking if the given text is present in the specified
+	 * An expectation for checking if the given text is not present in the specified
 	 * element.
 	 */
 	public static ExpectedCondition<Boolean> textNotPresentInElement(

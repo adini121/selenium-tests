@@ -41,24 +41,25 @@ public class CuratedContent extends NewTestTemplate {
 		specialCC.verifyNoSection("sectionB");
 		specialCC.verifyNoSection("sectionC");
 		
-		specialCC.addSection("sectionA");
-		specialCC.addSection("sectionB");
-		specialCC.addSection("sectionC");
+		specialCC.clickAddSection("sectionA");
+		specialCC.clickAddSection("sectionB");
+		specialCC.clickAddSection("sectionC");
 		
 		specialCC.verifySection("sectionA");
 		specialCC.verifySection("sectionB");
 		specialCC.verifySection("sectionC");
 	}
 
-	@Test(groups = {"CuratedContent_003", "CuratedContent"})
+	@Test(groups = {"CuratedContent_003", "CuratedContent"},
+		  dependsOnMethods={"CuratedContent_002_add_sections"})
 	public void CuratedContent_003_remove_sections() {
 		specialCC.verifySection("sectionA");
 		specialCC.verifySection("sectionB");
 		specialCC.verifySection("sectionC");
 		
-		specialCC.removeSection("sectionA");
-		specialCC.removeSection("sectionB");
-		specialCC.removeSection("sectionC");
+		specialCC.clickRemoveSection("sectionA");
+		specialCC.clickRemoveSection("sectionB");
+		specialCC.clickRemoveSection("sectionC");
 		
 		specialCC.verifyNoSection("sectionA");
 		specialCC.verifyNoSection("sectionB");
@@ -71,24 +72,25 @@ public class CuratedContent extends NewTestTemplate {
 		specialCC.verifyNoItem("itemB");
 		specialCC.verifyNoItem("itemC");
 
-		specialCC.addItem("itemA");
-		specialCC.addItem("itemB");
-		specialCC.addItem("itemC");
+		specialCC.clickAddItem("itemA");
+		specialCC.clickAddItem("itemB");
+		specialCC.clickAddItem("itemC");
 		
 		specialCC.verifyItem("itemA");
 		specialCC.verifyItem("itemB");
 		specialCC.verifyItem("itemC");
 	}
 
-	@Test(groups = {"CuratedContent_005", "CuratedContent"})
+	@Test(groups = {"CuratedContent_005", "CuratedContent"},
+	      dependsOnMethods={"CuratedContent_004_add_items"})
 	public void CuratedContent_005_remove_items() {
 		specialCC.verifyItem("itemA");
 		specialCC.verifyItem("itemB");
 		specialCC.verifyItem("itemC");
 
-		specialCC.removeItem("itemA");
-		specialCC.removeItem("itemB");
-		specialCC.removeItem("itemC");
+		specialCC.clickRemoveItem("itemA");
+		specialCC.clickRemoveItem("itemB");
+		specialCC.clickRemoveItem("itemC");
 	
 		specialCC.verifyNoItem("itemA");
 		specialCC.verifyNoItem("itemB");
@@ -108,10 +110,10 @@ public class CuratedContent extends NewTestTemplate {
 		specialCC.verifyImage("imageA");
 		specialCC.verifyImage("imageB");
 		specialCC.verifyImage("imageC");
-		
 	}
 	
-	@Test(groups = {"CuratedContent_007", "CuratedContent"})
+	@Test(groups = {"CuratedContent_007", "CuratedContent"},
+	      dependsOnMethods={"CuratedContent_006_add_images"})
 	public void CuratedContent_007_remove_images() {
 		specialCC.verifyImage("imageA");
 		specialCC.verifyImage("imageB");
@@ -124,10 +126,5 @@ public class CuratedContent extends NewTestTemplate {
 		specialCC.verifyNoImage("imageA");
 		specialCC.verifyNoImage("imageB");
 		specialCC.verifyNoImage("imageC");
-		
 	}
-
-
-
-	
 }

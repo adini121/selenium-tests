@@ -7,12 +7,18 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+
 public class SpecialCuratedContentPageObject extends SpecialPageObject {
 	
 	@FindBy(css = "")
 	private WebElement addSectionButton;
 	@FindBy(css = "")
+	private WebElement removeSectionButton;
+	@FindBy(css = "")
 	private WebElement addItemButton;
+	@FindBy(css = "")
+	private WebElement removeItemButton;
 	@FindBy(css = "")
 	private WebElement saveButton;
 	@FindBy(css = "")
@@ -42,44 +48,56 @@ public class SpecialCuratedContentPageObject extends SpecialPageObject {
 		
 	}
 
-	public void verifyNoSection(String string) {
-		// TODO Auto-generated method stub
-		
+	public void verifyNoSection(String notExpected) {
+		if (!sections.isEmpty()) {
+			for (WebElement section: sections) {
+				waitForTextToBeNotPresentInElementByElement(section, notExpected);
+			}
+		}
+		PageObjectLogging.log("verifyNoSection", "text "+notExpected+ " not found in section", true);
 	}
 
-	public void verifySection(String string) {
-		// TODO Auto-generated method stub
-		
+	public void verifySection(String expected) {
+		for (WebElement section: sections) {
+			waitForTextToBePresentInElementByElement(section, expected);
+		}
+		PageObjectLogging.log("verifySection", "text "+expected+ " found in section", true);
 	}
 
-	public void addSection(String string) {
-		// TODO Auto-generated method stub
-		
+	public void clickAddSection(String string) {
+		waitForElementByElement(addSectionButton);
+		addSectionButton.click();
 	}
 
-	public void removeSection(String string) {
-		// TODO Auto-generated method stub
-		
+	public void clickRemoveSection(String string) {
+		waitForElementByElement(removeSectionButton);
+		removeSectionButton.click();
 	}
 
-	public void verifyItem(String string) {
-		// TODO Auto-generated method stub
-		
+	public void verifyItem(String expected) {
+		for (WebElement item: items) {
+			waitForTextToBeNotPresentInElementByElement(item, expected);
+		}
+		PageObjectLogging.log("verifyItem", "text "+expected+ " found in items", true);		// TODO Auto-generated method stub
 	}
 
-	public void verifyNoItem(String string) {
-		// TODO Auto-generated method stub
-		
+	public void verifyNoItem(String notExpected) {
+		if (!items.isEmpty()) {
+			for (WebElement item: items) {
+				waitForTextToBeNotPresentInElementByElement(item, notExpected);
+			}
+		}
+		PageObjectLogging.log("verifyNoItem", "text "+notExpected+ " not found in items", true);
 	}
 
-	public void addItem(String string) {
-		// TODO Auto-generated method stub
-		
+	public void clickAddItem(String string) {
+		waitForElementByElement(addItemButton);
+		addItemButton.click();
 	}
 
-	public void removeItem(String string) {
-		// TODO Auto-generated method stub
-		
+	public void clickRemoveItem(String string) {
+		waitForElementByElement(removeItemButton);
+		removeItemButton.click();
 	}
 
 	public void verifyImage(String string) {

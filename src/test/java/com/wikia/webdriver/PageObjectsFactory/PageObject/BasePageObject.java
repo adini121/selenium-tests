@@ -501,7 +501,12 @@ public class BasePageObject{
 
 	public void waitForTextToBePresentInElementByBy(By by, String text) {
 		wait.until(CommonExpectedConditions
-				.textToBePresentInElement(by, text));
+				.textPresenceInElement(by, text));
+	}
+	
+	public void waitForTextToBeNotPresentInElementByElement(WebElement elemenet, String text) {
+		wait.until(CommonExpectedConditions
+				.textNotPresentInElement(elemenet, text));
 	}
 
 	public void waitForStringInURL(String givenString) {
