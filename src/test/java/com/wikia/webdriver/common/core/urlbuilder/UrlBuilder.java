@@ -87,4 +87,8 @@ public class UrlBuilder {
 	public String removeProtocolServerNameFromUrl(String url) {
 		return url.substring(url.indexOf('.') + 1, url.length());
 	}
+
+	public String getUrlForWiki(String wikiName, String devboxName) {
+		return "http://" + wikiName + "." + devboxName + "." + "wikia-dev.com/";
+	}
 }

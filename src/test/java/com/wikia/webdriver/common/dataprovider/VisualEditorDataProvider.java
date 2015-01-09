@@ -137,4 +137,23 @@ public class VisualEditorDataProvider {
 				{"vedisabledtest"},
 		};
 	}
+
+	/**
+	 * Data provider for VE perf
+	 */
+	@DataProvider
+	public static final Object[][] getPerfWikis() {
+		return new Object[][] {
+			{"leagueoflegends", "rchan", "selenium"},
+			{"muppet", "rchan", "selenium"},
+			{"leagueoflegends", "rchan", "selenium"},
+			{"muppet", "rchan", "selenium"},
+			{"leagueoflegends", "rchan", "selenium"},
+			{"muppet", "rchan", "selenium"},
+			{"leagueoflegends", "rchan", "selenium"},
+			{"muppet", "rchan", "selenium"},
+			{"leagueoflegends", "rchan", "selenium"},
+			{"muppet", "rchan", "selenium"},
+		};
+	}
 }

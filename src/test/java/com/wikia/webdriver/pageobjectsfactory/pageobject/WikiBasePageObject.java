@@ -181,6 +181,8 @@ public class WikiBasePageObject extends BasePageObject {
 	protected WebElement headerWhereIsMyExtensionPage;
 	@FindBy(css="#globalNavigation")
 	protected WebElement newGlobalNavigation;
+	@FindBy(css="#HOME_TOP_LEADERBOARD")
+	protected WebElement topLeaderBoard;
 
 	protected By editButtonBy = By.cssSelector("#WikiaMainContent a[data-id='edit']");
 	protected By parentBy = By.xpath("./..");
@@ -472,7 +474,7 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	public VisualEditorPageObject openVEModeWithMainEditButton() {
-		waitForElementByElement(veEditButton);
+		waitForElementClickableByElement(veEditButton);
 		veEditButton.click();
 		PageObjectLogging.log("openVEModeWithMainEditButton", "VE main edit button clicked", true, driver);
 		return new VisualEditorPageObject(driver);
@@ -566,6 +568,20 @@ public class WikiBasePageObject extends BasePageObject {
 		getUrl(
 			urlBuilder.appendQueryStringToURL(
 				wikiURL + URLsContent.WIKI_DIR + article, URLsContent.VEACTION_EDIT
+			)
+		);
+		return new VisualEditorPageObject(driver);
+	}
+
+	/**
+	 * method used to navigate to new visual editor
+	 * @param wikiURL
+	 * @param article
+	 */
+	public VisualEditorPageObject openVEOnRandomArticle(String wikiURL, String article) {
+		getUrl(
+			urlBuilder.appendQueryStringToURL(
+				wikiURL + URLsContent.WIKI_DIR + "Special:Random/article", URLsContent.VEACTION_EDIT
 			)
 		);
 		return new VisualEditorPageObject(driver);
@@ -692,6 +708,7 @@ public class WikiBasePageObject extends BasePageObject {
 
 	public ArticlePageObject openRandomArticle(String wikiURL) {
 		getUrl(wikiURL + URLsContent.SPECIAL_RANDOM);
+		waitForElementNotVisibleByElement(topLeaderBoard);
 		return new ArticlePageObject(driver);
 	}
 

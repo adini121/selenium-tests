@@ -542,7 +542,7 @@ public class BasePageObject{
 	}
 
 	public void waitForElementClickableByElement(WebElement element) {
-		changeImplicitWait(250, TimeUnit.MILLISECONDS);
+		changeImplicitWait(100, TimeUnit.MILLISECONDS);
 		try {
 			wait.until(CommonExpectedConditions.elementToBeClickable(element));
 		}finally {
