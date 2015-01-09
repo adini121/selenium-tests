@@ -83,11 +83,11 @@ public class VEPerfTests extends NewTestTemplateBeforeClass {
 			long devTwoMS = TimeUnit.MILLISECONDS.convert(devTwoElapsedTimes.get(i), TimeUnit.NANOSECONDS);
 			totalDevOneMS += devOneMS;
 			totalDevTwoMS += devTwoMS;
-			PageObjectLogging.log("Execution time ", "Dev1 " + devOneMS + " Dev2 " + devTwoMS, true);
+			PageObjectLogging.log("Execution time (ms) ", "Dev1 " + devOneMS + " Dev2 " + devTwoMS, true);
 		}
 
-		PageObjectLogging.log("Total Execution time ", "Dev1 " + totalDevOneMS + " Dev2 " + totalDevTwoMS, true);
-		PageObjectLogging.log("Average Execution time ", "Dev1 " + totalDevOneMS/devOneElapsedTimes.size() +
+		PageObjectLogging.log("Total Execution time (ms) ", "Dev1 " + totalDevOneMS + " Dev2 " + totalDevTwoMS, true);
+		PageObjectLogging.log("Average Execution time (ms) ", "Dev1 " + totalDevOneMS/devOneElapsedTimes.size() +
 			" Dev2 " + totalDevTwoMS/devOneElapsedTimes.size(), true);
 	}
 }
