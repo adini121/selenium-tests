@@ -17,6 +17,7 @@ import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.InsertLi
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Style;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
@@ -87,6 +88,7 @@ public class VisualEditorMenu extends WikiBasePageObject {
 
 	public VisualEditorMenu(WebDriver driver) {
 		super(driver);
+		wait = new WebDriverWait(driver, 60);
 	}
 
 	private void clickStyleItemFromDropDown(By styleBy) {
