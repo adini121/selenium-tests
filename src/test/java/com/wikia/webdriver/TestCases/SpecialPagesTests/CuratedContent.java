@@ -4,6 +4,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.CssEditorContent;
+import com.wikia.webdriver.Common.DataProvider.CreateNewWikiDataProvider;
 import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
@@ -30,24 +31,28 @@ public class CuratedContent extends NewTestTemplate {
 
 	@Test(groups = {"CuratedContent_001", "CuratedContent"})
 	public void CuratedContent_001_zero_state() {
+		specialCC.verifyFeaturedContentPresence();
 		specialCC.verifyTitlePresence();
-		specialCC.verifyTutorialPresencee();
+		specialCC.verifyTutorialPresence();
 		specialCC.verifyButtonsPresencee();
 	}
 	
 	@Test(groups = {"CuratedContent_002", "CuratedContent"})
-	public void CuratedContent_002_add_sections() {
+	public void CuratedContent_002_add_section() {
 		specialCC.verifyNoSection("sectionA");
-		specialCC.verifyNoSection("sectionB");
-		specialCC.verifyNoSection("sectionC");
 		
-		specialCC.clickAddSection("sectionA");
-		specialCC.clickAddSection("sectionB");
-		specialCC.clickAddSection("sectionC");
+		int sectionCount = specialCC.getSectionCount();
+		int itemsCount = specialCC.getItemsCount();
+		specialCC.clickAddSection();
+		specialCC.typeSectionName("sectionA", sectionCount);
+		specialCC.clickAddItem();
+		specialCC.typeItemLabel("itemA", itemsCount);
+		specialCC.typeItemInput("Category:", itemsCount);
+//		specialCC.verifySuggestionAppeared()
+		specialCC.clickSave();
 		
 		specialCC.verifySection("sectionA");
-		specialCC.verifySection("sectionB");
-		specialCC.verifySection("sectionC");
+		specialCC.verifyItemLabel("itemA");
 	}
 
 	@Test(groups = {"CuratedContent_003", "CuratedContent"},
@@ -72,21 +77,11 @@ public class CuratedContent extends NewTestTemplate {
 		specialCC.verifyNoItem("itemB");
 		specialCC.verifyNoItem("itemC");
 
-		specialCC.clickAddItem("itemA");
-		specialCC.clickAddItem("itemB");
-		specialCC.clickAddItem("itemC");
-		
-		specialCC.verifyItem("itemA");
-		specialCC.verifyItem("itemB");
-		specialCC.verifyItem("itemC");
 	}
 
 	@Test(groups = {"CuratedContent_005", "CuratedContent"},
 	      dependsOnMethods={"CuratedContent_004_add_items"})
 	public void CuratedContent_005_remove_items() {
-		specialCC.verifyItem("itemA");
-		specialCC.verifyItem("itemB");
-		specialCC.verifyItem("itemC");
 
 		specialCC.clickRemoveItem("itemA");
 		specialCC.clickRemoveItem("itemB");
