@@ -11,6 +11,7 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialog
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterGroups;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -70,7 +71,8 @@ public class VEPerfTests extends NewTestTemplateBeforeClass {
 		return elapsedTime;
 	}
 
-	@AfterClass
+	@AfterGroups
+		(groups = {"Perf"})
 	public void printTimes() {
 
 		long totalDevOneMS = 0;
