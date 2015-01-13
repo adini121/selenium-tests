@@ -14,16 +14,10 @@ public class SpecialCuratedContentPageObject extends SpecialPageObject {
 	
 	@FindBy(css = "#addSection")
 	private WebElement addSectionButton;
-	@FindBy(css = "")
-	private WebElement removeSectionButton;
 	@FindBy(css = "#addItem")
 	private WebElement addItemButton;
-	@FindBy(css = "")
-	private WebElement removeItemButton;
 	@FindBy(css = "#save")
 	private WebElement saveButton;
-	@FindBy(css = "")
-	private WebElement addImageButton;
 	@FindBy(css = ".section-input[value=\"Featured Content\"]")
 	private WebElement featuredContentSection;
 	@FindBy(css = "div.AdminDashboardGeneralHeader h1")
@@ -102,11 +96,6 @@ public class SpecialCuratedContentPageObject extends SpecialPageObject {
 		addSectionButton.click();
 	}
 
-	public void clickRemoveSection(String string) {
-		waitForElementByElement(removeSectionButton);
-		removeSectionButton.click();
-	}
-
 	public void verifyItem(String expectedInput, String expectedLabel, int itemNumber) {
 		String itemInput = itemInputs.get(itemNumber).getText();
 		String itemLabel = itemLabels.get(itemNumber).getText();
@@ -129,31 +118,6 @@ public class SpecialCuratedContentPageObject extends SpecialPageObject {
 	public void clickAddItem() {
 		waitForElementByElement(addItemButton);
 		addItemButton.click();
-	}
-
-	public void clickRemoveItem(String string) {
-		waitForElementByElement(removeItemButton);
-		removeItemButton.click();
-	}
-
-	public void verifyImage(String string) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void verifyNoImage(String string) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void addImage(String string) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void removeImage(String string) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	public void typeSectionName(String sectionName, int sectionNumber) {
