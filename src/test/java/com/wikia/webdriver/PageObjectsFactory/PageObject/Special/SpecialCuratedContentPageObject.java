@@ -46,6 +46,7 @@ public class SpecialCuratedContentPageObject extends SpecialPageObject {
 			+ "supports: articles, blogs, videos (youtube and ooyala)",
 			"Does it make sense to group items under a game series installment? "
 			+ "Add a \"Section\" and drag and drop wiki items under it.",
+			" Section needs to have an image",
 			"Feel free to delete or add more lines, and reorder them by dragging and dropping.",
 			"Items without section or with empty section will be shown as last in Curated Content.",
 			"When adding items label them (right field) and type names (left field) "
@@ -67,7 +68,7 @@ public class SpecialCuratedContentPageObject extends SpecialPageObject {
 	}
 
 	public void verifyTutorialPresence() {
-		for(int i=0; i< tutorialItems.size(); i++) {
+		for(int i=0; i < tutorialItems.size(); i++) {
 			String a = tutorialItems.get(i).getText();
 			String b = tutorial[i];
 			Assertion.assertEquals(tutorialItems.get(i).getText(), tutorial[i]);
