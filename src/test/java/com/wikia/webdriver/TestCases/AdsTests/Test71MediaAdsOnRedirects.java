@@ -8,7 +8,7 @@ import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 
 /**
- * Bogna 'bognix' Knychla
+ * Bogna 'bognix' Knychala
  * @ownership AdEngineering
  */
 public class Test71MediaAdsOnRedirects extends NewTestTemplate {
