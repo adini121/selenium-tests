@@ -1,23 +1,19 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor;
 
-import java.util.List;
-
+import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.*;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.*;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-
-import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Formatting;
-import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Indentation;
-import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.InsertDialog;
-import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.InsertList;
-import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Style;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.List;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
@@ -56,6 +52,8 @@ public class VisualEditorMenu extends WikiBasePageObject {
 	private List<WebElement> toolListItems;
 	@FindBy(css=".ve-ui-toolbar-saveButton.oo-ui-widget-enabled")
 	private WebElement enabledPublishButton;
+	@FindBy(css=".ve-init-mw-viewPageTarget-toolbar-actions .secondary .oo-ui-labeledElement-label")
+	private WebElement cancelButton;
 
 	private By strikeStyleBy = By.cssSelector(".oo-ui-icon-strikethrough-s");
 	private By underlineStyleBy = By.cssSelector(".oo-ui-icon-underline-u");
@@ -291,6 +289,13 @@ public class VisualEditorMenu extends WikiBasePageObject {
 	public void clickBullListButton() {
 		bulletListButton.click();
 		PageObjectLogging.log("clickBullListButton", "bullet list button clicked", true);
+	}
+
+	public ArticlePageObject clickCancelButton() {
+		waitForElementClickableByElement(cancelButton);
+		cancelButton.click();
+		PageObjectLogging.log("clickCancelButton", "cancel button clicked", true);
+		return new ArticlePageObject(driver);
 	}
 
 	public VisualEditorSaveChangesDialog clickPublishButton() {

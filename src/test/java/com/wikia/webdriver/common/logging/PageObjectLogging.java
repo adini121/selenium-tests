@@ -1,5 +1,21 @@
 package com.wikia.webdriver.common.logging;
 
+import com.wikia.webdriver.common.core.CommonUtils;
+import com.wikia.webdriver.common.core.Global;
+import com.wikia.webdriver.common.core.imageutilities.Shooter;
+import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.exception.ExceptionUtils;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.events.AbstractWebDriverEventListener;
+import org.testng.ITestContext;
+import org.testng.ITestListener;
+import org.testng.ITestResult;
+import org.testng.SkipException;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -9,23 +25,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.exception.ExceptionUtils;
 import static org.apache.commons.lang.StringEscapeUtils.escapeHtml;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.events.AbstractWebDriverEventListener;
-import org.testng.ITestContext;
-import org.testng.ITestListener;
-import org.testng.ITestResult;
-
-import com.wikia.webdriver.common.core.CommonUtils;
-import com.wikia.webdriver.common.core.Global;
-import com.wikia.webdriver.common.core.imageutilities.Shooter;
-import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
-import org.testng.SkipException;
 
 public class PageObjectLogging extends AbstractWebDriverEventListener implements ITestListener {
 
@@ -40,6 +40,8 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 	private static String screenPath = screenDirPath + "screenshot";
 	private static String logFileName = "log.html";
 	private static String logPath = reportPath + logFileName;
+	private static String perfLogFileName = "perfLog.csv";
+	private static String perfLogPath = reportPath + perfLogFileName;
 
 	public static void log(String command, String description, boolean success,
 			WebDriver driver) {
@@ -78,6 +80,20 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 					+ "</td><td> <br/> &nbsp;</td></tr>");
 		}
 		CommonUtils.appendTextToFile(logPath, builder.toString());
+		logJSError(NewDriverProvider.getWebDriver());
+	}
+
+	public static void logPerf(String command, String description, boolean success) {
+		logPerf(command, description, success, false);
+	}
+
+	private static void logPerf(String command, String description, boolean success,
+							boolean ifLowLevel) {
+		String className = success ? "success" : "error";
+		StringBuilder builder = new StringBuilder();
+			builder.append(className + "," + command + "," + description);
+
+		CommonUtils.appendTextToFile(perfLogPath, builder.toString());
 		logJSError(NewDriverProvider.getWebDriver());
 	}
 

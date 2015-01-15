@@ -452,6 +452,7 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	public VisualEditorPageObject openVEModeWithMainEditButton() {
+		waitForElementNotPresent(By.cssSelector("#HOME_TOP_LEADERBOARD"));
 		waitForElementClickableByElement(veEditButton);
 		veEditButton.click();
 		PageObjectLogging.log("openVEModeWithMainEditButton", "VE main edit button clicked", true, driver);

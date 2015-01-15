@@ -137,6 +137,25 @@ public class VisualEditorDataProvider {
 				{"vedisabledtest"},
 		};
 	}
+//
+//	/**
+//	 * Data provider for VE perf
+//	 */
+//	@DataProvider
+//	public static final Object[][] getPerfWikis() {
+//		return new Object[][] {
+//			{"leagueoflegends", "rchan", "selenium"},
+//			{"muppet", "rchan", "selenium"},
+//			{"leagueoflegends", "rchan", "selenium"},
+//			{"muppet", "rchan", "selenium"},
+//			{"leagueoflegends", "rchan", "selenium"},
+//			{"muppet", "rchan", "selenium"},
+//			{"leagueoflegends", "rchan", "selenium"},
+//			{"muppet", "rchan", "selenium"},
+//			{"leagueoflegends", "rchan", "selenium"},
+//			{"muppet", "rchan", "selenium"},
+//		};
+//	}
 
 	/**
 	 * Data provider for VE perf
@@ -144,16 +163,37 @@ public class VisualEditorDataProvider {
 	@DataProvider
 	public static final Object[][] getPerfWikis() {
 		return new Object[][] {
-			{"leagueoflegends", "rchan", "selenium"},
-			{"muppet", "rchan", "selenium"},
-			{"leagueoflegends", "rchan", "selenium"},
-			{"muppet", "rchan", "selenium"},
-			{"leagueoflegends", "rchan", "selenium"},
-			{"muppet", "rchan", "selenium"},
-			{"leagueoflegends", "rchan", "selenium"},
-			{"muppet", "rchan", "selenium"},
-			{"leagueoflegends", "rchan", "selenium"},
-			{"muppet", "rchan", "selenium"},
+			{"leagueoflegends"},
+			{"muppet"},
+			{"leagueoflegends"},
+			{"muppet"},
+			{"leagueoflegends"},
+			{"muppet"},
+			{"leagueoflegends"},
+			{"muppet"},
+			{"leagueoflegends"},
+			{"muppet"},
+			{"leagueoflegends"},
+			{"muppet"},
+		};
+	}
+
+	/**
+	 * Data provider for VE perf
+	 */
+	@DataProvider
+	public static final Object[][] getPerfTwoWikis() {
+		return new Object[][] {
+			{"leagueoflegends", "rchan", "ve"},
+			{"muppet", "rchan", "ve"},
+			{"leagueoflegends", "rchan", "ve"},
+			{"muppet", "rchan", "ve"},
+			{"leagueoflegends", "rchan", "ve"},
+			{"muppet", "rchan", "ve"},
+			{"leagueoflegends", "rchan", "ve"},
+			{"muppet", "rchan", "ve"},
+			{"leagueoflegends", "rchan", "ve"},
+			{"muppet", "rchan", "ve"},
 		};
 	}
 }
