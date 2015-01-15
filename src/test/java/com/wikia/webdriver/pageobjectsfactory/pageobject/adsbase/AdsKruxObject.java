@@ -20,6 +20,10 @@ public class AdsKruxObject extends AdsBaseObject {
 	@FindBy(css = "script[src^=\"" + KRUX_CONTROL_TAG_URL_PREFIX + "\"]")
 	private WebElement kruxControlTag;
 
+	public AdsKruxObject(WebDriver driver) {
+		super(driver);
+	}
+
 	public AdsKruxObject(WebDriver driver, String page) {
 		super(driver, page);
 	}
@@ -29,29 +33,53 @@ public class AdsKruxObject extends AdsBaseObject {
 	 *
 	 * @param kruxSiteId the expected Krux site ID
 	 */
-	public void verifyKruxControlTag(String kruxSiteId) {
+	public AdsKruxObject verifyKruxControlTag(String kruxSiteId) {
 		String expectedUrl = KRUX_CONTROL_TAG_URL_PREFIX + kruxSiteId;
 		Assertion.assertEquals(expectedUrl, kruxControlTag.getAttribute("src"));
+		return this;
 	}
 
 	/**
 	 * Test whether the Krux user id is not empty and added to GPT calls
 	 */
-	public void verifyKruxUserParam() {
+	public AdsKruxObject verifyKruxUserParam() {
 		waitForKrux();
 		String kruxUser = (String) ((JavascriptExecutor) driver).executeScript("return Krux.user;");
 		Assertion.assertStringNotEmpty(kruxUser);
 		Assertion.assertTrue(isGptParamPresent("u", kruxUser));
+		return this;
 	}
 
-	public void verifyKruxSegment(String segId) {
-		waitForKrux();
+	private String getKruxSegment(){
 		List segments = (ArrayList) ((JavascriptExecutor) driver).executeScript("return Krux.segments;");
-		String current = Joiner.on("\t").join(segments);
-		Assertion.assertStringContains(segId, current);
+		return Joiner.on("\t").join(segments);
 	}
 
-	private void waitForKrux() {
+	public AdsKruxObject verifyKruxSegment(String segId) {
+		waitForKrux();
+		Assertion.assertStringContains(segId, getKruxSegment());
+		return this;
+	}
+
+	public AdsKruxObject verifyNoKruxSegment(String segId) {
+		waitForKrux();
+		Assertion.assertStringNotContains(segId, getKruxSegment());
+		return this;
+	}
+
+	public AdsKruxObject waitForKrux() {
 		wait.until(CommonExpectedConditions.scriptReturnsTrue("return !!window.Krux"));
+		return this;
+	}
+
+	public AdsKruxObject goTo(String wikiName, String article) {
+		String testPage = urlBuilder.getUrlForPath(wikiName, article);
+		getUrl(testPage, true);
+		return this;
+	}
+
+	public AdsKruxObject refresh(){
+		refreshPage();
+		return this;
 	}
 }

@@ -37,6 +37,31 @@ public class Assertion extends Assert {
 		}
 	}
 
+	public static boolean assertStringNotContains(String pattern, String current) {
+		String currentEncoded = encodeSpecialChars(current);
+		String patternEncoded = encodeSpecialChars(pattern);
+		try {
+			if (!current.contains(pattern)) {
+				PageObjectLogging.log(
+					"assertStringNotContains",
+					"assertion passed<br/>current: " + currentEncoded + "<br/>pattern: " + patternEncoded,
+					true
+				);
+				return true;
+			} else {
+				throw new AssertionError();
+			}
+		} catch (AssertionError ass) {
+			addVerificationFailure(ass);
+			PageObjectLogging.log(
+				"assertStringNotContains",
+				"assertion failed<br/>current: " + currentEncoded + "<br/>pattern: " + patternEncoded,
+				false
+			);
+			return false;
+		}
+	}
+
 	public static void assertEquals(String pattern, String current) {
 		String patternEncoded = encodeSpecialChars(pattern);
 		String currentEncoded = encodeSpecialChars(current);

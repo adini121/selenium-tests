@@ -312,4 +312,9 @@ public class AdsDataProvider {
 	public static final Object[][] evolveTestPage() {
 		return new Object[][]{{"adtest", "Evolve"}};
 	}
+
+	@DataProvider
+	public static final Object[][] kruxArticles() {
+		return new Object[][]{{"adtestkrux", "Page_1", "Page_2", "Page_3"}};
+	}
 }
