@@ -1,5 +1,6 @@
 package com.wikia.webdriver.common.dataprovider.ads;
 
+import javafx.util.Pair;
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.DataProvider;
 
@@ -314,7 +315,31 @@ public class AdsDataProvider {
 	}
 
 	@DataProvider
-	public static final Object[][] kruxArticles() {
-		return new Object[][]{{"adtestkrux", "Page_1", "Page_2", "Page_3"}};
+	public static final Object[][] kruxSegment() {
+		return new Object[][] {
+			{
+				Arrays.asList(
+					"adtestkrux.wikia.com/wiki/Page_1",
+					"adtestkrux.wikia.com/wiki/Page_2",
+					"adtestkrux.wikia.com/wiki/Page_3"),
+				"o7x6qbgru",
+				null
+			},
+			{
+				Arrays.asList(
+					"adtestkrux.wikia.com/wiki/Page_1",
+					"adtest.wikia.com/wiki/SyntheticTests/OoyalaVideo/Simple",
+					"adtest.wikia.com/wiki/Sharethrough/gaming"),
+				"o7x6qbgru",
+				null
+			},
+			{
+				Arrays.asList(
+					"adtest.wikia.com/wiki/SyntheticTests/OoyalaVideo/Simple",
+					"adtest.wikia.com/wiki/Sharethrough/gaming"),
+				null,
+				"o7x6qbgru"
+			}
+		};
 	}
 }

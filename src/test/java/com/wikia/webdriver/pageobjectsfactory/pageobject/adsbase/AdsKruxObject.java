@@ -72,9 +72,8 @@ public class AdsKruxObject extends AdsBaseObject {
 		return this;
 	}
 
-	public AdsKruxObject goTo(String wikiName, String article) {
-		String testPage = urlBuilder.getUrlForPath(wikiName, article);
-		getUrl(testPage, true);
+	public AdsKruxObject goTo(String path) {
+		getUrl(path, true);
 		return this;
 	}
 
