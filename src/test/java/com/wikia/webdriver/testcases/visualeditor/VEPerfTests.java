@@ -44,7 +44,6 @@ public class VEPerfTests extends NewTestTemplate {
 	public void VEPerfTests_001_noCache(String wiki) {
 		wikiURL = urlBuilder.getUrlForWiki(wiki);
 		article = article.openRandomArticle(wikiURL);
-		article.openVEModeWithMainEditButton();
 		devOneElapsedTimes.add(getVELoadTime());
 	}
 
