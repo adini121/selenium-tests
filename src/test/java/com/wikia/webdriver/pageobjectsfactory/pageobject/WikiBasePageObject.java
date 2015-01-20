@@ -47,7 +47,9 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.videohomepage.VideoHome
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiHistoryPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPageObject;
+import org.apache.http.Header;
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpHeaders;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.ParseException;
@@ -73,9 +75,14 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
+import java.text.DateFormat;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
@@ -837,8 +844,6 @@ public class WikiBasePageObject extends BasePageObject {
 			HttpEntity entity = response.getEntity();
 			String xmlResponse = null;
 
-			PageObjectLogging.log("LOGIN COOKIE:", response.toString(),true);
-
 			xmlResponse = EntityUtils.toString(entity);
 
 			String[] xmlResponseArr = xmlResponse.split("\"");
@@ -876,6 +881,16 @@ public class WikiBasePageObject extends BasePageObject {
 
 				xmlResponse = EntityUtils.toString(entity);
 
+				PageObjectLogging.log("LOGIN COOKIE:", response.toString(),true);
+
+				for(Header headers: response.getHeaders("Set-Cookie")) {
+					String[] params = headers.getValue().split("[;=]");
+
+					Date date = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss", Locale.US).parse(params[3], new ParsePosition(4));
+
+					driver.manage().addCookie(new Cookie(params[0], params[1], params[7], params[5], date, false));
+				}
+
 				xmlResponseArr = xmlResponse.split("\"");
 
 				if (xmlResponse.contains("WrongPass")) {
@@ -884,19 +899,19 @@ public class WikiBasePageObject extends BasePageObject {
 			}
 
 			String domain = (wikiURL.contains("wikia-dev")) ? "wikia-dev.com" : "wikia.com";
-			JavascriptExecutor js = (JavascriptExecutor) driver;
-			js.executeScript("$.cookie('" + xmlResponseArr[11]
-				+ "_session', '" + xmlResponseArr[13]
-				+ "', {'domain': '" + domain + "', 'path': '/'})");
-			js.executeScript("$.cookie('" + xmlResponseArr[11]
-				+ "UserName', '" + xmlResponseArr[7]
-				+ "', {'domain': '" + domain + "', 'path': '/'})");
-			js.executeScript("$.cookie('" + xmlResponseArr[11]
-				+ "UserID', '" + xmlResponseArr[5]
-				+ "', {'domain': '" + domain + "', 'path': '/'})");
-			js.executeScript("$.cookie('" + xmlResponseArr[11]
-				+ "Token', '" + xmlResponseArr[9]
-				+ "', {'domain': '" + domain + "' , 'path': '/'})");
+//			JavascriptExecutor js = (JavascriptExecutor) driver;
+//			js.executeScript("$.cookie('" + xmlResponseArr[11]
+//				+ "_session', '" + xmlResponseArr[13]
+//				+ "', {'domain': '" + domain + "', 'path': '/'})");
+//			js.executeScript("$.cookie('" + xmlResponseArr[11]
+//				+ "UserName', '" + xmlResponseArr[7]
+//				+ "', {'domain': '" + domain + "', 'path': '/'})");
+//			js.executeScript("$.cookie('" + xmlResponseArr[11]
+//				+ "UserID', '" + xmlResponseArr[5]
+//				+ "', {'domain': '" + domain + "', 'path': '/'})");
+//			js.executeScript("$.cookie('" + xmlResponseArr[11]
+//				+ "Token', '" + xmlResponseArr[9]
+//				+ "', {'domain': '" + domain + "' , 'path': '/'})");
 			try {
 				driver.get(wikiURL);
 			} catch (TimeoutException e) {
