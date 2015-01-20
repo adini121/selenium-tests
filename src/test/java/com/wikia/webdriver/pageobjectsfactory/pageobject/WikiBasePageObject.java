@@ -829,6 +829,7 @@ public class WikiBasePageObject extends BasePageObject {
 			HttpClient httpclient = HttpClientBuilder.create()
 				.setRetryHandler(new DefaultHttpRequestRetryHandler())
 				.build();
+
 			HttpPost httpPost = new HttpPost(wikiURL + "api.php");
 			List<NameValuePair> nvps = new ArrayList<NameValuePair>();
 
@@ -877,16 +878,10 @@ public class WikiBasePageObject extends BasePageObject {
 
 				response = httpclient.execute(httpPost);
 
-				entity = response.getEntity();
-
-				xmlResponse = EntityUtils.toString(entity);
-
-				PageObjectLogging.log("LOGIN COOKIE:", response.toString(),true);
-
 				for(Header headers: response.getHeaders("Set-Cookie")) {
 					String[] params = headers.getValue().split("[;=]");
 
-					Date date = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss", Locale.US).parse(params[3], new ParsePosition(4));
+					Date date = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss", Locale.ENGLISH).parse(params[3], new ParsePosition(4));
 
 					driver.manage().addCookie(new Cookie(params[0], params[1], params[7], params[5], date, false));
 				}
@@ -898,20 +893,6 @@ public class WikiBasePageObject extends BasePageObject {
 				}
 			}
 
-			String domain = (wikiURL.contains("wikia-dev")) ? "wikia-dev.com" : "wikia.com";
-//			JavascriptExecutor js = (JavascriptExecutor) driver;
-//			js.executeScript("$.cookie('" + xmlResponseArr[11]
-//				+ "_session', '" + xmlResponseArr[13]
-//				+ "', {'domain': '" + domain + "', 'path': '/'})");
-//			js.executeScript("$.cookie('" + xmlResponseArr[11]
-//				+ "UserName', '" + xmlResponseArr[7]
-//				+ "', {'domain': '" + domain + "', 'path': '/'})");
-//			js.executeScript("$.cookie('" + xmlResponseArr[11]
-//				+ "UserID', '" + xmlResponseArr[5]
-//				+ "', {'domain': '" + domain + "', 'path': '/'})");
-//			js.executeScript("$.cookie('" + xmlResponseArr[11]
-//				+ "Token', '" + xmlResponseArr[9]
-//				+ "', {'domain': '" + domain + "' , 'path': '/'})");
 			try {
 				driver.get(wikiURL);
 			} catch (TimeoutException e) {
