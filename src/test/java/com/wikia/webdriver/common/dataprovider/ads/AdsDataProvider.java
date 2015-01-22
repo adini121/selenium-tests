@@ -1,6 +1,5 @@
 package com.wikia.webdriver.common.dataprovider.ads;
 
-import javafx.util.Pair;
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.DataProvider;
 
@@ -319,26 +318,26 @@ public class AdsDataProvider {
 		return new Object[][] {
 			{
 				Arrays.asList(
-					"adtestkrux.wikia.com/wiki/Page_1",
-					"adtestkrux.wikia.com/wiki/Page_2",
-					"adtestkrux.wikia.com/wiki/Page_3"),
-				"o7x6qbgru",
+					"adtest.wikia.com/wiki/Krux/Page_1",
+					"adtest.wikia.com/wiki/Krux/Page_2",
+					"adtest.wikia.com/wiki/Krux/Page_3"),
+				"o8l9bis26",
 				null
 			},
 			{
 				Arrays.asList(
-					"adtestkrux.wikia.com/wiki/Page_1",
-					"adtest.wikia.com/wiki/SyntheticTests/OoyalaVideo/Simple",
-					"adtest.wikia.com/wiki/Sharethrough/gaming"),
-				"o7x6qbgru",
+					"adtest.wikia.com/wiki/Krux/Page_1",
+					"glee.wikia.com/wiki/Glee_TV_Show_Wiki",
+					"glee.wikia.com/wiki/Rachel_Berry"),
+				"o8l9bis26",
 				null
 			},
 			{
 				Arrays.asList(
-					"adtest.wikia.com/wiki/SyntheticTests/OoyalaVideo/Simple",
-					"adtest.wikia.com/wiki/Sharethrough/gaming"),
+					"glee.wikia.com/wiki/Glee_TV_Show_Wiki",
+					"glee.wikia.com/wiki/Rachel_Berry"),
 				null,
-				"o7x6qbgru"
+				"o8l9bis26"
 			}
 		};
 	}
