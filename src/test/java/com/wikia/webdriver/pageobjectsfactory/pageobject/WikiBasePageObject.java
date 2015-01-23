@@ -57,6 +57,7 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultBackoffStrategy;
 import org.apache.http.impl.client.DefaultHttpRequestRetryHandler;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
@@ -165,6 +166,12 @@ public class WikiBasePageObject extends BasePageObject {
 	protected WebElement headerWhereIsMyExtensionPage;
 	@FindBy(css = "#globalNavigation")
 	protected WebElement newGlobalNavigation;
+	@FindBy(css = "#userForceLoginModal .wikia-button-facebook")
+	protected WebElement formConnectWithFbButtonModal;
+	@FindBy(css = "#mw-content-text .wikia-button-facebook")
+	protected WebElement formConnectWithFbButtonBasic;
+	@FindBy(css = "#UserLoginDropdown .wikia-button-facebook")
+	protected WebElement formConnectWithFbButtonDropDown;
 
 	protected final static By LOGIN_BUTTON_CSS = By.cssSelector("a[data-id='login']");
 
@@ -827,7 +834,8 @@ public class WikiBasePageObject extends BasePageObject {
 	public String logInCookie(String userName, String password, String wikiURL) {
 		try {
 			HttpClient httpclient = HttpClientBuilder.create()
-				.setRetryHandler(new DefaultHttpRequestRetryHandler())
+				.setConnectionBackoffStrategy(new DefaultBackoffStrategy())
+				.disableAutomaticRetries()
 				.build();
 
 			HttpPost httpPost = new HttpPost(wikiURL + "api.php");
@@ -849,7 +857,9 @@ public class WikiBasePageObject extends BasePageObject {
 
 			String[] xmlResponseArr = xmlResponse.split("\"");
 			String token;
-			//Insert here for logging responses -- QAART 371 -- QAART 501
+
+			PageObjectLogging.log("LOGIN HEADERS: ", response.toString(), true);
+			PageObjectLogging.log("LOGIN RESPONSE: ", xmlResponse, true);
 			try {
 				token = xmlResponseArr[5];
 			} catch (ArrayIndexOutOfBoundsException e) {
@@ -858,24 +868,19 @@ public class WikiBasePageObject extends BasePageObject {
 					".\n xmlReponse is " + xmlResponse);
 			}
 
-			while (xmlResponseArr.length < 11) {// sometimes first request
-				// does
-				// not contain full
-				// information,
-				// in such situation
-				// xmlResponseArr.length <
-				// 11
-				List<NameValuePair> nvps2 = new ArrayList<NameValuePair>();
+			List<NameValuePair> nvps2 = new ArrayList<NameValuePair>();
 
-				nvps2.add(new BasicNameValuePair("action", "login"));
-				nvps2.add(new BasicNameValuePair("format", "xml"));
-				nvps2.add(new BasicNameValuePair("lgname", userName));
-				nvps2.add(new BasicNameValuePair("lgpassword", password));
-				nvps2.add(new BasicNameValuePair("lgtoken", token));
+			nvps2.add(new BasicNameValuePair("action", "login"));
+			nvps2.add(new BasicNameValuePair("format", "xml"));
+			nvps2.add(new BasicNameValuePair("lgname", userName));
+			nvps2.add(new BasicNameValuePair("lgpassword", password));
+			nvps2.add(new BasicNameValuePair("lgtoken", token));
 
-				httpPost.setEntity(new UrlEncodedFormEntity(nvps2,
-						StandardCharsets.UTF_8));
+			httpPost.reset();
+			httpPost.setEntity(new UrlEncodedFormEntity(nvps2,
+				StandardCharsets.UTF_8));
 
+			for(int i = 0; i<10; i++){
 				response = httpclient.execute(httpPost);
 
 				for(Header headers: response.getHeaders("Set-Cookie")) {
@@ -891,8 +896,29 @@ public class WikiBasePageObject extends BasePageObject {
 				if (xmlResponse.contains("WrongPass")) {
 					throw new WebDriverException("Incorrect password provided for user: " + userName);
 				}
+
+				if(xmlResponseArr.length >=11){
+					break;
+				}
 			}
 
+			PageObjectLogging.log("LOGIN HEADERS: ", response.toString(), true);
+			PageObjectLogging.log("LOGIN RESPONSE: ", xmlResponse, true);
+
+			String domain = (wikiURL.contains("wikia-dev")) ? "wikia-dev.com" : "wikia.com";
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("$.cookie('" + xmlResponseArr[11]
+				+ "_session', '" + xmlResponseArr[13]
+				+ "', {'domain': '" + domain + "', 'path': '/'})");
+			js.executeScript("$.cookie('" + xmlResponseArr[11]
+				+ "UserName', '" + xmlResponseArr[7]
+				+ "', {'domain': '" + domain + "', 'path': '/'})");
+			js.executeScript("$.cookie('" + xmlResponseArr[11]
+				+ "UserID', '" + xmlResponseArr[5]
+				+ "', {'domain': '" + domain + "', 'path': '/'})");
+			js.executeScript("$.cookie('" + xmlResponseArr[11]
+				+ "Token', '" + xmlResponseArr[9]
+				+ "', {'domain': '" + domain + "' , 'path': '/'})");
 			try {
 				driver.get(wikiURL);
 			} catch (TimeoutException e) {
@@ -1200,5 +1226,17 @@ public class WikiBasePageObject extends BasePageObject {
 		}
 
 		return venusGlobalNav;
+	}
+
+	public void verifyModalFBButtonVisible() {
+		Assertion.assertTrue(checkIfElementOnPage(formConnectWithFbButtonModal));
+	}
+
+	public void verifyFBButtonVisible() {
+		Assertion.assertTrue(checkIfElementOnPage(formConnectWithFbButtonBasic));
+	}
+
+	public void verifyDropDownFBButtonVisible() {
+		Assertion.assertTrue(checkIfElementOnPage(formConnectWithFbButtonDropDown));
 	}
 }
