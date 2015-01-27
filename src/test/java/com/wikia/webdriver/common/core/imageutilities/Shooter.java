@@ -1,14 +1,10 @@
 package com.wikia.webdriver.common.core.imageutilities;
 
+import org.openqa.selenium.*;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
-
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.Point;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import java.util.ArrayList;
 
 /**
  * Class responsible for taking and saving screenshots
@@ -16,6 +12,9 @@ import org.openqa.selenium.WebElement;
  * @author Bogna 'bognix' Knychala
  */
 public class Shooter {
+
+	//Chromedriver has an open issue and all screenshots made in chromedriver on mobile are scaled
+	private static final double CHROME_DRIVER_SCREENSHOT_SCALE = 0.5;
 
 	private ImageEditor imageEditor;
 
@@ -35,14 +34,28 @@ public class Shooter {
 	 * Create a screenshot of passed element
 	 * and save screenshot as image file in temp dir
 	 *
-	 * @param element     - WebElement you want to capture
-	 * @param driver      - instace of WebDriver
+	 * @param element - WebElement you want to capture
+	 * @param driver  - instace of WebDriver
 	 * @return File path  - file's handler which was saved in given path
 	 */
-	public File captureWebElement(WebElement element, WebDriver driver) {
-		File screen = capturePage(driver);
-		Point start = element.getLocation();
-		return imageEditor.cropImage(start, element.getSize(), screen);
+	public File captureWebElement(WebElement element, WebDriver driver, boolean isMobile) {
+		BufferedImage page = !isMobile ? imageEditor.fileToImage(capturePage(driver)) : imageEditor.scaleImage(
+			capturePage(driver), CHROME_DRIVER_SCREENSHOT_SCALE, CHROME_DRIVER_SCREENSHOT_SCALE
+		);
+		Object[] rect = getBoundingClientRect(element, driver);
+		return imageEditor.cropImage((Point) rect[0], (Dimension) rect[1], page);
+	}
+
+	private Object[] getBoundingClientRect(WebElement element, WebDriver driver) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		ArrayList<String> list = (ArrayList<String>) js.executeScript(
+			"var rect =  arguments[0].getBoundingClientRect();" +
+				"return [ '' + parseInt(rect.left), '' + parseInt(rect.top), '' + parseInt(rect.width), '' + parseInt(rect.height) ]",
+			element
+		);
+		Point start = new Point(Integer.parseInt(list.get(0)), Integer.parseInt(list.get(1)));
+		Dimension size = new Dimension(Integer.parseInt(list.get(2)), Integer.parseInt(list.get(3)));
+		return new Object[] {start, size};
 	}
 
 	public BufferedImage takeScreenshot(WebElement element, WebDriver driver) {
@@ -51,12 +64,6 @@ public class Shooter {
 		Dimension size = element.getSize();
 		BufferedImage image = imageEditor.fileToImage(screen);
 		return image.getSubimage(start.getX(), start.getY(), size.width, size.height);
-	}
-
-	public File captureWebElementAndCrop(WebElement element, Dimension size, WebDriver driver) {
-		File screen = capturePage(driver);
-		Point start = element.getLocation();
-		return imageEditor.cropImage(start, size, screen);
 	}
 
 	public File capturePageAndCrop(Point start, Dimension size, WebDriver driver) {

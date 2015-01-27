@@ -28,7 +28,7 @@ public class ManualConfiguration extends AbstractConfiguration {
 				System.out.println("CAN'T LOCATE CONFIG FILE");
 			}
 		}
-		config = (Map<String, String>)yaml.load(input);
+		config = (Map<String, String>) yaml.load(input);
 	}
 
 	@Override
@@ -79,5 +79,15 @@ public class ManualConfiguration extends AbstractConfiguration {
 	@Override
 	public String getQS() {
 		return config.get("qs");
+	}
+
+	@Override
+	public String getAppiumIp() {
+		return config.get("appium-ip");
+	}
+
+	@Override
+	public String getDeviceName() {
+		return config.get("deviceName");
 	}
 }

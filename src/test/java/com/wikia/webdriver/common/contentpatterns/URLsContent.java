@@ -113,7 +113,7 @@ public class URLsContent {
 
 	// File Pages
 	public static final String FILE_NAMESPACE = "File:";
-	public static final String FILENAME_001 = "Grammy_Muppet_Critics";
+	public static final String FILENAME_001 = "Grammy_Muppet_Critics.jpeg";
 	public static final String FILENAME_002 = "New_Batman_Year_One_Clip";
 
 	// History Pages
@@ -173,4 +173,8 @@ public class URLsContent {
 
 	//Escaped frament URL for Maps
 	public static final String ESCAPED_FRAGMENT = "?_escaped_fragment_";
+
+	//Wikis with smart banners
+	public static final String SMART_BANNER_GTA = "gta";
+	public static final String SMART_BANNER_GLEE = "glee";
 }

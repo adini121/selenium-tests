@@ -12,20 +12,20 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MobileSearchPageObject extends com.wikia.webdriver.pageobjectsfactory.pageobject.mobile.MobileBasePageObject {
+public class MobileSearchPageObject extends MobileBasePageObject {
 
 	public MobileSearchPageObject(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 	}
 
-	@FindBy(css="ul#wkResultUl li.result p a")
+	@FindBy(css = "ul#wkResultUl li.result p a")
 	WebElement searchResultList;
-	@FindBy(css="#wkResultNext")
+	@FindBy(css = "#wkResultNext")
 	WebElement searchNextPageButton;
-	@FindBy(css="#wkResultPrev")
+	@FindBy(css = "#wkResultPrev")
 	WebElement searchPreviousPageButton;
-	@FindBys(@FindBy(css=".result"))
+	@FindBys(@FindBy(css = ".result"))
 	List<WebElement> resultList;
 
 	public void verifySearchResultsList() {
@@ -51,7 +51,7 @@ public class MobileSearchPageObject extends com.wikia.webdriver.pageobjectsfacto
 
 	public List<String> getResult() {
 		List<String> listTitle = new ArrayList<String>();
-		for(WebElement elem:resultList){
+		for (WebElement elem : resultList) {
 			listTitle.add(elem.findElement(By.cssSelector("a")).getText());
 		}
 		return listTitle;
@@ -59,14 +59,14 @@ public class MobileSearchPageObject extends com.wikia.webdriver.pageobjectsfacto
 
 	public void compareResultsEquals(List<String> beforePagination, List<String> afterPagination) {
 		Assertion.assertNumber(beforePagination.size(), afterPagination.size(), "checking length");
-		for (int i=0; i<beforePagination.size(); i++){
+		for (int i = 0; i < beforePagination.size(); i++) {
 			Assertion.assertEquals(beforePagination.get(i), afterPagination.get(i), "list's elements are not equals");
 		}
 	}
 
 	public void compareResultsNotEquals(List<String> beforePagination, List<String> afterPagination) {
-		Assertion.assertTrue(beforePagination.size()!=afterPagination.size(), "sizes of lists are the same");
-		for (int i=0; i<beforePagination.size(); i++) {
+		Assertion.assertTrue(beforePagination.size() != afterPagination.size(), "sizes of lists are the same");
+		for (int i = 0; i < beforePagination.size(); i++) {
 			Assertion.assertNotEquals(beforePagination.get(i), afterPagination.get(i), "list's elements are equals");
 		}
 	}

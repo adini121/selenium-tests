@@ -1,9 +1,5 @@
 package com.wikia.webdriver.testcases.visualeditor;
 
-import org.testng.annotations.AfterGroups;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.InteractiveMapsContent;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
@@ -21,15 +17,17 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapsPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
+import org.testng.annotations.AfterGroups;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 /**
  * @author Robert 'Rochan' Chan
  * @ownership Contribution
- *
+ * <p/>
  * VE-1337 - Adding existing map onto article
  * VE-1337 - Checking empty state dialog on wiki with no maps
  * VE-1351 - Adding map in a empty state
- *
  */
 
 public class VEAddMapTests extends NewTestTemplateBeforeClass {
@@ -52,6 +50,8 @@ public class VEAddMapTests extends NewTestTemplateBeforeClass {
 	public void VEAddMapTests_001_AddExistingMap() {
 		articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
+		ve.verifyVEToolBarPresent();
+		ve.verifyEditorSurfacePresent();
 		VisualEditorAddMapDialog mapDialog =
 			(VisualEditorAddMapDialog) ve.openDialogFromMenu(InsertDialog.MAP);
 		VisualEditorPageObject veNew = mapDialog.addExistingMap(0);
@@ -59,7 +59,6 @@ public class VEAddMapTests extends NewTestTemplateBeforeClass {
 		VisualEditorSaveChangesDialog save = veNew.clickPublishButton();
 		ArticlePageObject article = save.savePage();
 		article.verifyVEPublishComplete();
-		article.logOut(wikiURL);
 	}
 
 	@Test(
@@ -68,7 +67,9 @@ public class VEAddMapTests extends NewTestTemplateBeforeClass {
 	public void VEAddMapTests_002_CheckEmptyMapWiki() {
 		wikiURL = urlBuilder.getUrlForWiki(URLsContent.VE_DISABLED_WIKI);
 		articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-		VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
+		VisualEditorPageObject ve= base.openVEOnArticle(wikiURL, articleName);
+		ve.verifyVEToolBarPresent();
+		ve.verifyEditorSurfacePresent();
 		VisualEditorAddMapDialog mapDialog =
 			(VisualEditorAddMapDialog) ve.openDialogFromMenu(InsertDialog.MAP);
 		mapDialog.checkIsEmptyState();
@@ -82,6 +83,8 @@ public class VEAddMapTests extends NewTestTemplateBeforeClass {
 		wikiURL = urlBuilder.getUrlForWiki(URLsContent.VE_DISABLED_WIKI);
 
 		VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
+		ve.verifyVEToolBarPresent();
+		ve.verifyEditorSurfacePresent();
 		VisualEditorAddMapDialog mapDialog =
 			(VisualEditorAddMapDialog) ve.openDialogFromMenu(InsertDialog.MAP);
 		CreateAMapComponentObject map = mapDialog.clickCreateAMapButton();

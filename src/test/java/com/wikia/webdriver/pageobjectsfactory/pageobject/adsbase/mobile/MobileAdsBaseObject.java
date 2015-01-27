@@ -1,20 +1,11 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.mobile;
 
-import java.io.File;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.WebElement;
-
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsComparison;
+import org.openqa.selenium.*;
 
 /**
  * Bogna 'bognix' Knychala
@@ -24,17 +15,15 @@ public class MobileAdsBaseObject extends AdsBaseObject {
 	private static final String SMART_BANNER_SELECTOR = ".smartbanner.android";
 	private static final String FLITE_MASK_SELECTOR = ".flite-mask";
 	private AdsComparison adsComparison;
-	private ImageComparison imageComparison;
 
 	public MobileAdsBaseObject(WebDriver driver, String page) {
 		super(driver, page);
 		adsComparison = new AdsComparison();
-		imageComparison = new ImageComparison();
 		PageObjectLogging.log("", "Page screenshot", true, driver);
 	}
 
 	@Override
-	protected void setWindowSize() {
+	protected void setWindowSizeAndroid() {
 		try {
 			driver.manage().window().setSize(new Dimension(360, 640));
 		} catch (WebDriverException ex) {
@@ -46,7 +35,14 @@ public class MobileAdsBaseObject extends AdsBaseObject {
 		}
 	}
 
+	private String getCountry() {
+		return ((String) ((JavascriptExecutor) driver).executeScript(
+			"return Wikia.geo.getCountryCode();"
+		));
+	}
+
 	public void verifyMobileTopLeaderboard() {
+		PageObjectLogging.log("DEBUG GeoEdge", getCountry(), true);
 		extractGptInfo(presentLeaderboardSelector);
 		removeSmartBanner();
 		if (checkIfElementOnPage(FLITE_MASK_SELECTOR)) {
@@ -60,8 +56,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
 				String.format("Slot is not expanded - ad is not there; CSS selector: %s", presentLeaderboardSelector)
 			);
 		}
-		if (!adsComparison.isAdVisible(presentLeaderboard, presentLeaderboardSelector, driver))
-		{
+		if (!adsComparison.isAdVisible(presentLeaderboard, presentLeaderboardSelector, driver, true)) {
 			throw new NoSuchElementException(
 				"Screenshots of element on/off look the same."
 					+ "Most probable ad is not present; CSS "
@@ -119,7 +114,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript(
 			"var elementY = document.getElementById(arguments[0]).offsetTop;" +
-			"window.scrollTo(0, elementY);",
+				"window.scrollTo(0, elementY);",
 			slotName
 		);
 	}

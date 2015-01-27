@@ -47,7 +47,7 @@ public class MobileAdsDataProvider {
 
 	@DataProvider
 	public static final Object[][] articlesWithTopLeaderboard() {
-		return new Object[][] {
+		return new Object[][]{
 			{"elderscrolls", "Skyrim"},
 			{"it.creepypastaitalia", "Slenderman"},
 			{"ja.gundam", "%E3%82%AC%E3%83%B3%E3%83%80%E3%83%9A%E3%83%87%E3%82%A3%E3%82%A2"},
@@ -63,7 +63,7 @@ public class MobileAdsDataProvider {
 
 	@DataProvider
 	public static final Object[][] dfpParams() {
-		return new Object[][] {
+		return new Object[][]{
 			{
 				"adtest",
 				"SyntheticTests/DfpParams",
@@ -78,6 +78,7 @@ public class MobileAdsDataProvider {
 					"\"dmn\":\"wikiacom\"",
 					"\"hostpre\":\"",
 					"\"wpage\":\"synthetictests/dfpparams\"",
+					"\"ref\":\"direct\"",
 					"\"lang\":\"en\"",
 					"\"esrb\":\"teen\""
 				),
@@ -86,6 +87,14 @@ public class MobileAdsDataProvider {
 					"\"src\":\"mobile\""
 				)
 			}
+		};
+	}
+
+	@DataProvider
+	public static final Object[][] testSynthetic() {
+		return new Object[][] {
+			{"adtest", "MobileLeaderboard", "MOBILE_TOP_LEADERBOARD", 320, 100, 131469612, "mobile",
+				"src/test/resources/adsResources/mobiletl320x100"}
 		};
 	}
 }

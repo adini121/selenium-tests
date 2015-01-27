@@ -13,7 +13,13 @@ import org.openqa.selenium.Point;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.awt.*;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
@@ -58,7 +64,7 @@ public class AdsComparison {
 	public boolean compareImageWithScreenshot(
 		String filePath, Dimension screenshotSize, Point startPoint, WebDriver driver
 	) {
-		String encodedExpectedScreen = null;
+		String encodedExpectedScreen;
 		try {
 			encodedExpectedScreen = readFileAsString(filePath);
 		} catch (IOException ex) {
@@ -69,7 +75,7 @@ public class AdsComparison {
 			startPoint, screenshotSize, driver
 		);
 
-		String encodedCapturedScreen = null;
+		String encodedCapturedScreen;
 		try {
 			encodedCapturedScreen = readFileAndEncodeToBase(capturedScreen);
 		} catch (IOException ex) {
@@ -86,9 +92,29 @@ public class AdsComparison {
 		return success;
 	}
 
-	public boolean isAdVisible(final WebElement element, final String selector, final WebDriver driver) {
+	public boolean compareImageWithScreenshot(final String imageUrl, final WebElement element,
+											  final WebDriver driver, final boolean isMobile) {
+		try {
+			String encodedExpectedScreen = readFileAsString(imageUrl);
+			File capturedScreen = shooter.captureWebElement(element, driver, isMobile);
+			String encodedCapturedScreen = readFileAndEncodeToBase(capturedScreen);
+			capturedScreen.delete();
+			boolean result = imageComparison.areBase64StringsTheSame(encodedExpectedScreen, encodedCapturedScreen);
+			if (!result) {
+				// replaceAll - add new line char after each 100 char.
+				PageObjectLogging.log("compareImageWithScreenshot",
+					encodedCapturedScreen.replaceAll("(.{100})", "$1\n"), true);
+			}
+			return result;
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public boolean isAdVisible(final WebElement element, final String selector,
+							   final WebDriver driver, final boolean isMobile) {
 		hideSlot(selector, driver);
-		final File backgroundImg = shooter.captureWebElement(element, driver);
+		final File backgroundImg = shooter.captureWebElement(element, driver, isMobile);
 		PageObjectLogging.log("ScreenshotsComparison", "Background image in " + selector, true, driver);
 		showSlot(selector, driver);
 		try {
@@ -96,7 +122,7 @@ public class AdsComparison {
 			wait.until(new ExpectedCondition<Object>() {
 				@Override
 				public Object apply(WebDriver driver) {
-					File adImg = shooter.captureWebElement(element, driver);
+					File adImg = shooter.captureWebElement(element, driver, isMobile);
 					PageObjectLogging.log("ScreenshotsComparison", "Ad image in " + selector, true, driver);
 					boolean areFilesTheSame = imageComparison.areFilesTheSame(backgroundImg, adImg);
 					adImg.delete();

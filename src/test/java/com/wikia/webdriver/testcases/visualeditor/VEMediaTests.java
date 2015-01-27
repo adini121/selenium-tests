@@ -1,13 +1,5 @@
 package com.wikia.webdriver.testcases.visualeditor;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.openqa.selenium.Dimension;
-import org.testng.annotations.AfterGroups;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Alignment;
@@ -25,11 +17,18 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObjec
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
+import org.openqa.selenium.Dimension;
+import org.testng.annotations.AfterGroups;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Robert 'Rochan' Chan
  * @ownership Contribution
- *
+ * <p/>
  * VE-1335 Previewing Youtube video from VE's media dialog
  * VE-1335 Previewing image from VE's media dialog
  * VE-1336 1519 Uploading an image with a new file name
@@ -62,6 +61,8 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 		String providerName = "youtube";
 
 		VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
+		ve.verifyVEToolBarPresent();
+		ve.verifyEditorSurfacePresent();
 		VisualEditorAddMediaDialog mediaDialog =
 			(VisualEditorAddMediaDialog) ve.openDialogFromMenu(InsertDialog.MEDIA);
 		mediaDialog = mediaDialog.searchMedia("h");
@@ -76,6 +77,8 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 		String mediaTitle = "Thomas Wright 1792 - 1849";
 
 		VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
+		ve.verifyVEToolBarPresent();
+		ve.verifyEditorSurfacePresent();
 		VisualEditorAddMediaDialog mediaDialog =
 			(VisualEditorAddMediaDialog) ve.openDialogFromMenu(InsertDialog.MEDIA);
 		mediaDialog = mediaDialog.searchMedia("h");
@@ -93,6 +96,8 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		VisualEditorPageObject ve = base.openNewArticleEditModeVisual(wikiURL);
+		ve.verifyVEToolBarPresent();
+		ve.verifyEditorSurfacePresent();
 		VisualEditorAddMediaDialog mediaDialog =
 			(VisualEditorAddMediaDialog) ve.openDialogFromMenu(InsertDialog.MEDIA);
 		ve = mediaDialog.uploadImage(PageContent.FILE2PNG, testFileUploadName, testImageLicense);
@@ -108,6 +113,8 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 		String captionText = "test123";
 
 		VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
+		ve.verifyVEToolBarPresent();
+		ve.verifyEditorSurfacePresent();
 		VisualEditorAddMediaDialog mediaDialog =
 			(VisualEditorAddMediaDialog) ve.openDialogFromMenu(InsertDialog.MEDIA);
 		mediaDialog = mediaDialog.searchMedia("h");
@@ -121,7 +128,6 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 		VisualEditorSaveChangesDialog save = ve.clickPublishButton();
 		ArticlePageObject article = save.savePage();
 		article.verifyVEPublishComplete();
-		article.logOut(wikiURL);
 	}
 
 	@Test(
@@ -129,6 +135,8 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 	)
 	public void VEMediaTests_005_resizeVideoWithHandle() {
 		VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
+		ve.verifyVEToolBarPresent();
+		ve.verifyEditorSurfacePresent();
 		VisualEditorAddMediaDialog mediaDialog =
 			(VisualEditorAddMediaDialog) ve.openDialogFromMenu(InsertDialog.MEDIA);
 		mediaDialog = mediaDialog.searchMedia("h");
@@ -140,7 +148,6 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 		VisualEditorSaveChangesDialog save = ve.clickPublishButton();
 		ArticlePageObject article = save.savePage();
 		article.verifyVEPublishComplete();
-		article.logOut(wikiURL);
 	}
 
 	@Test(
@@ -150,6 +157,8 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 		int resizeNumber = 250;
 
 		VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
+		ve.verifyVEToolBarPresent();
+		ve.verifyEditorSurfacePresent();
 		VisualEditorAddMediaDialog mediaDialog =
 			(VisualEditorAddMediaDialog) ve.openDialogFromMenu(InsertDialog.MEDIA);
 		mediaDialog = mediaDialog.searchMedia("h");
@@ -165,7 +174,6 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 		VisualEditorSaveChangesDialog save = ve.clickPublishButton();
 		ArticlePageObject article = save.savePage();
 		article.verifyVEPublishComplete();
-		article.logOut(wikiURL);
 	}
 
 	@Test(
@@ -179,6 +187,8 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 
 		String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
+		ve.verifyVEToolBarPresent();
+		ve.verifyEditorSurfacePresent();
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
 		VisualEditorAddMediaDialog mediaDialog =
@@ -204,7 +214,6 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 		saveDialog = reviewDialog.clickReturnToSaveFormButton();
 		ArticlePageObject article = saveDialog.savePage();
 		article.verifyVEPublishComplete();
-		article.logOut(wikiURL);
 	}
 
 	@AfterGroups(groups = "VEMediaTests_003")
@@ -215,6 +224,5 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 		filePage.verifyArticleName(URLsContent.FILE_NAMESPACE + testFullFileName);
 		DeletePageObject deletePage = filePage.deleteVersion(1);
 		WikiBasePageObject base = deletePage.submitDeletion();
-		base.logOut(wikiURL);
 	}
 }
