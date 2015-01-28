@@ -27,7 +27,7 @@ public class TestGlobalSearchInGlobalNav extends NewTestTemplate {
 	}
 
 	@Test(
-		groups = {"TestGlobalSearchInGlobalNav_001", "TestGlobalSearchInGlobalNav"},
+		groups = {"TestGlobalSearchInGlobalNav_001", "TestGlobalSearchInGlobalNav", "GlobalNav"},
 		dataProvider = "getDataForGlobalSearchAnon"
 	)
 	public void TestGlobalSearchInGlobalNav_001_asAnon(
@@ -54,7 +54,7 @@ public class TestGlobalSearchInGlobalNav extends NewTestTemplate {
 	}
 
 	@Test(
-		groups = {"TestGlobalSearchInGlobalNav_002", "TestGlobalSearchInGlobalNav"},
+		groups = {"TestGlobalSearchInGlobalNav_002", "TestGlobalSearchInGlobalNav", "GlobalNav"},
 		dataProvider = "getDataForGlobalSearchLoggedIn"
 	)
 	public void TestGlobalSearchInGlobalNav_002_asLoggedIn(
@@ -82,7 +82,7 @@ public class TestGlobalSearchInGlobalNav extends NewTestTemplate {
 	}
 
 	@Test(
-		groups = {"TestGlobalSearchInGlobalNav_003", "TestGlobalSearchInGlobalNav"},
+		groups = {"TestGlobalSearchInGlobalNav_003", "TestGlobalSearchInGlobalNav", "GlobalNav"},
 		dataProvider = "getWikisWithDisabledLocalSearch"
 	)
 	public void TestGlobalSearchInGlobalNav_003_localSearchDisabled(String wikiName) {
