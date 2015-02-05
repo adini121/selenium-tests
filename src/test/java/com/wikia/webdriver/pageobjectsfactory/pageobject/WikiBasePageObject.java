@@ -333,12 +333,6 @@ public class WikiBasePageObject extends BasePageObject {
     return new SpecialPromotePageObject(driver);
   }
 
-  public SpecialUserLoginPageObject openSpecialUserLogin(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_USER_LOGIN);
-    PageObjectLogging.log("openSpecialUserLogin", "Special:UserLogin page opened", true);
-    return new SpecialUserLoginPageObject(driver);
-  }
-
   public UserProfilePageObject openProfilePage(String userName, String wikiURL) {
     getUrl(wikiURL + URLsContent.USER_PROFILE.replace("%userName%", userName));
     return new UserProfilePageObject(driver);

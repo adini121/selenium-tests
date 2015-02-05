@@ -35,8 +35,7 @@ public class FacebookButtonTests extends NewTestTemplate {
 
   @Test(groups = {"FBButton_003", "FacebookButton"})
   public void FBButton_003_LoginButton_Visible() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    SpecialUserLoginPageObject login = base.openSpecialUserLogin(wikiURL);
+    SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver).open(wikiURL);
     login.verifyFBButtonVisible();
   }
 

@@ -49,21 +49,19 @@ public class ForgottenPasswordTests extends NewTestTemplate {
   public void ForgottenPassword_002_specialPage() {
     String userName = credentials.userNameForgottenPassword2;
 
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.openWikiPage(wikiURL);
-    SpecialUserLoginPageObject login = base.openSpecialUserLogin(wikiURL);
-    login.remindPassword(userName, credentials.apiToken);
-    login.verifyMessageAboutNewPassword(userName);
+    SpecialUserLoginPageObject loginPage = new SpecialUserLoginPageObject(driver).open(wikiURL);
+    loginPage.remindPassword(userName, credentials.apiToken);
+    loginPage.verifyMessageAboutNewPassword(userName);
     String
         newPassword =
-        login.receiveMailWithNewPassowrd(credentials.email, credentials.emailPassword);
-    login.login(userName, newPassword);
-    newPassword = login.setNewPassword();
-    login.verifyUserLoggedIn(userName);
+        loginPage.receiveMailWithNewPassowrd(credentials.email, credentials.emailPassword);
+    loginPage.login(userName, newPassword);
+    newPassword = loginPage.setNewPassword();
+    loginPage.verifyUserLoggedIn(userName);
 
-    login.logOut(wikiURL);
-    login.openSpecialUserLogin(wikiURL);
-    login.login(userName, newPassword);
-    login.verifyUserLoggedIn(userName);
+    loginPage.logOut(wikiURL);
+    loginPage.open(wikiURL);
+    loginPage.login(userName, newPassword);
+    loginPage.verifyUserLoggedIn(userName);
   }
 }

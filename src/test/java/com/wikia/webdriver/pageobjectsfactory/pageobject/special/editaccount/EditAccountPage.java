@@ -11,8 +11,12 @@ import org.openqa.selenium.support.FindBy;
 /**
  * @author Karol 'kkarolk' Kujawiak
  */
-public class EditAccount extends BasePageObject {
+public class EditAccountPage extends BasePageObject {
 
+  private static final String
+      USER_ACCOUNT_REOPEN_MESSAGE =
+      "Successfully removed disabled bit for account";
+  private static final String USER_ACCOUNT_CLOSED_MESSAGE = "Successfully disabled account";
   @FindBy(css = "[name=wpUserName]")
   private WebElement userNameField;
   @FindBy(css = "[value='Close account']")
@@ -28,15 +32,13 @@ public class EditAccount extends BasePageObject {
   @FindBy(css = "fieldset > span")
   private WebElement statusMessage;
 
-  private static final String
-      USER_ACCOUNT_REOPEN_MESSAGE =
-      "Successfully removed disabled bit for account";
-  private static final String USER_ACCOUNT_CLOSED_MESSAGE = "Successfully disabled account";
-
-  public EditAccount(WebDriver driver, String communityWikiURL, String userName) {
+  public EditAccountPage(WebDriver driver) {
     super(driver);
+  }
+
+  public EditAccountPage openAccountManagementFor(String userName) {
     driver.get(
-        communityWikiURL +
+        urlBuilder.getUrlForWiki("community") +
         URLsContent.SPECIAL_EDIT_ACCOUNT
     );
     userNameField.sendKeys(userName);
@@ -46,6 +48,8 @@ public class EditAccount extends BasePageObject {
         URLsContent.SPECIAL_EDIT_ACCOUNT + " page opened",
         true
     );
+
+    return this;
   }
 
   public void closeAccount(String reason) {

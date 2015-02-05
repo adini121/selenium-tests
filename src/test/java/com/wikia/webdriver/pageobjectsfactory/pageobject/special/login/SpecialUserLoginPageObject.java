@@ -2,6 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.special.login;
 
 import com.wikia.webdriver.common.contentpatterns.ApiActions;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.properties.Properties;
@@ -39,6 +40,12 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
   private WebElement messagePlaceholder;
 
   private static final String DISABLED_ACCOUNT_MESSAGE = "Your account has been disabled by Wikia.";
+
+  public SpecialUserLoginPageObject open(String wikiURL) {
+    getUrl(wikiURL + URLsContent.SPECIAL_USER_LOGIN);
+    PageObjectLogging.log("openSpecialUserLogin", "Special:UserLogin page opened", true);
+    return this;
+  }
 
   private void typeInUserName(String name) {
     waitForElementByElement(userName);
@@ -79,7 +86,7 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
   }
 
   public void loginAndVerify(String name, String password, String wikiURL) {
-    openSpecialUserLogin(wikiURL);
+    new SpecialUserLoginPageObject(driver).open(wikiURL);
     login(name, password);
     verifyUserLoggedIn(name);
   }
