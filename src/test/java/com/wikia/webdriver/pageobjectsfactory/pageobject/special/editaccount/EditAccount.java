@@ -35,6 +35,9 @@ public class EditAccount extends BasePageObject {
 
   public EditAccount(WebDriver driver, String communityWikiURL, String userName) {
     super(driver);
+      driver.get(
+          communityWikiURL
+      );
     driver.get(
         communityWikiURL +
         URLsContent.SPECIAL_EDIT_ACCOUNT
