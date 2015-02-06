@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.toolbartests;
 
 import com.wikia.webdriver.common.properties.Credentials;
+import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.common.templates.NewTestTemplateBeforeClass;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.toolbars.ShareToolbarComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -13,7 +14,7 @@ import org.testng.annotations.Test;
  *         share by email, 5. Verify email modal for logged in user when attempting to share by
  *         email.
  */
-public class ShareToolbarTests extends NewTestTemplateBeforeClass {
+public class ShareToolbarTests extends NewTestTemplate {
 
   Credentials credentials = config.getCredentials();
 
