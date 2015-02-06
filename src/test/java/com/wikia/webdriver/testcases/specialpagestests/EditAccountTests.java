@@ -29,7 +29,8 @@ public class EditAccountTests extends NewTestTemplate {
   @Test(groups = "EditAccountTest")
   public void EditAccount_001_closeAccount() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+//    base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    base.getVenusGlobalNav().openAccountNAvigation().logIn(credentials.userNameStaff, credentials.passwordStaff);
     EditAccount
         editAccount =
         new EditAccount(driver, testedWiki, credentials.userNameClosedAccount);
