@@ -100,6 +100,8 @@ public class DropDownComponentObject extends WikiBasePageObject {
         "Login form is submitted",
         true
     );
+
+      verifyUserLoggedIn(userName);
   }
 
   public void fillUserNameInput(String userName) {
