@@ -934,6 +934,8 @@ public class WikiBasePageObject extends BasePageObject {
 
       verifyUserLoggedIn(userName);
 
+      Thread.sleep(5000);
+
       PageObjectLogging.log("loginCookie",
                             "user was logged in by cookie", true, driver);
       return token;
@@ -954,6 +956,8 @@ public class WikiBasePageObject extends BasePageObject {
     } catch (JSONException e) {
       e.printStackTrace();
       return null;
+    } catch (InterruptedException e) {
+      e.printStackTrace();
     }
   }
 
