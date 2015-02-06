@@ -46,7 +46,7 @@ import java.util.concurrent.TimeUnit;
 public class BasePageObject {
 
   public WebDriver driver;
-  protected int timeOut = 30;
+  protected int timeOut = 45;
   public WebDriverWait wait;
   public Actions builder;
   protected UrlBuilder urlBuilder;
