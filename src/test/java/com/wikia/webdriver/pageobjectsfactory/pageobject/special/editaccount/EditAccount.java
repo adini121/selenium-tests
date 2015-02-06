@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -38,6 +39,9 @@ public class EditAccount extends BasePageObject {
       driver.get(
           communityWikiURL
       );
+      for(Cookie cookie : driver.manage().getCookies()){
+          System.out.println(cookie.toString());
+      }
     driver.get(
         communityWikiURL +
         URLsContent.SPECIAL_EDIT_ACCOUNT
