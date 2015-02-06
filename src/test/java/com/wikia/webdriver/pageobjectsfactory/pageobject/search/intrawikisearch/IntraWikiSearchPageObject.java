@@ -269,7 +269,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
   }
 
   public void selectPhotosOnly() {
-    filterPhotos.click();
+    scrollAndClick(filterPhotos);
     PageObjectLogging.log("selectPhotosOnly", "Photos option is selected", true, driver);
   }
 
