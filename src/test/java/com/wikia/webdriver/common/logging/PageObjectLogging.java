@@ -190,36 +190,14 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
   @Override
   public void onTestFailure(ITestResult result) {
     driver = NewDriverProvider.getWebDriver();
-    if (driver == null) {
-      driver = NewDriverProvider.getWebDriver();
-    }
-    if (Global.LOG_ENABLED) {
-      try {
-        new Shooter().savePageScreenshot(screenPath + imageCounter, driver);
-        CommonUtils.appendTextToFile(screenPath + imageCounter
-                                     + ".html", driver.getPageSource());
-      } catch (Exception e) {
-        log("onException",
-            "driver has no ability to catch screenshot or html source - driver may died",
-            false);
-      }finally {
-          imageCounter += 1;
-      }
 
       String exception = escapeHtml(result.getThrowable().toString()
-                                    + "\n" + ExceptionUtils.getStackTrace(result.getThrowable()));
+          + "\n" + ExceptionUtils.getStackTrace(result.getThrowable()));
 
-      StringBuilder builder = new StringBuilder();
-        builder.append("<tr class=\"error\"><td>error</td><td>"
-            + exception
-            + "</td><td> <br/><a href='screenshots/screenshot"
-            + imageCounter
-            + ".png'>Screenshot</a><br/><a href='screenshots/screenshot"
-            + imageCounter + ".html'>HTML Source</a></td></tr>");
-      CommonUtils.appendTextToFile(logPath, builder.toString());
+      PageObjectLogging.log("error", exception, false, driver);
+
       logJSError(driver);
       onTestSuccess(result);
-    }
   }
 
   @Override
