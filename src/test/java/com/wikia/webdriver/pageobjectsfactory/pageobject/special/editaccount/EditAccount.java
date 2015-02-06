@@ -36,16 +36,14 @@ public class EditAccount extends BasePageObject {
 
   public EditAccount(WebDriver driver, String communityWikiURL, String userName) {
     super(driver);
-      driver.get(
-          communityWikiURL
-      );
-      for(Cookie cookie : driver.manage().getCookies()){
-          System.out.println(cookie.toString());
-      }
+
     driver.get(
         communityWikiURL +
         URLsContent.SPECIAL_EDIT_ACCOUNT
     );
+      for(Cookie cookie : driver.manage().getCookies()){
+          System.out.println(cookie.toString());
+      }
     userNameField.sendKeys(userName);
     userNameField.submit();
     PageObjectLogging.log(
