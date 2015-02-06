@@ -202,20 +202,21 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
         log("onException",
             "driver has no ability to catch screenshot or html source - driver may died",
             false);
+      }finally {
+          imageCounter += 1;
       }
 
       String exception = escapeHtml(result.getThrowable().toString()
                                     + "\n" + ExceptionUtils.getStackTrace(result.getThrowable()));
 
       StringBuilder builder = new StringBuilder();
-      builder.append("<tr class=\"error\"><td>error</td><td>"
-                     + exception
-                     + "</td><td> <br/><a href='screenshots/screenshot"
-                     + imageCounter
-                     + ".png'>Screenshot</a><br/><a href='screenshots/screenshot"
-                     + imageCounter + ".html'>HTML Source</a></td></tr>");
+        builder.append("<tr class=\"error\"><td>error</td><td>"
+            + exception
+            + "</td><td> <br/><a href='screenshots/screenshot"
+            + imageCounter
+            + ".png'>Screenshot</a><br/><a href='screenshots/screenshot"
+            + imageCounter + ".html'>HTML Source</a></td></tr>");
       CommonUtils.appendTextToFile(logPath, builder.toString());
-      imageCounter += 1;
       logJSError(driver);
       onTestSuccess(result);
     }

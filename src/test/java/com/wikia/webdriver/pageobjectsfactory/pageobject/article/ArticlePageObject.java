@@ -246,7 +246,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   public VisualEditModePageObject editArticleInRTEUsingDropdown() {
-    openEditDropdown.click();
+    scrollAndClick(openEditDropdown);
     waitForElementVisibleByElement(editUsingClassicEditor);
     editUsingClassicEditor.click();
     return new VisualEditModePageObject(driver);
