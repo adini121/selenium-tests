@@ -30,6 +30,7 @@ public class UserProfilePageObject extends WikiBasePageObject {
   private WebElement avatarRemoveButton;
 
   private By image = By.cssSelector("img");
+  private static final String AVATAR_WRAPPER_CSS = ".masthead-avatar";
 
   private String avatarSelector = ".masthead-avatar > img[src*='/%imageName%']";
 
@@ -104,7 +105,7 @@ public class UserProfilePageObject extends WikiBasePageObject {
     alert.accept();
     driver.switchTo().defaultContent();
     hideAvatarControls();
-    waitForElementByElement(avatarWrapper);
+    waitForElementByCss(AVATAR_WRAPPER_CSS);
     PageObjectLogging.log("clickRemoveAvatar", "avatar remove button clicked", true);
   }
 
