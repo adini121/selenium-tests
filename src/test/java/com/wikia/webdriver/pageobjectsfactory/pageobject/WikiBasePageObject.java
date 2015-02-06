@@ -958,6 +958,7 @@ public class WikiBasePageObject extends BasePageObject {
       return null;
     } catch (InterruptedException e) {
       e.printStackTrace();
+      return null;
     }
   }
 
