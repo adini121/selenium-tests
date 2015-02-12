@@ -6,6 +6,8 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.InteractiveMapsMercuryComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.PerformTouchAction;
+
 import org.testng.annotations.Test;
 import org.testng.annotations.BeforeMethod;
 
@@ -43,6 +45,18 @@ public class InteractiveMapsTests extends NewTestTemplate {
     maps.clickPin();
     maps.verifyPinPopUpAppeared();
   }
+  
+  // IMAPT03
+  @Test(groups = {"MercuryInteractiveMaps_003", "MercuryInteractiveMapsTests", "Mercury"})
+  public void MercuryInteractiveMaps_003_ZoomByGesture() {
+    MercuryBasePageObject base = new MercuryBasePageObject(driver);
+    MercuryArticlePageObject article =
+        base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_MAPS);
+    PerformTouchAction touchAction = new PerformTouchAction(driver);
+    InteractiveMapsMercuryComponentObject maps = article.clickViewMapButton();
+    maps.verifyMapModalIsVisible();
+    maps.verifyZoomByGesture(touchAction);
+  }
 
   // IMAPT04
   @Test(groups = {"MercuryInteractiveMaps_004", "MercuryInteractiveMapsTests", "Mercury"})
@@ -52,14 +66,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
         base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_MAPS);
     InteractiveMapsMercuryComponentObject maps = article.clickViewMapButton();
     maps.verifyMapModalIsVisible();
-    String leaflet = maps.getMapLeafletSrc();
-    maps.clickZoomOut(6);
-    String newLeaflet = maps.getMapLeafletSrc();
-    maps.verifyMapZoomChangedView(leaflet, newLeaflet);
-    leaflet = maps.getMapLeafletSrc();
-    maps.clickZoomIn(3);
-    newLeaflet = maps.getMapLeafletSrc();
-    maps.verifyMapZoomChangedView(leaflet, newLeaflet);
+    maps.verifyZoomButtons();
   }
 
   // IMAPT05
@@ -84,8 +91,20 @@ public class InteractiveMapsTests extends NewTestTemplate {
     maps.verifyMapModalIsVisible();
     maps.verifyMapTitleInHeader();
   }
+  
+  // IMAPT07
+  @Test(groups = {"MercuryInteractiveMaps_007", "MercuryInteractiveMapsTests", "Mercury"})
+  public void MercuryInteractiveMaps_007_ScrollableFilterList() {
+    MercuryBasePageObject base = new MercuryBasePageObject(driver);
+    MercuryArticlePageObject article =
+        base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_MAPS);
+    PerformTouchAction touchAction = new PerformTouchAction(driver);
+    InteractiveMapsMercuryComponentObject maps = article.clickViewMapButton();
+    maps.verifyMapModalIsVisible();
+    maps.verifyScrollableFilterList(touchAction);
+  }
 
-  // IMAPT08 - FAIL
+  // IMAPT08
   @Test(groups = {"MercuryInteractiveMaps_008", "MercuryInteractiveMapsTests", "Mercury"})
   public void MercuryInteractiveMaps_008_CloseButtonWillCloseModal() {
     MercuryBasePageObject base = new MercuryBasePageObject(driver);

@@ -33,6 +33,26 @@ public class CommentsTests extends NewTestTemplate {
     article.verifyCommentsAreUncollapsed();
   }
 
+  // CT02
+  @Test(groups = {"MercuryCommentsTests_002", "MercuryCommentsTests", "Mercury"})
+  public void MercuryCommentsTests_002_25CommentsPerPage() {
+    MercuryBasePageObject base = new MercuryBasePageObject(driver);
+    MercuryArticlePageObject article =
+        base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_COMMENTS_TEST_ARTICLE);
+    article.clickCommentsHeader();
+    article.verifyCommentsPerPage(25);
+  }
+  
+  // CT03
+  @Test(groups = {"MercuryCommentsTests_003", "MercuryCommentsTests", "Mercury"})
+  public void MercuryCommentsTests_003_NextAndPreviousPageAreVisible() {
+    MercuryBasePageObject base = new MercuryBasePageObject(driver);
+    MercuryArticlePageObject article =
+        base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_COMMENTS_TEST_ARTICLE);
+    article.clickCommentsHeader();
+    article.verifyNextAndPreviousPageAreVisible();
+  }
+  
   // CT04
   @Test(groups = {"MercuryCommentsTest_004", "MercuryCommentsTests", "Mercury"})
   public void MercuryCommentsTests_004_ClickViewReplyWillExpandReplies() {
@@ -52,5 +72,55 @@ public class CommentsTests extends NewTestTemplate {
         base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_COMMENTS_TEST_ARTICLE);
     article.clickCommentsHeader();
     article.verifyCommentsElements();
+  }
+  
+  // CT06
+  @Test(groups = {"MercuryCommentsTest_006", "MercuryCommentsTests", "Mercury"})
+  public void MercuryCommentsTests_006_CommentsCounterIsCorrect() {
+    MercuryBasePageObject base = new MercuryBasePageObject(driver);
+    MercuryArticlePageObject article =
+        base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_COMMENTS_TEST_ARTICLE);
+    article.clickCommentsHeader();
+    article.verifyCommentsCounterIsCorrect();
+  }
+  
+  // CT07
+  @Test(groups = {"MercuryCommentsTests_007", "MercuryCommentsTests", "Mercury"})
+  public void MercuryCommentsTests_007_RepliesCounterIsCorrect() {
+    MercuryBasePageObject base = new MercuryBasePageObject(driver);
+    MercuryArticlePageObject article =
+        base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_COMMENTS_TEST_ARTICLE);
+    article.clickCommentsHeader();
+    article.verifyRepliesCounterIsCorrect(1);
+  }
+  
+  // CT08
+  @Test(groups = {"MercuryCommentsTests_008", "MercuryCommentsTests", "Mercury"})
+  public void MercuryCommentsTests_008_TapOnUserRedirectToUserPage() {
+    MercuryBasePageObject base = new MercuryBasePageObject(driver);
+    MercuryArticlePageObject article =
+        base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_COMMENTS_TEST_ARTICLE);
+    article.clickCommentsHeader();
+    article.verifyTapOnUserRedirectToUserPage(0);
+  }
+  
+  // CT09
+  @Test(groups = {"MercuryCommentsTests_009", "MercuryCommentsTests", "Mercury"})
+  public void MercuryCommentsTests_009_ImagesAndVideosAreDisplayed() {
+    MercuryBasePageObject base = new MercuryBasePageObject(driver);
+    MercuryArticlePageObject article =
+        base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_COMMENTS_TEST_ARTICLE);
+    article.clickCommentsHeader();
+    article.verifyMediaInComments(MercuryArticlePageObject.MEDIA_TYPE_VIDEO, 1);
+    article.verifyMediaInComments(MercuryArticlePageObject.MEDIA_TYPE_IMAGE, 3);
+  }
+  
+  // CT10
+  @Test(groups = {"MercuryCommentsTests_010", "MercuryCommentsTests", "Mercury"})
+  public void MercuryCommentsTests_010_ChevronRotatesWhenTapped() {
+    MercuryBasePageObject base = new MercuryBasePageObject(driver);
+    MercuryArticlePageObject article =
+        base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_COMMENTS_TEST_ARTICLE);
+    article.verifyChevronRotatesWhenTapped();
   }
 }

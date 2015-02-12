@@ -6,6 +6,8 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.Interactiv
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.LightBoxMercuryComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.SearchNavSideMenuComponentObject;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -54,6 +56,33 @@ public class MercuryArticlePageObject extends MercuryBasePageObject {
   private WebElement viewMapButton;
   @FindBy(css = ".linked-gallery-image a")
   private WebElement linkedImage;
+  @FindBy(css = "ul.comments > li")
+  private List<WebElement> commentsList;
+  @FindBy(css = "ul.comments > li li")
+  private List<WebElement> commentsReplies;
+  @FindBy(css = "ul.comments > li ul")
+  private List<WebElement> commentsRepliesList;
+  @FindBy(css = "button.show-comments-btn.page-btn")
+  private WebElement showCommentsButton;
+  @FindBy(xpath = "//button[text()='Next page']")
+  private WebElement nextCommentPageButton;
+  @FindBy(xpath = "//button[text()='Previous page']")
+  private WebElement previousCommentPageButton;
+  @FindBy(css = "svg.chevron")
+  private WebElement commentChevron;
+  @FindBy(css = "li.article-comment")
+  private List<WebElement> allComments;
+  @FindBy(css = "svg.logo")
+  private WebElement footerLogo;
+  @FindBy(css = "ul.footer-links a")
+  private List<WebElement> footerLinks;
+  @FindBy(css = "div.contributors a")
+  private List<WebElement> topContributorsLinks;
+  @FindBy(css = "nav.article-categories-list button")
+  private WebElement categoryButton;
+
+  public static final String MEDIA_TYPE_VIDEO = "Video";
+  public static final String MEDIA_TYPE_IMAGE = "Image";
 
   public MercuryArticlePageObject(WebDriver driver) {
     super(driver);
@@ -130,8 +159,8 @@ public class MercuryArticlePageObject extends MercuryBasePageObject {
   public void verifyTopContributorsSectionIsVisible() {
     scrollToElement(topContributorsSection);
     Assertion.assertTrue(checkIfElementOnPage(topContributorsSection));
-    PageObjectLogging
-        .log("verifyTopContributorsSectionIsVisible", "Top contributors section is visible", true);
+    PageObjectLogging.log("verifyTopContributorsSectionIsVisible",
+                          "Top contributors section is visible", true);
   }
 
   public void verifyTopContributorsThumb() {
@@ -157,14 +186,128 @@ public class MercuryArticlePageObject extends MercuryBasePageObject {
   public void verifyRepliesAreExpanded() {
     Assertion.assertTrue(checkIfElementOnPage(repliesContent.get(0)));
   }
-  
+
   public void verifySingleLinkedImageRedirect(int index) {
     String currentUrl = driver.getCurrentUrl();
     singleImgLink.get(index).click();
-    if (currentUrl.equals(driver.getCurrentUrl())) {
-      PageObjectLogging.log("verifySingleLinkedImageRedirect", "Redirection doesn't work", false);
-    } else {
-      PageObjectLogging.log("verifySingleLinkedImageRedirect", "Redirection works", true);
+    Assertion.assertFalse(currentUrl.equals(driver.getCurrentUrl()), "Redirection doesn't work");
+  }
+
+  public void verifyCommentsPerPage(int expectedNumber) {
+    Assertion.assertNumber(expectedNumber, commentsList.size(), "Number of comments per page");
+  }
+
+  public void verifyNextAndPreviousPageAreVisible() {
+    int numberOfComments =
+        Integer.parseInt(showCommentsButton.getText().substring(0,
+                                                                showCommentsButton.getText()
+                                                                    .indexOf(" ")));
+    Assertion.assertTrue(numberOfComments - commentsReplies.size() > 25,
+                         "There is less than 25 on that page");
+    Assertion.assertTrue(nextCommentPageButton.isDisplayed(), "Next page button isn't displayed");
+    nextCommentPageButton.click();
+    Assertion.assertTrue(previousCommentPageButton.isDisplayed(),
+                         "Previous page button isn't displayed");
+    previousCommentPageButton.click();
+    Assertion.assertFalse(previousCommentPageButton.isDisplayed(),
+                          "Previous page button is displayed");
+  }
+
+  public void verifyRepliesCounterIsCorrect(int index) {
+    int stringStart = showRepliesButtons.get(index).getText().indexOf(" ") + 1;
+    int stringEnd = showRepliesButtons.get(index).getText().indexOf(" ", stringStart + 1);
+    int numberOfReplies =
+        Integer.parseInt(showRepliesButtons.get(index).getText().substring(stringStart, stringEnd));
+    Assertion
+        .assertTrue(
+            numberOfReplies == commentsRepliesList.get(index).findElements(By.cssSelector("li"))
+                .size(), "Replies counter doesn't work");
+  }
+
+  public void verifyTapOnUserRedirectToUserPage(int index) {
+    String userName = commentsUsernames.get(index).getText();
+    commentsUsernames.get(index).click();
+    String subUrl =
+        driver.getCurrentUrl().substring(driver.getCurrentUrl().indexOf("/wiki/") + 6,
+                                         driver.getCurrentUrl().length());
+    Assertion.assertTrue(subUrl.equals("User:" + userName), "Url doesn't contain user page");
+  }
+
+  public void verifyCommentsCounterIsCorrect() {
+    int numberOfComments =
+        Integer.parseInt(commentsHeader.getText().substring(0,
+                                                            commentsHeader.getText().indexOf(" ")));
+    while (nextCommentPageButton.isDisplayed()) {
+      numberOfComments -= allComments.size();
+      nextCommentPageButton.click();
+    }
+    numberOfComments -= allComments.size();
+    Assertion.assertTrue(numberOfComments == 0, "There are "
+                                                + numberOfComments + " untracked comments");
+  }
+
+  public void verifyMediaInComments(String mediaType, int index) {
+    WebElement mediaInComment;
+    String methodName = "verifyMediaInComments";
+    try {
+      if (mediaType.equals("Video")) {
+        mediaInComment = allComments.get(index).findElement(By.cssSelector("figure.comment-video"));
+      } else {
+        mediaInComment = allComments.get(index).findElement(By.cssSelector("figure"));
+      }
+      Assertion.assertTrue(mediaInComment.findElement(By.cssSelector("img")).isDisplayed(),
+                           mediaType + " thumbnail isn't displayed");
+      Assertion.assertTrue(mediaInComment.findElement(By.cssSelector("a")).getAttribute("href")
+                               .contains("/wiki/File:"), mediaType + " anchor isn't displayed");
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.log(methodName, "There is no " + mediaType + " in that comment", false);
+      PageObjectLogging.log(methodName, e.getMessage(), false);
+    }
+  }
+
+  public void verifyChevronRotatesWhenTapped() {
+    boolean collapsed = showCommentsButton.getAttribute("class").contains("collapsed");
+    clickCommentsHeader();
+    Assertion.assertFalse(
+        collapsed == showCommentsButton.getAttribute("class").contains("collapsed"),
+        "Chevron didn't turn");
+  }
+
+  public void verifyFooterElements(int expectedNumberOfElementsInFooter) {
+    String methodName = "verifyFooterElements";
+    int elementCounter = 0;
+    try {
+      waitForElementByElement(footerLogo);
+      Assertion.assertTrue(footerLogo.isDisplayed(), "Wikia logo isn't displayed");
+      for (WebElement element : footerLinks) {
+        Assertion.assertTrue(element.isDisplayed(), element.getText() + " isn't displayed");
+        ++elementCounter;
+      }
+      Assertion.assertTrue(elementCounter == expectedNumberOfElementsInFooter,
+                           "Some elements aren't displayed");
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.log(methodName, "Some elements are missing", false);
+      PageObjectLogging.log(methodName, e.getMessage(), false);
+    }
+  }
+
+  public void verifyTapContributorRedirectToUserPage(int index) {
+    topContributorsLinks.get(index).click();
+    String newUrl = driver.getCurrentUrl();
+    Assertion.assertTrue(newUrl.contains("/wiki/User:"), "Redirection to user page doesn't work");
+  }
+
+  public void verifyChevronRotation() {
+    String methodName = "verifyChevronRotation";
+    try {
+      waitForElementByElement(categoryButton);
+      Assertion.assertTrue(categoryButton.getAttribute("class").contains("collapsed"),
+                           "Chevron isn't collapsed");
+      categoryButton.click();
+      Assertion.assertFalse(categoryButton.getAttribute("class").contains("collapsed"),
+                            "Chevron is collapsed");
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.log(methodName, e.getMessage(), false);
     }
   }
 }

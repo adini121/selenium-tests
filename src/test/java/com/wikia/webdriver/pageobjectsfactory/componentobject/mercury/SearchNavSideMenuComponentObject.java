@@ -3,8 +3,6 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.mercury;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryArticlePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.PerformTouchAction;
-
 import org.openqa.selenium.WebDriver;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryBasePageObject;
@@ -117,11 +115,7 @@ public class SearchNavSideMenuComponentObject extends MercuryBasePageObject {
   }
 
   public void verifySearchNoResult() {
-    if (searchSuggestions.size() == 0) {
-      PageObjectLogging.log("verifySearchNoResult", "There are no results", true);
-    } else {
-      PageObjectLogging.log("verifySearchNoResult", "There are results", false);
-    }
+    Assertion.assertTrue(searchSuggestions.size() == 0, "There are results");
   }
 
   public void verifyOpeningArticleInNav(int anchorIndex) {
@@ -145,14 +139,10 @@ public class SearchNavSideMenuComponentObject extends MercuryBasePageObject {
     PageObjectLogging.log("verifyBackLinkFunctionality", "Back button is working", true, driver);
   }
 
-  public void verifyClosingNav(PerformTouchAction touchAction) {
+  public void verifyClosingNav() {
     waitForElementVisibleByElement(overlay);
-    touchAction.tapOnPointXY(90, 50, 500, 4000);
-    if (overlay.getCssValue("visibility").equals("hidden")) {
-      PageObjectLogging.log("verifyClosingNav", "Nav menu is closed", true);
-    } else {
-      PageObjectLogging.log("verifyClosingNav", "Nav menu is open", false);
-    }
+    tapOnElement(overlay);
+    PageObjectLogging.log("verifyClosingNav", "Nav menu is closed", true, driver);
   }
 
   public void verifyTextEllipsis(int anchorIndex) {
@@ -162,28 +152,15 @@ public class SearchNavSideMenuComponentObject extends MercuryBasePageObject {
         noChevrons.get(anchorIndex).getCssValue("text-overflow").contains("ellipsis");
     boolean chevronsEllipsis =
         chevrons.get(anchorIndex).getCssValue("text-overflow").contains("ellipsis");
-    if (noChevronsEllipsis && chevronsEllipsis) {
-      PageObjectLogging.log("verifyTextEllipsis", "CSS selector is set to ellipsis", true);
-    } else {
-      PageObjectLogging.log("verifyTextEllipsis", "CSS sellector isn't set to ellipsis", false);
-    }
+    Assertion.assertTrue(noChevronsEllipsis && chevronsEllipsis,
+        "CSS sellector isn't set to ellipsis");
   }
 
   public void verifyClickOnSearchWillExpandWindow() {
     clickSearchField();
-    if (resultField.getCssValue("visibility").equals("visible")) {
-      PageObjectLogging.log("verifyClickOnSearchWillExpandWindow", "Result field is now visible",
-          true);
-    } else {
-      PageObjectLogging.log("verifyClickOnSearchWillExpandWindow", "Result field is now hidden",
-          false);
-    }
-    if (menuField.getCssValue("visibility").equals("visible")) {
-      PageObjectLogging.log("verifyClickOnSearchWillExpandWindow", "Menu field is now visible",
-          false);
-    } else {
-      PageObjectLogging
-          .log("verifyClickOnSearchWillExpandWindow", "Menu field is now hidden", true);
-    }
+    Assertion.assertTrue(resultField.getCssValue("visibility").equals("visible"),
+        "Result field is now hidden");
+    Assertion.assertFalse(menuField.getCssValue("visibility").equals("visible"),
+        "Menu field is now visible");
   }
 }
