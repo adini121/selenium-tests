@@ -3,6 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.mercury;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryArticlePageObject;
+
 import org.openqa.selenium.WebDriver;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryBasePageObject;
@@ -93,20 +94,20 @@ public class SearchNavSideMenuComponentObject extends MercuryBasePageObject {
     waitForElementVisibleByElement(searchInput);
     searchInput.sendKeys(content.substring(0, length));
     PageObjectLogging.log("typeInSearchField", "String >>" + content.substring(0, length)
-        + "<< was typed in string field", true);
+                                               + "<< was typed in string field", true);
   }
 
   public void verifySearchSuggestionsWereVisible() {
     waitForElementByElement(searchSuggestions.get(0));
     Assertion.assertTrue(checkIfElementOnPage(searchSuggestions.get(0)));
     PageObjectLogging.log("verifySearchSuggestionsWereVisible", "Search suggestions were visible",
-        true, driver);
+                          true, driver);
   }
 
   public void verifySearchView() {
     Assertion.assertTrue(checkIfElementOnPage(searchView));
     PageObjectLogging.log("verifySearchView", "Search view was displayed on full size", true,
-        driver);
+                          driver);
   }
 
   public void verifyMenuView() {
@@ -153,14 +154,23 @@ public class SearchNavSideMenuComponentObject extends MercuryBasePageObject {
     boolean chevronsEllipsis =
         chevrons.get(anchorIndex).getCssValue("text-overflow").contains("ellipsis");
     Assertion.assertTrue(noChevronsEllipsis && chevronsEllipsis,
-        "CSS sellector isn't set to ellipsis");
+                         "CSS sellector isn't set to ellipsis");
   }
 
   public void verifyClickOnSearchWillExpandWindow() {
     clickSearchField();
     Assertion.assertTrue(resultField.getCssValue("visibility").equals("visible"),
-        "Result field is now hidden");
+                         "Result field is now hidden");
     Assertion.assertFalse(menuField.getCssValue("visibility").equals("visible"),
-        "Menu field is now visible");
+                          "Menu field is now visible");
+  }
+
+  public void verifyRandomPageOnFirstLevel(int randomPagePos, int checkInCategory) {
+    Assertion.assertTrue(noChevrons.get(randomPagePos).getText().toString().equals("Random Page"));
+    chevrons.get(checkInCategory).click();
+    if (noChevrons.size() > 0) {
+      Assertion
+          .assertFalse(noChevrons.get(randomPagePos).getText().toString().equals("Random Page"));
+    }
   }
 }

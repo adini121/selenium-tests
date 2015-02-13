@@ -83,4 +83,14 @@ public class TopBarTests extends NewTestTemplate {
     SearchNavSideMenuComponentObject nav = article.clickSearchButton();
     nav.verifyTextEllipsis(0);
   }
+
+  // TBT07 - Verify "Random page" should be visible on level 1 only
+  @Test(groups = {"MercuryTopBarTests_007", "MercuryTopBarTests", "Mercury"})
+  public void MercuryTopBarTests_007_RandomPageOnFirstLevel() {
+    MercuryBasePageObject base = new MercuryBasePageObject(driver);
+    MercuryArticlePageObject article =
+        base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_MAIN_ARTICLE);
+    SearchNavSideMenuComponentObject nav = article.clickSearchButton();
+    nav.verifyRandomPageOnFirstLevel(0, 0);
+  }
 }
