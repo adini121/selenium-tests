@@ -67,6 +67,7 @@ public class ImageStorageTests extends NewTestTemplate {
     renamePage.rename(imageNewName, true);
     file.verifyNotificationMessage();
     file.verifyHeader(imageNewName);
+    file = newFiles.openFilePage(wikiURL, imageNewName);
     renamePage = file.renameUsingDropdown();
     renamePage.rename(PageContent.FILERENAME, true);
     file.verifyNotificationMessage();
