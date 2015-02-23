@@ -55,7 +55,7 @@ public class ImageStorageTests extends NewTestTemplate {
     newFiles.verifyURLStatus(200, imageThumbnailURL);
   }
 
-  @Test(groups = {"ImageStorageTests", "ImageStorage_002"})
+  @Test(groups = {"ImageStorageTests", "ImageStorage_002"}, invocationCount = 10)
   @UseUnstablePageLoadStrategy
   public void ImageStorage_002_moveImage() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -67,7 +67,6 @@ public class ImageStorageTests extends NewTestTemplate {
     renamePage.rename(imageNewName, true);
     file.verifyNotificationMessage();
     file.verifyHeader(imageNewName);
-    file = newFiles.openFilePage(wikiURL, imageNewName);
     renamePage = file.renameUsingDropdown();
     renamePage.rename(PageContent.FILERENAME, true);
     file.verifyNotificationMessage();
