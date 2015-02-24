@@ -27,7 +27,7 @@ public class CategoriesTestsEditMode extends NewTestTemplate {
 
   Credentials credentials = config.getCredentials();
 
-  @Test(groups = {"CategoriesTestsArticleEdit_001", "CategoriesTestsArticleEditMode"})
+  @Test(groups = {"CategoriesTestsArticleEdit_001", "CategoriesTestsArticleEditMode"}, invocationCount=25)
   public void CategoriesTestsArticleEdit_001_anonEdit() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
@@ -42,7 +42,7 @@ public class CategoriesTestsEditMode extends NewTestTemplate {
     visual.verifyCategoryPresent(categoryName);
   }
 
-  @Test(groups = {"CategoriesTestsArticleEdit_002", "CategoriesTestsArticleEditMode"})
+  @Test(groups = {"CategoriesTestsArticleEdit_002", "CategoriesTestsArticleEditMode"}, invocationCount=25)
   public void CategoriesTestsArticleEdit_002_anonDelete() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
@@ -55,7 +55,7 @@ public class CategoriesTestsEditMode extends NewTestTemplate {
     visual.verifyCategoryNotPresent(categoryName);
   }
 
-  @Test(groups = {"CategoriesTestsArticleEdit_003", "CategoriesTestsArticleEditMode"})
+  @Test(groups = {"CategoriesTestsArticleEdit_003", "CategoriesTestsArticleEditMode"}, invocationCount=25)
   public void CategoriesTestsArticleEdit_003_anonSuggestions() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
@@ -66,7 +66,7 @@ public class CategoriesTestsEditMode extends NewTestTemplate {
     visual.verifyCategoryPresent(categoryName);
   }
 
-  @Test(groups = {"CategoriesTestsArticleEdit_004", "CategoriesTestsArticleEditMode"})
+  @Test(groups = {"CategoriesTestsArticleEdit_004", "CategoriesTestsArticleEditMode"}, invocationCount=25)
   public void CategoriesTestsArticleEdit_004_user() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -78,7 +78,7 @@ public class CategoriesTestsEditMode extends NewTestTemplate {
     visual.verifyCategoryPresent(categoryName);
   }
 
-  @Test(groups = {"CategoriesTestsArticleEdit_005", "CategoriesTestsArticleEditMode"})
+  @Test(groups = {"CategoriesTestsArticleEdit_005", "CategoriesTestsArticleEditMode"}, invocationCount=25)
   public void CategoriesTestsArticleEdit_005_userSuggestions() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
