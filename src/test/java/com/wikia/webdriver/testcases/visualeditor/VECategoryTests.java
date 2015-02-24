@@ -5,7 +5,6 @@ import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Category
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.InsertDialog;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.common.templates.NewTestTemplateBeforeClass;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorOptionsDialog;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorReviewChangesDialog;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorSaveChangesDialog;
@@ -61,6 +60,7 @@ public class VECategoryTests extends NewTestTemplate {
     saveDialog = reviewDialog.clickReturnToSaveFormButton();
     ArticlePageObject article = saveDialog.savePage();
     article.verifyVEPublishComplete();
+    article.logOut(wikiURL);
   }
 
   //CA02
@@ -82,6 +82,7 @@ public class VECategoryTests extends NewTestTemplate {
     saveDialog = reviewDialog.clickReturnToSaveFormButton();
     ArticlePageObject article = saveDialog.savePage();
     article.verifyVEPublishComplete();
+    article.logOut(wikiURL);
   }
 
   //CA03
@@ -95,6 +96,7 @@ public class VECategoryTests extends NewTestTemplate {
     VisualEditorOptionsDialog optionsDialog =
         (VisualEditorOptionsDialog) ve.openDialogFromMenu(InsertDialog.CATEGORIES);
     optionsDialog.verifyLinkSuggestions(categorySearchStr, CategoryResultType.NEW);
+    optionsDialog.logOut(wikiURL);
   }
 
   //CA04
@@ -108,6 +110,7 @@ public class VECategoryTests extends NewTestTemplate {
     VisualEditorOptionsDialog optionsDialog =
         (VisualEditorOptionsDialog) ve.openDialogFromMenu(InsertDialog.CATEGORIES);
     optionsDialog.verifyLinkSuggestions(categorySearchStr, CategoryResultType.MATCHING);
+    optionsDialog.logOut(wikiURL);
   }
 
   //CA05
@@ -135,5 +138,6 @@ public class VECategoryTests extends NewTestTemplate {
     saveDialog = reviewDialog.clickReturnToSaveFormButton();
     ArticlePageObject article = saveDialog.savePage();
     article.verifyVEPublishComplete();
+    article.logOut(wikiURL);
   }
 }

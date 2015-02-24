@@ -5,7 +5,6 @@ import com.wikia.webdriver.common.contentpatterns.VEContent;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.InsertDialog;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.common.templates.NewTestTemplateBeforeClass;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorEditTemplateDialog;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorInsertTemplateDialog;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorReviewChangesDialog;
@@ -68,6 +67,7 @@ public class VETemplateTests extends NewTestTemplate {
     templateDialog.clearSearchInput();
     templateDialog.typeInSearchInput(VEContent.TEMPLATE_SEARCH_MATCH_ARTICLE);
     templateDialog.verifyIsResultTemplate();
+    templateDialog.logOut(wikiURL);
   }
 
   //AT02
@@ -83,6 +83,7 @@ public class VETemplateTests extends NewTestTemplate {
         (VisualEditorInsertTemplateDialog) ve.openDialogFromMenu(InsertDialog.TEMPLATE);
     templateDialog.verifyNoResultTemplate();
     templateDialog.verifyIsSuggestedTemplate();
+    templateDialog.logOut(wikiURL);
   }
 
   //AT03
@@ -192,5 +193,6 @@ public class VETemplateTests extends NewTestTemplate {
     saveDialog = reviewDialog.clickReturnToSaveFormButton();
     ArticlePageObject article = saveDialog.savePage();
     article.verifyVEPublishComplete();
+    article.logOut(wikiURL);
   }
 }

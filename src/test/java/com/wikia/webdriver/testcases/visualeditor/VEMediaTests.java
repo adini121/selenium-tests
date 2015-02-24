@@ -107,6 +107,7 @@ public class VEMediaTests extends NewTestTemplate {
     VisualEditorSaveChangesDialog save = ve.clickPublishButton();
     ArticlePageObject article = save.savePage();
     article.verifyVEPublishComplete();
+    article.logOut(wikiURL);
   }
 
   //MS01
@@ -234,5 +235,6 @@ public class VEMediaTests extends NewTestTemplate {
     filePage.verifyArticleName(URLsContent.FILE_NAMESPACE + testFullFileName);
     DeletePageObject deletePage = filePage.deleteVersion(1);
     deletePage.submitDeletion();
+    deletePage.logOut(wikiURL);
   }
 }

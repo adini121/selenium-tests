@@ -36,6 +36,7 @@ public class VisualEditorEntryTests extends NewTestTemplate {
                         credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
     article.openArticleByName(wikiURL, URLsContent.CATEGORY_PAGE);
     article.verifyMainEditEditor(expectedEditor);
+    article.logOut(wikiURL);
   }
 
   @Test(
@@ -53,6 +54,7 @@ public class VisualEditorEntryTests extends NewTestTemplate {
                         credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
     article.openArticleByName(wikiURL, articleName);
     article.verifyCreateAPageEditor(expectedEditor, articleName);
+    article.logOut(wikiURL);
   }
 
   @Test(
@@ -69,6 +71,7 @@ public class VisualEditorEntryTests extends NewTestTemplate {
                         credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
     article.openArticleByName(wikiURL, URLsContent.LIST_PAGE);
     article.verifyMainEditEditor(expectedEditor);
+    article.logOut(wikiURL);
   }
 
   @Test(
@@ -85,6 +88,7 @@ public class VisualEditorEntryTests extends NewTestTemplate {
                         credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
     article.openArticleByName(wikiURL, URLsContent.TESTINGPAGE);
     article.verifyMainEditEditor(expectedEditor);
+    article.logOut(wikiURL);
   }
 
   @Test(
@@ -101,6 +105,7 @@ public class VisualEditorEntryTests extends NewTestTemplate {
                         credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
     article.openArticleByName(wikiURL, URLsContent.TESTINGPAGE);
     article.verifyRedLinkEditor(expectedEditor);
+    article.logOut(wikiURL);
   }
 
   @Test(
@@ -117,6 +122,7 @@ public class VisualEditorEntryTests extends NewTestTemplate {
                         credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
     article.openArticleByName(wikiURL, URLsContent.TESTINGPAGE);
     article.verifySectionEditEditor(expectedEditor);
+    article.logOut(wikiURL);
   }
 
   @Test(
@@ -133,6 +139,7 @@ public class VisualEditorEntryTests extends NewTestTemplate {
                         credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
     article.openArticleByName(wikiURL, URLsContent.TEMPLATE_PAGE);
     article.verifyMainEditEditor(expectedEditor);
+    article.logOut(wikiURL);
   }
 
   @Test(
@@ -148,6 +155,7 @@ public class VisualEditorEntryTests extends NewTestTemplate {
     article.logInCookie(credentials.getUserBaseOnEditorPref(editorPref),
                         credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
     article.verifyURLActionEditEditor(expectedEditor, URLsContent.TESTINGPAGE, wikiURL);
+    article.logOut(wikiURL);
   }
 
   @Test(
@@ -163,5 +171,6 @@ public class VisualEditorEntryTests extends NewTestTemplate {
     article.logInCookie(credentials.getUserBaseOnEditorPref(editorPref),
                         credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
     article.verifyURLVEActionEditEditor(expectedEditor, wikiURL);
+    article.logOut(wikiURL);
   }
 }

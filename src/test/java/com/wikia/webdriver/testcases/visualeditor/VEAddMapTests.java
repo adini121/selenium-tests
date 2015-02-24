@@ -57,6 +57,7 @@ public class VEAddMapTests extends NewTestTemplate {
     VisualEditorSaveChangesDialog save = veNew.clickPublishButton();
     ArticlePageObject article = save.savePage();
     article.verifyVEPublishComplete();
+    article.logOut(wikiURL);
   }
 
   @Test(
@@ -109,5 +110,6 @@ public class VEAddMapTests extends NewTestTemplate {
     DeleteAMapComponentObject deleteMapModal = createdMap.deleteMap();
     InteractiveMapsPageObject specialMaps = deleteMapModal.deleteMap();
     specialMaps.verifyEmptyState();
+    specialMaps.logOut(wikiURL);
   }
 }
