@@ -7,7 +7,6 @@ import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.InsertDi
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Setting;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.common.templates.NewTestTemplateBeforeClass;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorAddMediaDialog;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorAddMediaDialog.ImageLicense;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorMediaSettingsDialog;
@@ -99,7 +98,6 @@ public class VEMediaTests extends NewTestTemplate {
     testFullFileName = testFileUploadName + ".png";
     testImageLicense = ImageLicense.CCBYSA;
 
-    base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     VisualEditorPageObject ve = base.openNewArticleEditModeVisual(wikiURL);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
