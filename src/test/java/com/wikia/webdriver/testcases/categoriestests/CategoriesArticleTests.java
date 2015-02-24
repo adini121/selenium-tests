@@ -28,7 +28,7 @@ public class CategoriesArticleTests extends NewTestTemplate {
 
   Credentials credentials = config.getCredentials();
 
-  @Test(groups = {"CategoriesTestsArticle_001", "CategoriesTestsArticle", "Smoke2"})
+  @Test(groups = {"CategoriesTestsArticle_001", "CategoriesTestsArticle", "Smoke2"}, invocationCount=25)
   public void CategoriesTestsArticle_001_anon() {
     ArticlePageObject article = new ArticlePageObject(driver);
     article.openRandomArticle(wikiURL);
@@ -38,7 +38,7 @@ public class CategoriesArticleTests extends NewTestTemplate {
     article.verifyCategoryPresent(categoryName);
   }
 
-  @Test(groups = {"CategoriesTestsArticle_002", "CategoriesTestsArticle"})
+  @Test(groups = {"CategoriesTestsArticle_002", "CategoriesTestsArticle"}, invocationCount=25)
   public void CategoriesTestsArticle_002_anonSuggestions() {
     VisualEditModePageObject visualEditMode = new VisualEditModePageObject(driver);
     visualEditMode.navigateToArticleEditPageCK(
@@ -52,7 +52,7 @@ public class CategoriesArticleTests extends NewTestTemplate {
     article.verifyCategoryPresent(desiredCategory);
   }
 
-  @Test(groups = {"CategoriesTestsArticle_003", "CategoriesTestsArticle"})
+  @Test(groups = {"CategoriesTestsArticle_003", "CategoriesTestsArticle"}, invocationCount=25)
   public void CategoriesTestsArticle_003_user() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -63,7 +63,7 @@ public class CategoriesArticleTests extends NewTestTemplate {
     article.verifyCategoryPresent(categoryName);
   }
 
-  @Test(groups = {"CategoriesTestsArticle_004", "CategoriesTestsArticle"})
+  @Test(groups = {"CategoriesTestsArticle_004", "CategoriesTestsArticle"}, invocationCount=25)
   public void CategoriesTestsArticle_004_userSuggestions() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -78,7 +78,7 @@ public class CategoriesArticleTests extends NewTestTemplate {
     article.verifyCategoryPresent(desiredCategory);
   }
 
-  @Test(groups = {"CategoriesTestsArticle_005", "CategoriesTestsArticle"})
+  @Test(groups = {"CategoriesTestsArticle_005", "CategoriesTestsArticle"}, invocationCount=25)
   public void CategoriesTestsArticle_005_anonEdit() {
     ArticlePageObject article = new ArticlePageObject(driver);
     article.openRandomArticle(wikiURL);
@@ -91,7 +91,7 @@ public class CategoriesArticleTests extends NewTestTemplate {
     article.verifyCategoryPresent(categoryName);
   }
 
-  @Test(groups = {"CategoriesTestsArticle_006", "CategoriesTestsArticle"})
+  @Test(groups = {"CategoriesTestsArticle_006", "CategoriesTestsArticle"}, invocationCount=25)
   public void CategoriesTestsArticle_006_anonDelete() {
     ArticlePageObject article = new ArticlePageObject(driver);
     article.openRandomArticle(wikiURL);
