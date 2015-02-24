@@ -23,6 +23,7 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -45,6 +46,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   private static final int SKIN_WIDTH = 90;
   private static final int SKIN_MARGIN_TOP = 100;
   private static final int SKIN_MARGIN_HORIZONTAL = 5;
+  private static final int WAIT_AD_EXPANDED_SEC = 10;
   private static final String[] GPT_DATA_ATTRIBUTES = {
       "data-gpt-line-item-id",
       "data-gpt-creative-id",
@@ -388,27 +390,6 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   }
 
-  private boolean checkTagsPresent(WebElement slotElement) {
-    try {
-      waitForOneOfTagsPresentInElement(slotElement, "img", "iframe");
-      PageObjectLogging.log(
-          "IFrameOrImageFound",
-          "Image or iframe was found in slot in less then 30 seconds",
-          true,
-          driver
-      );
-      return true;
-    } catch (TimeoutException e) {
-      PageObjectLogging.log(
-          "IFrameOrImgNotFound",
-          "Nor image or iframe was found in slot for 30 seconds",
-          false,
-          driver
-      );
-      return false;
-    }
-  }
-
   protected boolean isScriptPresentInElement(WebElement element, String scriptText) {
     String formattedScriptText = scriptText.replaceAll("\\s", "");
 
@@ -571,6 +552,25 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   protected boolean checkIfSlotExpanded(WebElement slot) {
     return slot.getSize().getHeight() > 1 && slot.getSize().getWidth() > 1;
+  }
+
+  public void waitForSlotExpanded(final WebElement slot) {
+    changeImplicitWait(250, TimeUnit.MILLISECONDS);
+    try {
+      new WebDriverWait(driver, WAIT_AD_EXPANDED_SEC).until(new ExpectedCondition<Boolean>() {
+        @Override
+        public Boolean apply(WebDriver webDriver) {
+          return checkIfSlotExpanded(slot);
+        }
+
+        @Override
+        public String toString() {
+          return String.format(slot.getAttribute("id") + " is expanded.");
+        }
+      });
+    } finally {
+      restoreDeaultImplicitWait();
+    }
   }
 
   public void waitForSlotCollapsed(WebElement slot) {
