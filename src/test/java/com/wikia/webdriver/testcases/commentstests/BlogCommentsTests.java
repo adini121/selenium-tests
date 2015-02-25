@@ -21,7 +21,7 @@ public class BlogCommentsTests extends NewTestTemplate {
 
   Credentials credentials = config.getCredentials();
 
-  @Test(groups = {"BlogComments_001", "BlogCommentsTests"})
+  @Test(groups = {"BlogComments_001", "BlogCommentsTests"}, invocationCount=25)
   public void BlogComments_001_Anon_commentReply() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     UserProfilePageObject userProfile = base.openProfilePage(credentials.userName, wikiURL);
@@ -41,7 +41,7 @@ public class BlogCommentsTests extends NewTestTemplate {
     blogPage.verifyReplyCreator(PageContent.WIKIA_CONTRIBUTOR);
   }
 
-  @Test(groups = {"BlogComments_002", "BlogCommentsTests"})
+  @Test(groups = {"BlogComments_002", "BlogCommentsTests"}, invocationCount=25)
   public void BlogComments_002_User_commentReply() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -63,7 +63,7 @@ public class BlogCommentsTests extends NewTestTemplate {
   }
 
 
-  @Test(groups = {"BlogComments_003", "BlogCommentsTests"})
+  @Test(groups = {"BlogComments_003", "BlogCommentsTests"}, invocationCount=25)
   public void BlogComments_003_User_editComment() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -83,7 +83,7 @@ public class BlogCommentsTests extends NewTestTemplate {
     blogPage.verifyCommentText(commentEdited);
   }
 
-  @Test(groups = {"BlogComments_004", "BlogCommentsTests"})
+  @Test(groups = {"BlogComments_004", "BlogCommentsTests"}, invocationCount=25)
   public void BlogComments_004_Admin_deleteComment() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);

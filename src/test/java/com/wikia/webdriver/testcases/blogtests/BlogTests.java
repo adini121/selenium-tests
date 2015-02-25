@@ -25,7 +25,7 @@ public class BlogTests extends NewTestTemplate {
    * existing blog post 4. Delete/Undelete existing blog post 5. Move existing blog post
    */
 
-  @Test(groups = {"BlogTests_001", "BlogTests", "Smoke1"})
+  @Test(groups = {"BlogTests_001", "BlogTests", "Smoke1"}, invocationCount=25)
   public void BlogTests_001_addFromProfile() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName4, credentials.password4, wikiURL);
@@ -44,7 +44,7 @@ public class BlogTests extends NewTestTemplate {
   @Test(
       dataProviderClass = ArticleDataProvider.class,
       dataProvider = "articleTitles",
-      groups = {"BlogTests_002", "BlogTests"})
+      groups = {"BlogTests_002", "BlogTests"}, invocationCount=25)
   public void BlogTests_002_addByUrl(String blogTitle) {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -58,7 +58,7 @@ public class BlogTests extends NewTestTemplate {
     blogPage.verifyContent(blogContent);
   }
 
-  @Test(groups = {"BlogTests_003", "BlogTests"})
+  @Test(groups = {"BlogTests_003", "BlogTests"}, invocationCount=25)
   public void BlogTests_003_editFromProfile() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -74,7 +74,7 @@ public class BlogTests extends NewTestTemplate {
     blogPage.verifyContent(blogContent);
   }
 
-  @Test(groups = {"BlogTests_004", "BlogTests"})
+  @Test(groups = {"BlogTests_004", "BlogTests"}, invocationCount=25)
   public void BlogTests_004_deleteUndelete() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
@@ -91,7 +91,7 @@ public class BlogTests extends NewTestTemplate {
     blogPage.verifyBlogTitle(blogTitle);
   }
 
-  @Test(groups = {"BlogTests_005", "BlogTests"})
+  @Test(groups = {"BlogTests_005", "BlogTests"}, invocationCount=25)
   public void BlogTests_005_move() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
