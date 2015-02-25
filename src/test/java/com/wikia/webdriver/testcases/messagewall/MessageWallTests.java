@@ -23,7 +23,7 @@ public class MessageWallTests extends NewTestTemplate {
 
   Credentials credentials = config.getCredentials();
 
-  @Test(groups = {"MessageWall_001", "MessageWall", "Smoke3"})
+  @Test(groups = {"MessageWall_001", "MessageWall", "Smoke3"}, invocationCount=25)
   public void MessageWall_001_writeEdit() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -42,7 +42,7 @@ public class MessageWallTests extends NewTestTemplate {
     wall.verifyMessageEditText(title, messageEdit, credentials.userName);
   }
 
-  @Test(groups = {"MessageWall_002", "MessageWall"})
+  @Test(groups = {"MessageWall_002", "MessageWall"}, invocationCount=25)
   public void MessageWall_002_writeRemove() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -59,7 +59,7 @@ public class MessageWallTests extends NewTestTemplate {
     wall.verifyThreadRemoved();
   }
 
-  @Test(groups = {"MessageWall_003", "MessageWall"})
+  @Test(groups = {"MessageWall_003", "MessageWall"}, invocationCount=25)
   public void MessageWall_003_writeClose() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
@@ -79,7 +79,7 @@ public class MessageWallTests extends NewTestTemplate {
     wall.verifyThreadReopened();
   }
 
-  @Test(groups = {"MessageWall_004", "MessageWall"})
+  @Test(groups = {"MessageWall_004", "MessageWall"}, invocationCount=25)
   public void MessageWall_004_writeQuote() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
@@ -98,7 +98,7 @@ public class MessageWallTests extends NewTestTemplate {
     wall.verifyQuote(quote);
   }
 
-  @Test(groups = {"MessageWall_005", "MessageWall"})
+  @Test(groups = {"MessageWall_005", "MessageWall"}, invocationCount=25)
   public void MessageWall_005_writePreview() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -114,7 +114,7 @@ public class MessageWallTests extends NewTestTemplate {
     wall.verifyMessageText(title, message, credentials.userName);
   }
 
-  @Test(groups = {"MessageWall_006", "MessageWall"})
+  @Test(groups = {"MessageWall_006", "MessageWall"}, invocationCount=25)
   public void MessageWall_006_writeReply() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -139,7 +139,7 @@ public class MessageWallTests extends NewTestTemplate {
    * unClosedDivComment 2. refresh the page 3. make sure that reply area avatar doesn't appear by
    * default
    */
-  @Test(groups = {"MessageWall_007", "MessageWall"})
+  @Test(groups = {"MessageWall_007", "MessageWall"}, invocationCount=25)
   public void MessageWall_007_unclosedTagPost() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -163,7 +163,7 @@ public class MessageWallTests extends NewTestTemplate {
    * QATestsBlockedUser should be able to respond on his MessageWall
    */
   @Test(
-      groups = {"MessageWall_008", "MessageWall"}
+      groups = {"MessageWall_008", "MessageWall"}, invocationCount=25
   )
   public void MessageWall_008_blockedUserPostsOnHisWall() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
