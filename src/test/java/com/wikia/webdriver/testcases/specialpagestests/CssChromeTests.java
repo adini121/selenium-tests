@@ -30,7 +30,7 @@ public class CssChromeTests extends NewTestTemplate {
   /**
    * http://wikia-inc.atlassian.net/browse/DAR-285
    */
-  @Test(groups = {"CssChrome_001", "CssChrome", "AdminDashboard"})
+  @Test(groups = {"CssChrome_001", "CssChrome", "AdminDashboard"}, invocationCount = 25)
   public void CssChrome_001_showingErrorWhenWrongSyntax() {
     specialCss.verifyAceEditorPresence();
     specialCss.verifyHighlighting();
@@ -42,7 +42,7 @@ public class CssChromeTests extends NewTestTemplate {
   /**
    * http://wikia-inc.atlassian.net/browse/DAR-733
    */
-  @Test(groups = {"CssChrome_002", "CssChrome", "AdminDashboard"})
+  @Test(groups = {"CssChrome_002", "CssChrome", "AdminDashboard"}, invocationCount = 25)
   @UseUnstablePageLoadStrategy
   public void CssChrome_002_verifyPublishButtonAppearsAndWorks() {
     String currentTimestamp = specialCss.getTimeStamp();
@@ -55,7 +55,7 @@ public class CssChromeTests extends NewTestTemplate {
   /**
    * http://wikia-inc.atlassian.net/browse/DAR-733
    */
-  @Test(groups = {"CssChrome_003", "CssChrome", "AdminDashboard"})
+  @Test(groups = {"CssChrome_003", "CssChrome", "AdminDashboard"}, invocationCount = 25)
   @UseUnstablePageLoadStrategy
   public void CssChrome_003_verifyEditSummaryAppearsAndWorks() {
     String currentTimestamp = specialCss.getTimeStamp();
@@ -70,7 +70,7 @@ public class CssChromeTests extends NewTestTemplate {
   /**
    * http://wikia-inc.atlassian.net/browse/DAR-733
    */
-  @Test(groups = {"CssChrome_004", "CssChrome", "AdminDashboard"})
+  @Test(groups = {"CssChrome_004", "CssChrome", "AdminDashboard"}, invocationCount = 25)
   public void CssChrome_004_verifyChangesAppearsAndWorks() {
     String currentTimestamp = specialCss.getTimeStamp();
     specialCss.insertCssText("\n" + currentTimestamp);
@@ -126,7 +126,7 @@ public class CssChromeTests extends NewTestTemplate {
    * https://wikia-inc.atlassian.net/browse/DAR-731 story description
    * https://wikia-inc.atlassian.net/browse/DAR-880 development ticket
    */
-  @Test(groups = {"CssChrome_008", "CssChrome", "AdminDashboard"})
+  @Test(groups = {"CssChrome_008", "CssChrome", "AdminDashboard"}, invocationCount = 25)
   public void CssChrome_008_verifyOnLeaveMessageWorks() {
     specialCss.verifyAceEditorPresence();
     specialCss.sendCssText(CssEditorContent.VALID_CSS);
@@ -137,7 +137,7 @@ public class CssChromeTests extends NewTestTemplate {
   /**
    * https://wikia-inc.atlassian.net/browse/DAR-999
    */
-  @Test(groups = {"CssChrome_009", "CssChrome", "AdminDashboard"})
+  @Test(groups = {"CssChrome_009", "CssChrome", "AdminDashboard"}, invocationCount = 25)
   public void CssChrome_009_verifyTalkButtonWorks() {
     specialCss.verifyTalkBubblePresence();
     int commentsFromSpecialCss = specialCss.getNumberFromCssTalkBubble();
