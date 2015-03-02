@@ -136,7 +136,7 @@ public class VisualEditorEntryTests extends NewTestTemplate {
   }
 
   @Test(
-      groups = {"VisualEditorEntry", "VisualEditorEntryTest_008", "urlActionEditEntry"},
+      groups = {"VisualEditorEntry", "VisualEditorEntryTest_008", "actionURLEntry"},
       dataProviderClass = VisualEditorDataProvider.class,
       dataProvider = "urlActionEditEntryPoints"
   )
@@ -151,7 +151,7 @@ public class VisualEditorEntryTests extends NewTestTemplate {
   }
 
   @Test(
-      groups = {"VisualEditorEntry", "VisualEditorEntryTest_009", "urlVEActionEditEntry"},
+      groups = {"VisualEditorEntry", "VisualEditorEntryTest_009", "veactionURLEntry"},
       dataProviderClass = VisualEditorDataProvider.class,
       dataProvider = "urlVEActionEditEntryPoints"
   )
