@@ -37,7 +37,7 @@ public class EditingPreferencesTests extends NewTestTemplate {
     base.logInCookie(credentials.userName5, credentials.password5, wikiURL);
   }
 
-  @Test(groups = {"EditingPreferencesTest", "EditPreferences_001"})
+  @Test(groups = {"EditingPreferencesTest", "EditPreferences_001"}, invocationCount=25)
   public void EditPreferences_001_selectVE() {
     EditingPreferencesPageObject editPrefPage = base.openSpecialEditingPreferencesPage(wikiURL);
     editPrefPage.selectPreferredEditor(VE);
@@ -50,7 +50,7 @@ public class EditingPreferencesTests extends NewTestTemplate {
     ve.verifyEditorSurfacePresent();
   }
 
-  @Test(groups = {"EditingPreferencesTest", "EditPreferences_002"})
+  @Test(groups = {"EditingPreferencesTest", "EditPreferences_002"}, invocationCount=25)
   public void EditPreferences_002_selectCK() {
     EditingPreferencesPageObject editPrefPage = base.openSpecialEditingPreferencesPage(wikiURL);
     editPrefPage.selectPreferredEditor(CK);
@@ -63,7 +63,7 @@ public class EditingPreferencesTests extends NewTestTemplate {
     ck.clickPublishButton();
   }
 
-  @Test(groups = {"EditingPreferencesTest", "EditPreferences_003"})
+  @Test(groups = {"EditingPreferencesTest", "EditPreferences_003"}, invocationCount=25)
   public void EditPreferences_003_selectSource() {
     EditingPreferencesPageObject editPrefPage = base.openSpecialEditingPreferencesPage(wikiURL);
     editPrefPage.selectPreferredEditor(SOURCE);
