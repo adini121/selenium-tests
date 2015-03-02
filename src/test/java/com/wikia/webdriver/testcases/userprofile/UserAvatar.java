@@ -61,7 +61,7 @@ public class UserAvatar extends NewTestTemplate {
   
   @Test(
       groups = {"AvatarTest", "AvatarTest_003"},
-      dependsOnMethods = "uploadAvatar"
+      dependsOnMethods = "uploadAvatar", invocationCount = 25
   )
   public void removeAvatar() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
