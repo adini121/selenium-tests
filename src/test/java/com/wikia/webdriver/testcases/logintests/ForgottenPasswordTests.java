@@ -17,7 +17,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
 
   Credentials credentials = config.getCredentials();
 
-  @Test(groups = {"ForgottenPassword_001", "ForgottenPassword"})
+  @Test(groups = {"ForgottenPassword_001", "ForgottenPassword"}, invocationCount = 25)
   public void ForgottenPassword_001_dropdown() {
     String userName = credentials.userNameForgottenPassword;
 
@@ -44,7 +44,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
   }
 
   @Test(
-      groups = {"ForgottenPassword_002", "ForgottenPassword"}
+      groups = {"ForgottenPassword_002", "ForgottenPassword"}, invocationCount = 25
   )
   public void ForgottenPassword_002_specialPage() {
     String userName = credentials.userNameForgottenPassword2;
