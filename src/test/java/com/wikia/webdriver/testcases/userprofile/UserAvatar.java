@@ -33,7 +33,7 @@ public class UserAvatar extends NewTestTemplate {
   Credentials credentials = config.getCredentials();
 
   @Test(
-      groups = {"AvatarTest", "AvatarTest_001"}
+      groups = {"AvatarTest", "AvatarTest_001"}, invocationCount = 25
   )
   public void uploadAvatar() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -50,7 +50,7 @@ public class UserAvatar extends NewTestTemplate {
 
   @Test(
 	  groups = {"AvatarTest", "AvatarTest_002"},
-	  dependsOnMethods = "uploadAvatar"
+	  dependsOnMethods = "uploadAvatar", invocationCount = 25
   )
   public void clickAvatar() {
 	  WikiBasePageObject base = new WikiBasePageObject(driver);
