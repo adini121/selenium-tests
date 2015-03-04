@@ -62,22 +62,4 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
     article.verifyContent(articleContent);
     article.verifyArticleTitle(articleTitle);
   }
-
-  @Test(
-      dataProviderClass = ArticleDataProvider.class,
-      dataProvider = "articleTitles",
-      groups = {"ArticleCRUDAnon", "ArticleCRUDAnon_004"}
-  )
-  public void ArticleCRUDAnon_004_differentTitles(String articleTitle) {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    String articleContent = PageContent.ARTICLE_TEXT;
-    String randomArticleTitle = articleTitle + base.getTimeStamp();
-    VisualEditModePageObject
-        visualEditMode =
-        base.navigateToArticleEditPageCK(wikiURL, randomArticleTitle);
-    visualEditMode.addContent(articleContent);
-    ArticlePageObject article = visualEditMode.submitArticle();
-    article.verifyContent(articleContent);
-    article.verifyArticleTitle(randomArticleTitle);
-  }
 }
