@@ -10,6 +10,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
 import org.apache.commons.lang3.StringUtils;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -80,6 +81,8 @@ public class NewDriverProvider {
       driver = getAndroidInstance();
     } else if("CBT".equals(browserName)){
       driver = getRwemoteFromCrossBrowserTest();
+    }else if("SL".equals(browserName)){
+      driver = getRwemoteFromSouceLabs();
     }else {
       throw new RuntimeException("Provided driver is not supported.");
     }
@@ -104,7 +107,7 @@ public class NewDriverProvider {
   public static EventFiringWebDriver getRwemoteFromCrossBrowserTest(){
     DesiredCapabilities caps = new DesiredCapabilities();
 
-    caps.setCapability("name", "Selenium Test Example");
+    caps.setCapability("name", "Local Machine");
     caps.setCapability("build", "1.0");
     caps.setCapability("browser_api_name", "Chrome40x64");
     caps.setCapability("os_api_name", "Win8.1");
@@ -120,6 +123,26 @@ public class NewDriverProvider {
 
     try {
       return new EventFiringWebDriver(new RemoteWebDriver(new URL("http://ptys.mietowy%40o2.pl:u44ec243821882ca@hub.crossbrowsertesting.com:80/wd/hub"), caps));
+    } catch (MalformedURLException e) {
+      e.printStackTrace();
+      return null;
+    }
+  }
+
+  public static EventFiringWebDriver getRwemoteFromSouceLabs(){
+    DesiredCapabilities caps = new DesiredCapabilities();
+
+    caps.setCapability(CapabilityType.BROWSER_NAME, "CHROME");
+    caps.setCapability(CapabilityType.PLATFORM, Platform.WIN8_1);
+    caps.setCapability("version", "40");
+
+    chromeOptions.addArguments("enable-strict-site-isolation");
+
+
+    caps.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+
+    try {
+      return new EventFiringWebDriver(new RemoteWebDriver(new URL("http://ludwikkazmierczak:682ab305-4d5c-427f-bdac-8cdfa77e2b02@ondemand.saucelabs.com:80/wd/hub"), caps));
     } catch (MalformedURLException e) {
       e.printStackTrace();
       return null;
