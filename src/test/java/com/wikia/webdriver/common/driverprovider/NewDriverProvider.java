@@ -108,7 +108,7 @@ public class NewDriverProvider {
     caps.setCapability("build", "1.0");
     caps.setCapability("browser_api_name", "Chrome40x64");
     caps.setCapability("os_api_name", "Win8.1");
-    caps.setCapability("screen_resolution", "1376x1032");
+    caps.setCapability("screen_resolution", "1366x768");
     caps.setCapability("record_video", "false");
     caps.setCapability("record_network", "false");
     caps.setCapability("record_snapshot", "false");
