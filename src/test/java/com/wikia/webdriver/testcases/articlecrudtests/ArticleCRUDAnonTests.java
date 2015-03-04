@@ -80,32 +80,4 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
     article.verifyContent(articleContent);
     article.verifyArticleTitle(randomArticleTitle);
   }
-
-  @Test(
-      groups = {"ArticleCRUDAnon", "ArticleCRUDAnon_005"}
-  )
-  public void ArticleCRUDAnon_005_editByURL() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    String articleContent = PageContent.ARTICLE_TEXT;
-    ArticlePageObject article = base.openRandomArticle(wikiURL);
-    VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
-    visualEditMode.addContent(articleContent);
-    visualEditMode.submitArticle();
-    article.verifyContent(articleContent);
-  }
-
-  @Test(
-      groups = {"ArticleCRUDAnon", "ArticleCRUDAnon_006"}
-  )
-  public void ArticleCRUDAnon_006_editDropdown() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    String articleContent = PageContent.ARTICLE_TEXT;
-    ArticlePageObject article =
-        base.openArticleByName(wikiURL, PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp());
-    VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
-    ve.verifyVEToolBarPresent();
-    ve.verifyEditorSurfacePresent();
-    article = ve.clickVEEditAndPublish(articleContent);
-    article.verifyContent(articleContent);
-  }
 }
