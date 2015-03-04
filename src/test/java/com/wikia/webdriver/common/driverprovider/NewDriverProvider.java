@@ -119,7 +119,7 @@ public class NewDriverProvider {
     caps.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
 
     try {
-      return new EventFiringWebDriver(new RemoteWebDriver(new URL("http://ludwik.kazmierczak%40gmail.com:u3d9bc1673a25aa7@hub.crossbrowsertesting.com:80/wd/hub"), caps));
+      return new EventFiringWebDriver(new RemoteWebDriver(new URL("http://ptys.mietowy%40o2.pl:u44ec243821882ca@hub.crossbrowsertesting.com:80/wd/hub"), caps));
     } catch (MalformedURLException e) {
       e.printStackTrace();
       return null;
