@@ -135,6 +135,7 @@ public class NewDriverProvider {
     caps.setCapability(CapabilityType.BROWSER_NAME, "CHROME");
     caps.setCapability(CapabilityType.PLATFORM, Platform.WIN8_1);
     caps.setCapability("version", "40");
+    caps.setCapability("name", "my_name");
 
     chromeOptions.addArguments("enable-strict-site-isolation");
 
