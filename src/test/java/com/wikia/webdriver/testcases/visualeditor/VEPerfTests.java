@@ -39,7 +39,8 @@ public class VEPerfTests extends NewTestTemplate {
 	@Test(
 		groups = {"Perf", "PerfNoCache"},
 		dataProviderClass=VisualEditorDataProvider.class,
-		dataProvider="getPerfWikis"
+		dataProvider="getPerfWikis",
+                invocationCount = 50
 	)
 	public void VEPerfTests_001_noCache(String wiki) {
 		wikiURL = urlBuilder.getUrlForWiki(wiki);
@@ -50,7 +51,8 @@ public class VEPerfTests extends NewTestTemplate {
 	@Test(
 		groups = {"PerfProd", "PerfCached"},
 		dataProviderClass=VisualEditorDataProvider.class,
-		dataProvider="getPerfWikis"
+		dataProvider="getPerfWikis",
+                invocationCount = 50
 	)
 	public void VEPerfTests_002_cached(String wiki) {
 		wikiURL = urlBuilder.getUrlForWiki(wiki);
@@ -77,7 +79,8 @@ public class VEPerfTests extends NewTestTemplate {
 	@Test(
 		groups = {"Perf", "PerfTemplateArticle"},
 		dataProviderClass=VisualEditorDataProvider.class,
-		dataProvider="getPerfWikis"
+		dataProvider="getPerfWikis",
+                invocationCount = 50
 	)
 	public void VEPerfTests_004_templateArticle(String wiki, String devbox1, String devbox2) {
 		wikiURL = urlBuilder.getUrlForWiki(wiki);
@@ -91,7 +94,8 @@ public class VEPerfTests extends NewTestTemplate {
 	@Test(
 		groups = {"Perf", "PerfGalleryArticle"},
 		dataProviderClass=VisualEditorDataProvider.class,
-		dataProvider="getPerfWikis"
+		dataProvider="getPerfWikis",
+                invocationCount = 50
 	)
 	public void VEPerfTests_005_galleryArticle(String wiki, String devbox1, String devbox2) {
 		wikiURL = urlBuilder.getUrlForWiki(wiki);
@@ -105,7 +109,8 @@ public class VEPerfTests extends NewTestTemplate {
 	@Test(
 		groups = {"Perf", "PerfTableArticle"},
 		dataProviderClass=VisualEditorDataProvider.class,
-		dataProvider="getPerfWikis"
+		dataProvider="getPerfWikis",
+                invocationCount = 50
 	)
 	public void VEPerfTests_006_tableArticle(String wiki, String devbox1, String devbox2) {
 		wikiURL = urlBuilder.getUrlForWiki(wiki);
