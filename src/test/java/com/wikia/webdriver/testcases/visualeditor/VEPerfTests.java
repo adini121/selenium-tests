@@ -64,7 +64,8 @@ public class VEPerfTests extends NewTestTemplate {
 	@Test(
 		groups = {"Perf", "PerfEmptyArticle"},
 		dataProviderClass=VisualEditorDataProvider.class,
-		dataProvider="getPerfWikis"
+		dataProvider="getPerfWikis",
+                invocationCount = 50
 	)
 	 public void VEPerfTests_003_emptyArticles(String wiki) {
 		String articleName = PageContent.ARTICLE_NAME_PREFIX + article.getTimeStamp();

@@ -1,9 +1,9 @@
 package com.wikia.webdriver.common.dataprovider;
 
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
+
 import org.openqa.selenium.By;
 import org.testng.annotations.DataProvider;
-
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
@@ -183,8 +183,6 @@ public class VisualEditorDataProvider {
 	@DataProvider
 	public static final Object[][] getPerfWikis() {
 		return new Object[][] {
-			{"leagueoflegends"},
-			{"muppet"},
 			{"leagueoflegends"},
 			{"muppet"},
 			{"leagueoflegends"},
