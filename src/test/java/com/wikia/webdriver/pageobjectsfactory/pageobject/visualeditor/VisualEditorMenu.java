@@ -51,7 +51,7 @@ public class VisualEditorMenu extends WikiBasePageObject {
 	private List<WebElement> toolListItems;
 	@FindBy(css = ".ve-ui-toolbar-saveButton.oo-ui-widget-enabled")
 	private WebElement enabledPublishButton;
-	@FindBy(css=".ve-init-mw-viewPageTarget-toolbar-actions .secondary .oo-ui-labeledElement-label")
+	@FindBy(css=".ve-init-mw-viewPageTarget-toolbar-actions .secondary")
 	private WebElement cancelButton;
 
 	private By strikeStyleBy = By.cssSelector(".oo-ui-icon-strikethrough-s");
