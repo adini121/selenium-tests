@@ -123,7 +123,7 @@ public class VEPerfTests extends NewTestTemplate {
 
   @Test(
       groups = {"Perf", "PerfSelectedArticles"},
-      invocationCount = 2
+      invocationCount = 25
   )
   public void VEPerfTests_007_selectedArticles() {
 
