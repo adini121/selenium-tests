@@ -121,6 +121,31 @@ public class VEPerfTests extends NewTestTemplate {
     devOneElapsedTimes.add(getVELoadTime());
   }
 
+  @Test(
+      groups = {"Perf", "PerfSelectedArticles"},
+      invocationCount = 2
+  )
+  public void VEPerfTests_007_selectedArticles() {
+
+    String textArticleName = "Example";
+    String galleryArticleName = "Gallery";
+    String mixedMediaArticleName = "The_Avett_Brothers";
+    String complexArticleName = "J.D.";
+    wikiURL = urlBuilder.getUrlForWiki("visualeditor");
+    article = article.openArticleByName(wikiURL, textArticleName);
+    getVELoadTimes();
+    new VisualEditorPageObject(driver).clickCancelButton();
+    article = article.openArticleByName(wikiURL, galleryArticleName);
+    getVELoadTimes();
+    new VisualEditorPageObject(driver).clickCancelButton();
+    article = article.openArticleByName(wikiURL, mixedMediaArticleName);
+    getVELoadTimes();
+    new VisualEditorPageObject(driver).clickCancelButton();
+    article = article.openArticleByName(wikiURL, complexArticleName);
+    getVELoadTimes();
+    new VisualEditorPageObject(driver).clickCancelButton();
+  }
+
   private long getVELoadTime() {
     VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
     String url = ve.getCurrentUrl();
