@@ -89,6 +89,8 @@ public class NewDriverProvider {
       driver = getRwemoteFromCrossBrowserTest();
     }else if("SL".equals(browserName)){
       driver = getRwemoteFromSouceLabs();
+    }else if("BS".equals(browserName)){
+      driver = getRwemoteFromBrowserStack();
     }else {
       throw new RuntimeException("Provided driver is not supported.");
     }
@@ -155,6 +157,29 @@ public class NewDriverProvider {
       return null;
     }
   }
+
+  public static EventFiringWebDriver getRwemoteFromBrowserStack(){
+    DesiredCapabilities caps = new DesiredCapabilities();
+
+    caps.setCapability("browser", "Chrome");
+    caps.setCapability("browser_version", "39.0");
+    caps.setCapability("os", "Windows");
+    caps.setCapability("os_version", "8.1");
+    caps.setCapability("resolution", "1920x1080");
+
+    chromeOptions.addArguments("enable-strict-site-isolation");
+
+
+    caps.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+
+    try {
+      return new EventFiringWebDriver(new RemoteWebDriver(new URL("http://ludwikkamierczak:IMBpwt9m79HSoxQOsij2@hub.browserstack.com/wd/hub"), caps));
+    } catch (MalformedURLException e) {
+      e.printStackTrace();
+      return null;
+    }
+  }
+
 
   public static WebDriver getWebDriver() {
     return driver;
