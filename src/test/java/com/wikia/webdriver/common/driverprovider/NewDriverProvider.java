@@ -166,6 +166,7 @@ public class NewDriverProvider {
     caps.setCapability("os", "Windows");
     caps.setCapability("os_version", "8.1");
     caps.setCapability("resolution", "1920x1080");
+    caps.setCapability("browserstack.debug", "true");
 
     chromeOptions.addArguments("enable-strict-site-isolation");
 
