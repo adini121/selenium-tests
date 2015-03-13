@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.core.annotations.UserAgent;
 import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
 
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -19,6 +20,7 @@ public class NewTestTemplate extends NewTestTemplateCore {
 
   @BeforeMethod(alwaysRun = true)
   public void start(Method method, Object[] data) {
+    NewDriverProvider.setNameCapability(method.getName());
     runProxyServerIfNeeded(method);
     if (method.isAnnotationPresent(UserAgent.class)) {
       setBrowserUserAgent(
