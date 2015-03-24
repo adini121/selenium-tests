@@ -7,6 +7,8 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
+import io.appium.java_client.MobileElement;
+
 /**
  * @authors: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
  * @ownership: Content - Mercury mobile
@@ -39,7 +41,10 @@ public class ArticlePageObject extends BasePageObject {
   }
 
   public void clickTopContributor(int index) {
-    topContributorsLinks.get(index).click();
+
+    MobileElement elem = (MobileElement)topContributorsLinks.get(index);
+
+    elem.click();
   }
 
   public void clickCategoryButton() {
