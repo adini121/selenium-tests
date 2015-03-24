@@ -45,7 +45,7 @@ public class ArticlePageObject extends BasePageObject {
   }
 
   public void clickTopContributor(int index) {
-    NewDriverProvider.getMobileDriver().findElement(By.cssSelector("div.contributors a"));
+    NewDriverProvider.getMobileDriver().findElement(By.cssSelector("div.contributors a")).click();
   }
 
   public void clickCategoryButton() {
