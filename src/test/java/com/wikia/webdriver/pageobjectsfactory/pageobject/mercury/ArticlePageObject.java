@@ -44,7 +44,7 @@ public class ArticlePageObject extends BasePageObject {
 
     MobileElement elem = (MobileElement)topContributorsLinks.get(index);
 
-    elem.click();
+    elem.tap(1, 500);
   }
 
   public void clickCategoryButton() {
