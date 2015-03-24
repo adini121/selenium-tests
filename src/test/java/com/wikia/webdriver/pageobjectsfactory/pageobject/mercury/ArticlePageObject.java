@@ -8,6 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import java.util.List;
 
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.android.AndroidElement;
 
 /**
  * @authors: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
@@ -41,10 +42,7 @@ public class ArticlePageObject extends BasePageObject {
   }
 
   public void clickTopContributor(int index) {
-
-    MobileElement elem = (MobileElement)topContributorsLinks.get(index);
-
-    elem.tap(1, 500);
+   ((AndroidElement) topContributorsLinks.get(index)).tap(1, 500);
   }
 
   public void clickCategoryButton() {
