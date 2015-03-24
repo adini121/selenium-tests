@@ -1,5 +1,8 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury;
 
+import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
@@ -42,7 +45,7 @@ public class ArticlePageObject extends BasePageObject {
   }
 
   public void clickTopContributor(int index) {
-   ((AndroidElement) topContributorsLinks.get(index)).tap(1, 500);
+    NewDriverProvider.getMobileDriver().findElement(By.cssSelector("div.contributors a"));
   }
 
   public void clickCategoryButton() {
