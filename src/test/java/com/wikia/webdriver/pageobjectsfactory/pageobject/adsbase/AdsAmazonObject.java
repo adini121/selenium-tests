@@ -22,12 +22,10 @@ public class AdsAmazonObject extends AdsBaseObject {
   @FindBy(css = "div[id*=_gpt][data-gpt-slot-params*=amznslots]")
   private WebElement slotWithAmazon;
 
-  public AdsAmazonObject(
-      WebDriver driver,
-      String testedPage,
-      NetworkTrafficInterceptor networkTrafficInterceptor
-  ) {
+  public AdsAmazonObject(WebDriver driver, String testedPage,
+                         NetworkTrafficInterceptor networkTrafficInterceptor) {
     super(driver, testedPage, networkTrafficInterceptor);
+    waitPageLoaded();
   }
 
   public void verifyAmazonScriptIncluded() {
