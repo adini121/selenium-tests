@@ -35,7 +35,7 @@ public class NewTestTemplateCore {
   protected String wikiCorporateURL;
   protected String wikiCorpSetupURL;
   private DesiredCapabilities capabilities;
-  protected NetworkTrafficInterceptor networkTrafficIntereceptor;
+  protected NetworkTrafficInterceptor networkTrafficInterceptor;
   protected boolean isProxyServerRunning = false;
 
   public NewTestTemplateCore() {
@@ -152,12 +152,12 @@ public class NewTestTemplateCore {
     }
 
     isProxyServerRunning = true;
-    networkTrafficIntereceptor = new NetworkTrafficInterceptor();
-    networkTrafficIntereceptor.startSeleniumProxyServer();
+    networkTrafficInterceptor = new NetworkTrafficInterceptor();
+    networkTrafficInterceptor.startSeleniumProxyServer();
     if (isGeoEdgeSet && !countryCode.isEmpty()) {
       setGeoEdge(countryCode);
     }
-    capabilities = getCapsWithProxyServerSet(networkTrafficIntereceptor);
+    capabilities = getCapsWithProxyServerSet(networkTrafficInterceptor);
     setDriverCapabilities(capabilities);
   }
 
@@ -165,7 +165,7 @@ public class NewTestTemplateCore {
     GeoEdgeUtils geoEdgeUtils = new GeoEdgeUtils(config.getCredentialsFilePath());
     String credentialsBase64 = "Basic " + geoEdgeUtils.createBaseFromCredentials();
     String ip = geoEdgeUtils.getIPForCountry(countryCode);
-    networkTrafficIntereceptor.setProxyServer(ip);
-    networkTrafficIntereceptor.changeHeader("Proxy-Authorization", credentialsBase64);
+    networkTrafficInterceptor.setProxyServer(ip);
+    networkTrafficInterceptor.changeHeader("Proxy-Authorization", credentialsBase64);
   }
 }

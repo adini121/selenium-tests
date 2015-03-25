@@ -301,8 +301,8 @@ public class AdsDataProvider {
   public static Object[][] amazonSites() {
     return new Object[][]{
         {"glee", "Glee_TV_Show_Wiki"},
-        {"gameofthrones", "Season_4"},
-        {"ja.gundam", "%E3%82%AC%E3%83%B3%E3%83%80%E3%83%9A%E3%83%87%E3%82%A3%E3%82%A2"}
+//        {"gameofthrones", "Season_4"},
+//        {"ja.gundam", "%E3%82%AC%E3%83%B3%E3%83%80%E3%83%9A%E3%83%87%E3%82%A3%E3%82%A2"}
     };
   }
 

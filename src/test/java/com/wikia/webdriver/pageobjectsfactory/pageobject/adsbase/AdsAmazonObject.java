@@ -9,14 +9,15 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+
 /**
  * @author Bogna 'bognix' Knychala
  */
 public class AdsAmazonObject extends AdsBaseObject {
 
   private final static String AMAZON_SCRIPT_URL = "amazon-adsystem.com/e/dtb";
-  private final static String AMAZON_SCRIPT = "script[src*=\"" + AMAZON_SCRIPT_URL + "\"]";
-  private final static String AMAZON_IFRAME = "iframe[src*=\"" + AMAZON_SCRIPT_URL + "\"]";
+  private final static String AMAZON_SCRIPT = "script[src*=\'" + AMAZON_SCRIPT_URL + "\']";
+  private final static String AMAZON_IFRAME = "iframe[src*=\'" + AMAZON_SCRIPT_URL + "\']";
   private final static String AMAZON_GPT_PATTERN = "\"amznslots\":[\"a";
 
   @FindBy(css = "div[id*=_gpt][data-gpt-slot-params*=amznslots]")
@@ -25,7 +26,6 @@ public class AdsAmazonObject extends AdsBaseObject {
   public AdsAmazonObject(WebDriver driver, String testedPage,
                          NetworkTrafficInterceptor networkTrafficInterceptor) {
     super(driver, testedPage, networkTrafficInterceptor);
-    waitPageLoaded();
   }
 
   public void verifyAmazonScriptIncluded() {
@@ -45,7 +45,13 @@ public class AdsAmazonObject extends AdsBaseObject {
   }
 
   public void verifyAdFromAmazonPresent() {
-    driver.switchTo().frame(slotWithAmazon.findElement(By.cssSelector("div > iframe")));
+    WebElement amazonIframe = slotWithAmazon.findElement(
+        By.cssSelector("div[id*=__container__] > iframe"));
+    PageObjectLogging.log("DEBUG IFRAME ID", amazonIframe.getAttribute("id"), true);
+    PageObjectLogging.log("DEBUG IFRAME WIDTH", amazonIframe.getAttribute("width"), true);
+    PageObjectLogging.log("DEBUG IFRAME HEIGHT", amazonIframe.getAttribute("height"), true);
+//    driver.switchTo().frame(amazonIframe);
+    PageObjectLogging.log("DEBUG IFRAME PAGE SOURCE", driver.switchTo().frame(amazonIframe).getPageSource(), true, driver);
     if (checkIfElementOnPage(AMAZON_IFRAME)) {
       PageObjectLogging.log("AmazonAd", "Script returned by Amazon present", true);
     } else {
