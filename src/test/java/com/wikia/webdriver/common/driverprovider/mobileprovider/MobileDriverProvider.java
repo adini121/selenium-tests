@@ -24,7 +24,7 @@ public class MobileDriverProvider {
     platform = config.getPlatform();
     platformVersion = config.getPlatformVersion();
     deviceId = config.getDeviceId();
-    mobileConfig = config.geMobileConfig();
+    mobileConfig = config.getMobileConfig();
     browser = config.getBrowser();
   }
 

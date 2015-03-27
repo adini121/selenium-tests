@@ -82,6 +82,7 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
     openSpecialUserLogin(wikiURL);
     login(name, password);
     verifyUserLoggedIn(name);
+    PageObjectLogging.log("method", "screenshot test", true, driver);
   }
 
   public void login(String name, String pass) {

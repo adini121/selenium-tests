@@ -29,10 +29,10 @@ public abstract class AbstractConfiguration {
 
   public abstract String getDeviceId();
 
-  public abstract String geMobileConfig();
+  public abstract String getMobileConfig();
 
   public abstract String getCredentialsFilePath();
-
+    
   public Credentials getCredentials() {
     return new Credentials(new File(this.getCredentialsFilePath()));
   }

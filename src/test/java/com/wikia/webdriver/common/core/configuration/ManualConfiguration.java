@@ -67,7 +67,7 @@ public class ManualConfiguration extends AbstractConfiguration {
   }
 
   @Override
-  public String geMobileConfig() {
+  public String getMobileConfig() {
     return config.get("mobile-config");
   }
 

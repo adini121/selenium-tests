@@ -48,17 +48,23 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
   private WebDriver driver;
 
   public static void log(String command, String description, boolean success, WebDriver driver) {
-    imageCounter += 1;
-    new Shooter().savePageScreenshot(screenPath + imageCounter, driver);
-    CommonUtils.appendTextToFile(screenPath + imageCounter + ".html", driver.getPageSource());
-    String className = success ? "success" : "error";
-    StringBuilder builder = new StringBuilder();
-    builder.append("<tr class=\"" + className + "\"><td>" + command + "</td><td>" + description
-        + "</td><td> <br/><a href='screenshots/screenshot" + imageCounter
-        + ".png'>Screenshot</a><br/><a href='screenshots/screenshot" + imageCounter
-        + ".html'>HTML Source</a></td></tr>");
-    CommonUtils.appendTextToFile(logPath, builder.toString());
-    logJSError(driver);
+      boolean enable_screenshots = false;
+      if (enable_screenshots) {
+          imageCounter += 1;
+          new Shooter().savePageScreenshot(screenPath + imageCounter, driver);
+          CommonUtils.appendTextToFile(screenPath + imageCounter + ".html", driver.getPageSource());
+          String className = success ? "success" : "error";
+          StringBuilder builder = new StringBuilder();
+          builder.append("<tr class=\"" + className + "\"><td>" + command + "</td><td>" + description
+                  + "</td><td> <br/><a href='screenshots/screenshot" + imageCounter
+                  + ".png'>Screenshot</a><br/><a href='screenshots/screenshot" + imageCounter
+                  + ".html'>HTML Source</a></td></tr>");
+          CommonUtils.appendTextToFile(logPath, builder.toString());
+          logJSError(driver);
+      }
+      else {
+          log(command, description, success);
+      }
   }
 
   public static void log(String command, String description, boolean success) {
