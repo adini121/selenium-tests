@@ -19,16 +19,16 @@
 			<artifactId>httpcore</artifactId>
 			<version>4.3.3</version>
 		</dependency>
-		<dependency>
-			<groupId>net.kennychua</groupId>
-			<artifactId>phantomjs-qunit-runner</artifactId>
-			<version>1.0.14</version>
-		</dependency>
 		<!-- QAART-397 Overriding jetty-server version that browsermob-proxy uses -->
 		<dependency>
 			<groupId>org.eclipse.jetty</groupId>
 			<artifactId>jetty-server</artifactId>
 			<version>8.1.15.v20140411</version>
+		</dependency>
+		<dependency>
+			<groupId>com.codeborne</groupId>
+			<artifactId>phantomjsdriver</artifactId>
+			<version>1.2.1</version>
 		</dependency>
 		<!-- QAART-397 Overriding jetty-servlet version that browsermob-proxy uses -->
 		<dependency>
@@ -131,11 +131,7 @@
 			<artifactId>commons-configuration</artifactId>
 			<version>1.6</version>
 		</dependency>
-		<dependency>
-			<groupId>com.github.detro.ghostdriver</groupId>
-			<artifactId>phantomjsdriver</artifactId>
-			<version>1.0.3</version>
-		</dependency>
+
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>

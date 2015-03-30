@@ -8,13 +8,10 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.VenusGlobalNavPageObject;
 
-import org.codehaus.plexus.util.FileUtils;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
 
 /**
  * @author Ludwik Kaźmierczak
