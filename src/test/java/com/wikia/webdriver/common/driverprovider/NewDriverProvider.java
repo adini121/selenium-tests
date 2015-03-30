@@ -256,8 +256,20 @@ public class NewDriverProvider {
       phantomJSBinaryPath = "/win32/phantomjs.exe";
     } else if (OSName.contains("MAC")) {
       phantomJSBinaryPath = "/mac32/phantomjs";
+
+      File phantomJS =
+          new File(ClassLoader.getSystemResource("PhantomJS" + phantomJSBinaryPath).getPath());
+
+      // set application user permissions to 455
+      phantomJS.setExecutable(true);
     } else if (OSName.contains("LINUX")) {
       phantomJSBinaryPath = "/linux32/phantomjs";
+
+      File phantomJS =
+          new File(ClassLoader.getSystemResource("PhantomJS" + phantomJSBinaryPath).getPath());
+
+      // set application user permissions to 455
+      phantomJS.setExecutable(true);
     }
 
     File phantomJSBinary =
