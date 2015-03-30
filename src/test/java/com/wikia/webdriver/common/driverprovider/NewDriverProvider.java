@@ -256,6 +256,8 @@ public class NewDriverProvider {
       phantomJSBinaryPath = "/win32/phantomjs.exe";
     } else if (OSName.contains("MAC")) {
       phantomJSBinaryPath = "/mac32/phantomjs";
+    } else if (OSName.contains("LINUX")) {
+      phantomJSBinaryPath = "/linux32/phantomjs";
     }
 
     File phantomJSBinary =
