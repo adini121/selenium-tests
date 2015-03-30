@@ -249,7 +249,6 @@ public class NewDriverProvider {
   }
 
   private static EventFiringWebDriver getPhantomJSInstance() {
-    final String phantomJSBinaryName = "phantomjs.exe";
     String OSName = System.getProperty("os.name").toUpperCase();
     String phantomJSBinaryPath = "";
 
