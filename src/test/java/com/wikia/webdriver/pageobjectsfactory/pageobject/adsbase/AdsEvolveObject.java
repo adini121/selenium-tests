@@ -17,7 +17,7 @@ public class AdsEvolveObject extends AdsBaseObject {
 
   public AdsEvolveObject(WebDriver driver, String page) {
     // INVISIBLE_SKIN works only with big resolution.
-    super(driver, page, new Dimension(1366, 768));
+    super(driver, page, new Dimension(2400, 1080));
   }
 
   public void verifyEvolveInSlot(String slotName) {
@@ -33,6 +33,8 @@ public class AdsEvolveObject extends AdsBaseObject {
   }
 
   public void verifyEvolveCall() {
+    driver.manage().window().setSize(new Dimension(2000, 2000));
+    PageObjectLogging.log("DEBUG", String.valueOf(driver.manage().window().getSize().getWidth()), true);
     verifyEvolveInSlot(AdsContent.TOP_LB);
     verifyEvolveInSlot(AdsContent.MEDREC);
     verifyEvolveInSlot(AdsContent.LEFT_SKYSCRAPPER_2);
