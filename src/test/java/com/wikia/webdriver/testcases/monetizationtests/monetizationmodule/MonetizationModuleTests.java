@@ -36,6 +36,12 @@ public class MonetizationModuleTests extends NewTestTemplate {
   private static final String TEST_ECOMMERCE_MULTI_DARK_ARTICLE = "Skyrim";
   private static final String TEST_ECOMMERCE_MULTI_LIGHT_WIKI = "finalfantasy";
   private static final String TEST_ECOMMERCE_MULTI_LIGHT_ARTICLE = "Final_Fantasy_IX";
+  private static final String TEST_SHARETHROUGH_GAMING_WIKI = "";
+  private static final String TEST_SHARETHROUGH_GAMING_ARTICLE = "";
+  private static final String TEST_SHARETHROUGH_ENTERTAINMENT_WIKI = "";
+  private static final String TEST_SHARETHROUGH_ENTERTAINMENT_ARTICLE = "";
+  private static final String TEST_SHARETHROUGH_LIFESTYLE_WIKI = "travel";
+  private static final String TEST_SHARETHROUGH_LIFESTYLE_ARTICLE = "Brussels";
 
 
   Credentials credentials = config.getCredentials();
@@ -842,5 +848,54 @@ public class MonetizationModuleTests extends NewTestTemplate {
     base.logInCookie(credentials.userName7, credentials.password7, wikiURL);
     base.openWikiPage(articleURL);
     monetizationModule.verifyEcommerceUnitNotShown();
+  }
+
+  @DataProvider(name = "MonetizationModuleTest_023")
+  public static Object[][] DataMonetizationModuleTest_023() {
+    return new Object[][]{
+        {"US", true, TEST_SHARETHROUGH_LIFESTYLE_WIKI, TEST_SHARETHROUGH_LIFESTYLE_ARTICLE},
+    };
+  }
+
+  /**
+   * MON-284
+   * Ecommerce: The monetization module single or multiple product is shown on article page on
+   * the rest for particular geos (ic/bc/af slots)
+   *
+   * @author Robert Chan
+   */
+  @Test(
+      dataProvider = "DataMonetizationModuleTest_023",
+      groups = {"MonetizationModule", "MonetizationModuleTest_021", "Monetization"}
+  )
+  public void MonetizationModuleTest_023(String countryCode, Boolean isFromsearch, String testWiki,
+                                         String testArticle) {
+
+    wikiURL = urlBuilder.getUrlForWiki(testWiki);
+    String articleURL = urlBuilder.getUrlForPath(testWiki, testArticle);
+    WikiBasePageObject base = new WikiBasePageObject(driver);
+    base.openWikiPage(articleURL);
+    MonetizationModuleComponentObject
+        monetizationModule =
+        new MonetizationModuleComponentObject(driver);
+    if (isFromsearch) {
+      monetizationModule.setCookieFromSearch();
+    } else {
+      monetizationModule.deleteCookieFromSearch();
+    }
+    monetizationModule.setCookieGeo(countryCode);
+    // anon user
+    base.refreshPage();
+    monetizationModule.verifyMonetizationModuleShown();
+    monetizationModule.verifySharethroughUnitShown();
+    monetizationModule.verifySharethroughUnitSlot();
+    monetizationModule.verifySharethroughUnitNotShownBelowCategory();
+    monetizationModule.verifySharethroughUnitNotShownAboveFooter();
+    monetizationModule.verifySharethroughUnitNotShownAboveTitle();
+    monetizationModule.verifySharethroughUnitNotShownBelowTitle();
+    // logged in user
+    base.logInCookie(credentials.userName6, credentials.password6, wikiURL);
+    base.openWikiPage(articleURL);
+    monetizationModule.verifySharethroughUnitNotShown();
   }
 }

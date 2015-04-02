@@ -83,6 +83,16 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
   private By eCommerceMultipleProductBy = By.cssSelector(".ecommerce-multiple-product");
   private By eCommerceSingleProductBy = By.cssSelector(".ecommerce-single-product");
 
+  //Sharethrough
+  private By
+      sharethroughContainerBy = By.cssSelector(".monetization-module[data-mon-type='sharethrough']");
+  private By slotInContentSharethroughBy = By.cssSelector("#monetization-ecommerce-in_content");
+  private By slotAboveFooterSharethroughBy = By.cssSelector("#monetization-ecommerce-above_footer");
+  private By
+      slotBelowCategorySharethroughBy = By.cssSelector("#monetization-ecommerce-below_category");
+  private By slotAboveTitleSharethroughBy = By.cssSelector("#monetization-ecommerce-above_title");
+  private By slotBelowTitleSharethroughBy = By.cssSelector("#monetization-ecommerce-below_title");
+
   public MonetizationModuleComponentObject(WebDriver driver) {
     super(driver);
   }
@@ -533,5 +543,71 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
                          "img height: " + imgHeight + "is bigger than max height: " + maxHeight);
     Assertion.assertTrue(imgWidth <= maxWidth,
                          "img width: " + imgWidth + " is bigger than max width: " + maxHeight);
+  }
+
+  public void verifySharethroughUnitShown() {
+    waitForElementByElementLocatedBy(sharethroughContainerBy);
+//    waitForElementByElement(sharethroughContainerBy);
+    Assertion.assertTrue(checkIfElementOnPage(sharethroughContainerBy));
+    PageObjectLogging.log("verifySharethroughUnitShown", "Sharethrough unit is visible", true);
+  }
+
+  public void verifySharethroughUnitSlot() {
+    List<WebElement> listWebElements = driver.findElements(sharethroughContainerBy);
+    for (WebElement elem : listWebElements) {
+      String slotName = elem.getAttribute(ATTRIBUTE_NAME_SLOT);
+      switch (slotName) {
+        case "in_content":
+          PageObjectLogging.log(
+              "verifySharethroughUnitSlot", "Verifying Sharethrough for In Content slot", true);
+          verifySharethroughUnitShown(slotInContentSharethroughBy);
+          break;
+        default:
+          PageObjectLogging.log(
+              "verifySharethroughUnitSlot", "Invalid slot name (Name: " + slotName + ")", true);
+          break;
+      }
+    }
+  }
+
+  private void verifySharethroughUnitShown(By slotBy) {
+    waitForElementByElementLocatedBy(slotBy);
+    Assertion.assertTrue(checkIfElementOnPage(slotBy));
+    scrollToElement(slotBy);
+    PageObjectLogging.log(
+        "verifySharethroughUnitShown", "Sharethrough unit is visible", true, driver);
+  }
+
+  public void verifySharethroughUnitNotShownBelowCategory() {
+    waitForElementNotPresent(slotBelowCategorySharethroughBy);
+    PageObjectLogging.log(
+        "verifySharethroughUnitNotShownBelowCategory",
+        "Sharethrough unit is not shown below the category", true);
+  }
+
+  public void verifySharethroughUnitNotShownAboveFooter() {
+    waitForElementNotPresent(slotAboveFooterSharethroughBy);
+    PageObjectLogging.log(
+        "verifySharethroughUnitNotShownAboveFooter",
+        "Sharethrough unit is not shown above the footer", true);
+  }
+
+  public void verifySharethroughUnitNotShownAboveTitle() {
+    waitForElementNotPresent(slotAboveTitleSharethroughBy);
+    PageObjectLogging.log(
+        "verifySharethroughUnitNotShownAboveTitle",
+        "Sharethrough unit is not shown above the title", true);
+  }
+
+  public void verifySharethroughUnitNotShownBelowTitle() {
+    waitForElementNotPresent(slotBelowTitleSharethroughBy);
+    PageObjectLogging.log(
+        "verifySharethroughUnitNotShownBelowTitle",
+        "Sharethrough unit is not shown below the title", true);
+  }
+
+  public void verifySharethroughUnitNotShown() {
+    waitForElementNotPresent(sharethroughContainerBy);
+    PageObjectLogging.log("verifySharethroughUnitNotShown", "Sharethrough unit is not shown", true);
   }
 }
