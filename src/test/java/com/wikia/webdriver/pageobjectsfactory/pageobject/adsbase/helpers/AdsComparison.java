@@ -65,12 +65,15 @@ public class AdsComparison {
     String encodedExpectedScreen;
     try {
       encodedExpectedScreen = readFileAsString(filePath);
+      PageObjectLogging.logImage("EXPECTED Img", encodedExpectedScreen, true);
     } catch (IOException ex) {
       throw new RuntimeException(ex);
     }
     File capturedScreen = shooter.capturePageAndCrop(
         startPoint, screenshotSize, driver
     );
+
+    PageObjectLogging.logImage("ACTUAL Img", capturedScreen, true);
 
     String encodedCapturedScreen;
     try {

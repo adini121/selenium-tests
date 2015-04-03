@@ -84,6 +84,8 @@ public class AdsBaseObject extends WikiBasePageObject {
   protected WebElement presentMedrec;
   @FindBy(css = INCONTENT_BOXAD_SELECTOR)
   protected WebElement incontentBoxad;
+  @FindBy(id = "ad-skin")
+  protected WebElement skin;
 
   @FindBy(css = "script[src^=\"" + KRUX_CONTROL_TAG_URL_PREFIX + "\"]")
   private WebElement kruxControlTag;
@@ -233,27 +235,12 @@ public class AdsBaseObject extends WikiBasePageObject {
    * @param expectedAdSkinLeftPart  - path to file with expected skin encoded in Base64
    * @param expectedAdSkinRightPart - path to file with expected skin encoded in Base64
    */
-  public void verifyAdSkinPresence(
-      String adSkinUrl,
-      String expectedAdSkinLeftPart, String expectedAdSkinRightPart
-  ) {
+  public void verifyAdSkinPresence(String adSkinUrl, String expectedAdSkinLeftPart,
+                                   String expectedAdSkinRightPart) {
     AdsContent.setSlotsSelectors();
 
-    String backgroundImageUrlAfter = getPseudoElementValue(
-        body, ":after", "backgroundImage"
-    );
-    Assertion.assertStringContains(adSkinUrl, backgroundImageUrlAfter);
-
-    String backgroundImageUrlBefore = getPseudoElementValue(
-        body, ":before", "backgroundImage"
-    );
-    Assertion.assertStringContains(adSkinUrl, backgroundImageUrlBefore);
-
-    PageObjectLogging.log(
-        "ScreenshotPage",
-        "Screenshot of the page taken",
-        true, driver
-    );
+    String backgroundImageUrl = getPseudoElementValue(skin, "", "backgroundImage");
+    Assertion.assertStringContains(adSkinUrl, backgroundImageUrl);
 
     AdsComparison adsComparison = new AdsComparison();
     adsComparison.hideSlot(AdsContent.getSlotSelector(AdsContent.WIKIA_BAR), driver);

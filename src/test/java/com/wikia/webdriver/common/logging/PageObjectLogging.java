@@ -90,11 +90,14 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     } catch (IOException e) {
       log("logImage", e.getMessage(), false);
     }
-    String imageAsBase64 = new String(bytes, StandardCharsets.UTF_8);
+    logImage(command, new String(bytes, StandardCharsets.UTF_8), success);
+  }
+
+  public static void logImage(String command, String imageAsBase64, boolean success) {
     imageAsBase64 = "<img src=\"data:image/png;base64," + imageAsBase64 + "\">";
     String className = success ? "success" : "error";
     CommonUtils.appendTextToFile(logPath, ("<tr class=\"" + className + "\"><td>" + command
-        + "</td><td>" + imageAsBase64 + "</td><td> <br/> &nbsp;</td></tr>"));
+                                           + "</td><td>" + imageAsBase64 + "</td><td> <br/> &nbsp;</td></tr>"));
   }
 
   private static void logJSError(WebDriver driver) {
