@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.monetizationtests.monetizationmodule;
 
+import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.monetizationmodule.MonetizationModuleComponentObject;
@@ -765,6 +766,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
       dataProvider = "DataMonetizationModuleTest_021",
       groups = {"MonetizationModule", "MonetizationModuleTest_021", "Monetization"}
   )
+  @UseUnstablePageLoadStrategy
   public void MonetizationModuleTest_021(String countryCode, Boolean isFromsearch, String testWiki,
                                          String testArticle, int isMulti) {
 
