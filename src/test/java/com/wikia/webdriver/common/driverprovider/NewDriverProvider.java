@@ -199,6 +199,8 @@ public class NewDriverProvider {
       firefoxProfile.setPreference("webdriver.load.strategy", "unstable");
     }
 
+    firefoxProfile.setPreference("plugin.state.flash", 0);
+
     caps.setCapability(FirefoxDriver.PROFILE, firefoxProfile);
 
     //Adding console logging for FF browser
