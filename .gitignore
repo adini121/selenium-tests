@@ -12,6 +12,7 @@ tmp.exe
 bin/
 src/test/java/com/wikia/webdriver/Trash/
 test-output/
+!test-output/junitreports
 *.iml
 captcha.txt
 config.xml
