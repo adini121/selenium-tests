@@ -22,7 +22,7 @@ public class AdsEvolveObject extends AdsBaseObject {
 
   public AdsEvolveObject(WebDriver driver, String page) {
     // INVISIBLE_SKIN works only with big resolution.
-    super(driver, page, new Dimension(1366, 768));
+    super(driver, page, new Dimension(3000, 4000));
     PageObjectLogging.log("DEBUG", String.valueOf(driver.manage().window().getSize().width), true);
   }
 
