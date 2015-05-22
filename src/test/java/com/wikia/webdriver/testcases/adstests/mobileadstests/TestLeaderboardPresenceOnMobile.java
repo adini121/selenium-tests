@@ -29,7 +29,7 @@ public class TestLeaderboardPresenceOnMobile extends MobileTestTemplate {
 
   @GeoEdgeProxy(country = "JP")
   @Test(
-      groups = {"MobileAds", "TopLeaderboardPresenceTest_JP"}
+      groups = {"MobileAds", "TopLeaderboardPresenceTest_JP", "MonitoringTestsMobile"}
   )
   public void TopLeaderboardPresenceTest_JP() {
     new MobileAdsBaseObject(driver, testedPage).verifyMobileTopLeaderboard();
@@ -37,7 +37,7 @@ public class TestLeaderboardPresenceOnMobile extends MobileTestTemplate {
 
   @GeoEdgeProxy(country = "VE")
   @Test(
-      groups = {"MobileAds", "TopLeaderboardPresenceTest_VE"}
+      groups = {"MobileAds", "TopLeaderboardPresenceTest_VE", "MonitoringTestsMobile"}
   )
   public void TopLeaderboardPresenceTest_VE() {
     new MobileAdsBaseObject(driver, testedPage).verifyMobileTopLeaderboard();
@@ -45,7 +45,7 @@ public class TestLeaderboardPresenceOnMobile extends MobileTestTemplate {
 
   @GeoEdgeProxy(country = "AU")
   @Test(
-      groups = {"MobileAds", "TopLeaderboardPresenceTest_AU"}
+      groups = {"MobileAds", "TopLeaderboardPresenceTest_AU", "MonitoringTestsMobile"}
   )
   public void TopLeaderboardPresenceTest_AU() {
     new MobileAdsBaseObject(driver, testedPage).verifyMobileTopLeaderboard();
@@ -53,7 +53,7 @@ public class TestLeaderboardPresenceOnMobile extends MobileTestTemplate {
 
   @GeoEdgeProxy(country = "NZ")
   @Test(
-      groups = {"MobileAds", "TopLeaderboardPresenceTest_NZ"}
+      groups = {"MobileAds", "TopLeaderboardPresenceTest_NZ", "MonitoringTestsMobile"}
   )
   public void TopLeaderboardPresenceTest_NZ() {
     new MobileAdsBaseObject(driver, testedPage).verifyMobileTopLeaderboard();
@@ -61,7 +61,7 @@ public class TestLeaderboardPresenceOnMobile extends MobileTestTemplate {
 
   @GeoEdgeProxy(country = "DE")
   @Test(
-      groups = {"MobileAds", "TopLeaderboardPresenceTest_DE"}
+      groups = {"MobileAds", "TopLeaderboardPresenceTest_DE", "MonitoringTestsMobile"}
   )
   public void TopLeaderboardPresenceTest_DE() {
     new MobileAdsBaseObject(driver, testedPage).verifyMobileTopLeaderboard();
@@ -69,7 +69,7 @@ public class TestLeaderboardPresenceOnMobile extends MobileTestTemplate {
 
   @GeoEdgeProxy(country = "GB")
   @Test(
-      groups = {"MobileAds", "TopLeaderboardPresenceTest_GB"}
+      groups = {"MobileAds", "TopLeaderboardPresenceTest_GB", "MonitoringTestsMobile"}
   )
   public void TopLeaderboardPresenceTest_GB() {
     new MobileAdsBaseObject(driver, testedPage).verifyMobileTopLeaderboard();
@@ -77,7 +77,7 @@ public class TestLeaderboardPresenceOnMobile extends MobileTestTemplate {
 
   @GeoEdgeProxy(country = "LT")
   @Test(
-      groups = {"MobileAds", "TopLeaderboardPresenceTest_LT"}
+      groups = {"MobileAds", "TopLeaderboardPresenceTest_LT", "MonitoringTestsMobile"}
   )
   public void TopLeaderboardPresenceTest_LT() {
     new MobileAdsBaseObject(driver, testedPage).verifyMobileTopLeaderboard();
@@ -85,7 +85,7 @@ public class TestLeaderboardPresenceOnMobile extends MobileTestTemplate {
 
   @GeoEdgeProxy(country = "TW")
   @Test(
-      groups = {"MobileAds", "TopLeaderboardPresenceTest_TW"}
+      groups = {"MobileAds", "TopLeaderboardPresenceTest_TW", "MonitoringTestsMobile"}
   )
   public void TopLeaderboardPresenceTest_TW() {
     new MobileAdsBaseObject(driver, testedPage).verifyMobileTopLeaderboard();
@@ -93,14 +93,14 @@ public class TestLeaderboardPresenceOnMobile extends MobileTestTemplate {
 
   @GeoEdgeProxy(country = "CA")
   @Test(
-      groups = {"MobileAds", "TopLeaderboardPresenceTest_CA"}
+      groups = {"MobileAds", "TopLeaderboardPresenceTest_CA", "MonitoringTestsMobile"}
   )
   public void TopLeaderboardPresenceTest_CA() {
     new MobileAdsBaseObject(driver, testedPage).verifyMobileTopLeaderboard();
   }
 
   @Test(
-      groups = {"MobileAds", "TopLeaderboardPresenceTest_GEF"}
+      groups = {"MobileAds", "TopLeaderboardPresenceTest_GEF", "MonitoringTestsMobile"}
   )
   public void TopLeaderboardPresenceTest_GEF() {
     new MobileAdsBaseObject(driver, testedPage).verifyMobileTopLeaderboard();
@@ -108,7 +108,7 @@ public class TestLeaderboardPresenceOnMobile extends MobileTestTemplate {
 
   @GeoEdgeProxy(country = "NO")
   @Test(
-      groups = {"MobileAds", "TopLeaderboardPresenceTest_NO"}
+      groups = {"MobileAds", "TopLeaderboardPresenceTest_NO", "MonitoringTestsMobile"}
   )
   public void TopLeaderboardPresenceTest_NO() {
     new MobileAdsBaseObject(driver, testedPage).verifyMobileTopLeaderboard();

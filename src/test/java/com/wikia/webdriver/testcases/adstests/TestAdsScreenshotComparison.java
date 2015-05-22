@@ -36,7 +36,7 @@ public class TestAdsScreenshotComparison extends TemplateDontLogout {
 
   @GeoEdgeProxy(country = "JP")
   @Test(
-      groups = {"Ads_Screenshot_JP"}
+      groups = {"Ads_Screenshot_JP", "MonitoringTestsDesktop"}
   )
   public void Ads_Screenshot_JP() throws Exception {
     checkAds();
@@ -44,7 +44,7 @@ public class TestAdsScreenshotComparison extends TemplateDontLogout {
 
   @GeoEdgeProxy(country = "DE")
   @Test(
-      groups = {"Ads_Screenshot_DE"}
+      groups = {"Ads_Screenshot_DE", "MonitoringTestsDesktop"}
   )
   public void Ads_Screenshot_DE() throws Exception {
     checkAds();
@@ -52,7 +52,7 @@ public class TestAdsScreenshotComparison extends TemplateDontLogout {
 
   @GeoEdgeProxy(country = "AU")
   @Test(
-      groups = {"Ads_Screenshot_AU"}
+      groups = {"Ads_Screenshot_AU", "MonitoringTestsDesktop"}
   )
   public void Ads_Screenshot_AU() throws Exception {
     checkAds();
@@ -60,7 +60,7 @@ public class TestAdsScreenshotComparison extends TemplateDontLogout {
 
   @GeoEdgeProxy(country = "VE")
   @Test(
-      groups = {"Ads_Screenshot_VE"}
+      groups = {"Ads_Screenshot_VE", "MonitoringTestsDesktop"}
   )
   public void Ads_Screenshot_VE() throws Exception {
     checkAds();
@@ -68,7 +68,7 @@ public class TestAdsScreenshotComparison extends TemplateDontLogout {
 
   @GeoEdgeProxy(country = "LT")
   @Test(
-      groups = {"Ads_Screenshot_LT"}
+      groups = {"Ads_Screenshot_LT", "MonitoringTestsDesktop"}
   )
   public void Ads_Screenshot_LT() throws Exception {
     checkAds();
@@ -76,7 +76,7 @@ public class TestAdsScreenshotComparison extends TemplateDontLogout {
 
   @GeoEdgeProxy(country = "TW")
   @Test(
-      groups = {"Ads_Screenshot_TW"}
+      groups = {"Ads_Screenshot_TW", "MonitoringTestsDesktop"}
   )
   public void Ads_Screenshot_TW() throws Exception {
     checkAds();
@@ -84,7 +84,7 @@ public class TestAdsScreenshotComparison extends TemplateDontLogout {
 
   @GeoEdgeProxy(country = "NZ")
   @Test(
-      groups = {"Ads_Screenshot_NZ"}
+      groups = {"Ads_Screenshot_NZ", "MonitoringTestsDesktop"}
   )
   public void Ads_Screenshot_NZ() throws Exception {
     checkAds();
@@ -92,7 +92,7 @@ public class TestAdsScreenshotComparison extends TemplateDontLogout {
 
   @GeoEdgeProxy(country = "CA")
   @Test(
-      groups = {"Ads_Screenshot_CA"}
+      groups = {"Ads_Screenshot_CA", "MonitoringTestsDesktop"}
   )
   public void Ads_Screenshot_CA() throws Exception {
     checkAds();
@@ -100,14 +100,14 @@ public class TestAdsScreenshotComparison extends TemplateDontLogout {
 
   @GeoEdgeProxy(country = "GB")
   @Test(
-      groups = {"Ads_Screenshot_GB"}
+      groups = {"Ads_Screenshot_GB", "MonitoringTestsDesktop"}
   )
   public void Ads_Screenshot_GB() throws Exception {
     checkAds();
   }
 
   @Test(
-      groups = {"Ads_Screenshot_GEF"}
+      groups = {"Ads_Screenshot_GEF", "MonitoringTestsDesktop"}
   )
   public void Ads_Screenshot_GEF() throws Exception {
     checkAds();
@@ -115,7 +115,7 @@ public class TestAdsScreenshotComparison extends TemplateDontLogout {
 
   @GeoEdgeProxy(country = "NO")
   @Test(
-      groups = {"Ads_Screenshot_NO"}
+      groups = {"Ads_Screenshot_NO", "MonitoringTestsDesktop"}
   )
   public void Ads_Screenshot_NO() throws Exception {
     checkAds();
